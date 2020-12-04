@@ -54,19 +54,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
+CMAKE_COMMAND = /snap/clion/137/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f
+RM = /snap/clion/137/bin/cmake/linux/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/jbennink/Documents/Projects/ft_containers
+CMAKE_SOURCE_DIR = /home/jonasbb/Documents/Projects/containers
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug
+CMAKE_BINARY_DIR = /home/jonasbb/Documents/Projects/containers/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/ft_containers.dir/depend.make
@@ -85,7 +85,7 @@ ft_containers_EXTERNAL_OBJECTS =
 
 libft_containers.a: CMakeFiles/ft_containers.dir/build.make
 libft_containers.a: CMakeFiles/ft_containers.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Linking CXX static library libft_containers.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/jonasbb/Documents/Projects/containers/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Linking CXX static library libft_containers.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/ft_containers.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ft_containers.dir/link.txt --verbose=$(VERBOSE)
 
@@ -99,6 +99,6 @@ CMakeFiles/ft_containers.dir/clean:
 .PHONY : CMakeFiles/ft_containers.dir/clean
 
 CMakeFiles/ft_containers.dir/depend:
-	cd /Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/jbennink/Documents/Projects/ft_containers /Users/jbennink/Documents/Projects/ft_containers /Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug /Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug /Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/CMakeFiles/ft_containers.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/jonasbb/Documents/Projects/containers/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jonasbb/Documents/Projects/containers /home/jonasbb/Documents/Projects/containers /home/jonasbb/Documents/Projects/containers/cmake-build-debug /home/jonasbb/Documents/Projects/containers/cmake-build-debug /home/jonasbb/Documents/Projects/containers/cmake-build-debug/CMakeFiles/ft_containers.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ft_containers.dir/depend
 
