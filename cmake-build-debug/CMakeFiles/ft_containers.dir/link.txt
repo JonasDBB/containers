@@ -1,2 +1,0 @@
-/usr/bin/ar qc libft_containers.a  
-/usr/bin/ranlib libft_containers.a

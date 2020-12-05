@@ -33,7 +33,7 @@ namespace ft
 	private:
 		size_type		_capacity;
 		size_type		_size;
-		pointer			_array;
+		value			_array;
 		allocator_type	_alloc;
 
 	public:
@@ -84,7 +84,7 @@ namespace ft
 		}
 
 		// assignment operator
-		vector&		operator=(const vector& x)
+		vector&			operator=(const vector& x)
 		{
 			delete[] this->_array;
 			this->_array = NULL;
@@ -100,38 +100,38 @@ namespace ft
 		/* ==ITERATOR FUNCTIONS== */
 
 		/* ==CAPACITY FUNCTIONS== */
-		size_type	size() const
+		size_type		size() const
 		{
 			return (this->_size);
 		}
 
-		size_type	max_size() const
+		size_type		max_size() const
 		{
 			return (this->_alloc.max_size());
 		}
 
-		void		resize(size_type n, value_type val = value_type())
+		void			resize(size_type n, value_type val = value_type())
 		{
 			this->reserve(n);
 			for (;this->_size < n; this->_size++)
-				// addback val
+				push_back(val);
 			while (this->_size > n)
 				this->_size--;
 		}
 
-		size_type	capacity() const
+		size_type		capacity() const
 		{
 			return (this->_capacity);
 		}
 
-		bool		empty() const
+		bool			empty() const
 		{
 			if (!this->_size)
 				return (true);
 			return (false);
 		}
 
-		void		reserve(size_type n)
+		void			reserve(size_type n)
 		{
 			if (this->_capacity >= n)
 				return;
@@ -139,7 +139,7 @@ namespace ft
 				this->_capacity = 1;
 			while (this->_capacity < n)
 				this->_capacity *= 2;
-			pointer new_arr = new value_type [this->_capacity];
+			pointer new_arr = new value_type [this->_capacity]; //NOLINT
 			for (size_type i = 0; i < this->_size; i++)
 				new_arr[i] = this->_array[i];
 			delete[] this->_array;
@@ -147,13 +147,56 @@ namespace ft
 		}
 
 		/* ==ELEMENT ACCESS FUNCTIONS== */
+		reference		operator[](size_type n)
+		{
+			return (this->_array[n]);
+		}
+
+		const_reference	operator[](size_type n) const
+		{
+			return (this->_array[n]);
+		}
+
+		reference		at(size_type n)
+		{
+			if (n < 0 || n >= this->_size)
+				throw(std::out_of_range("vector::_M_range_check"));
+			return (this->_array[n]);
+		}
+
+		const_reference	at(size_type n) const
+		{
+			if (n < 0 || n >= this->_size)
+				throw(std::out_of_range("vector::_M_range_check"));
+			return (this->_array[n]);
+		}
+
+		reference		front(size_type n)
+		{
+			return (this->_array[0]);
+		}
+
+		const_reference	front(size_type n) const
+		{
+			return (this->_array[0]);
+		}
+
+		reference		back(size_type n)
+		{
+			return (this->_array[this->_size - 1]);
+		}
+
+		const_reference	back(size_type n) const
+		{
+			return (this->_array[this->_size - 1]);
+		}
 
 		/* ==MODIFIER FUNCTIONS== */
 //		template <class InputIterator>
 //		void		assign(InputIterator first, InputIterator last)
 //		{}
 
-		void		assign(size_type n, const value_type& val)
+		void			assign(size_type n, const value_type& val)
 		{
 			clear();
 			reserve(n);
@@ -162,14 +205,14 @@ namespace ft
 				this->_array[i] = val;
 		}
 
-		void		push_back(const value_type& val)
+		void			push_back(const value_type& val)
 		{
 			reserve(this->_size + 1);
 			this->_array[this->_size] = val;
 			this->_size++;
 		}
 
-		void		pop_back()
+		void			pop_back()
 		{
 			if (this->_size)
 				this->_size--;
@@ -179,7 +222,7 @@ namespace ft
 
 		// erase
 
-		void		swap(vector& x)
+		void			swap(vector& x)
 		{
 			size_type tmp = this->_size;
 			this->_size = x._size;
@@ -192,17 +235,62 @@ namespace ft
 			x._array = tmp_arr;
 		}
 
-		void		clear()
+		void			clear()
 		{
 			this->_size = 0;
 		}
+
 	};
 
+	/* ==NON-MEMBER FUNCTION OVERLOADS== */
 
 	template <class T, class Alloc>
-		void	swap(vector<T,Alloc>& x, vector<T,Alloc>& y)
+	bool	operator==(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{
+		if (lhs.size() != rhs.size())
+			return (false);
+		for (typename ft::vector<T>::size_type i = 0; i < lhs.size(); i++)
 		{
-			x.swap(y);
+			if (lhs[i] != rhs[i])
+				return (false);
 		}
+		return (true);
+	}
+
+	template <class T, class Alloc>
+	bool	operator!=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{
+		return !(lhs == rhs);
+	}
+
+	template <class T, class Alloc>
+	bool	operator<(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{
+
+	}
+
+	template <class T, class Alloc>
+	bool	operator<=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{
+		return !(rhs < lhs);
+	}
+
+	template <class T, class Alloc>
+	bool	operator>(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{
+		return (rhs < lhs);
+	}
+
+	template <class T, class Alloc>
+	bool	operator>=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{
+		return !(lhs < rhs);
+	}
+
+	template <class T, class Alloc>
+	void	swap(vector<T,Alloc>& x, vector<T,Alloc>& y)
+	{
+		x.swap(y);
+	}
 }
 #endif
