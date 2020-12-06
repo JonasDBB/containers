@@ -261,9 +261,84 @@ namespace ft
 				this->_size--;
 		}
 
-		// insert
+		iterator		insert(iterator position, const value_type& val)
+		{
+			resize(this->_size + 1);
+			iterator tmp(end() - 1);
+			while (tmp != position)
+			{
+				*tmp = *(tmp - 1);
+				tmp--;
+			}
+			*position = val;
+			return (position);
+		}
 
-		// erase
+		void			insert(iterator position, size_type n, const value_type& val)
+		{
+			resize(this->_size + n);
+			iterator tmp(end() - 1);
+			while (tmp - n != position)
+			{
+				*tmp = *(tmp - n);
+				tmp--;
+			}
+			*tmp = *(tmp - n);
+			for (size_type i = 0; i < n; i++)
+			{
+				*position = val;
+				position++;
+			}
+		}
+
+		template <class InputIterator>
+		void			insert(iterator position, InputIterator first, InputIterator last)
+		{
+			difference_type	len = ft::distance(first, last);
+			resize(this->_size + len);
+			iterator tmp(end() - 1);
+			while (tmp - len != position)
+			{
+				*tmp = *(tmp - len);
+				tmp--;
+			}
+			*tmp = *(tmp - len);
+			while (first != last)
+			{
+				*position = *first;
+				position++;
+				first++;
+			}
+		}
+
+		iterator		erase(iterator position)
+		{
+			iterator	tmp(position);
+
+			this->_size--;
+			position++;
+			while (position != end())
+			{
+				*(position - 1) = *position;
+				position++;
+			}
+			return (tmp);
+		}
+
+		iterator		erase(iterator first, iterator last)
+		{
+			iterator		tmp(first);
+			difference_type	len = ft::distance(first, last);
+
+			this->_size -= len;
+			while (last != end())
+			{
+				*first = *last;
+				first++;
+				last++;
+			}
+			return (tmp);
+		}
 
 		void			swap(vector& x)
 		{

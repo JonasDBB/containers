@@ -43,20 +43,42 @@ void	basic_it()
 	for (int i = 0; i < 10; i++)
 		vc0.push_back(i);
 	vector<int>	vc1(vc0.begin(), vc0.end());
-	RandomAccessIterator<int,int*,int&> it = vc0.begin();
-//	for (int i = 0; i < 10; i++)
-//	{
-//		std::cout << "0: " << vc0[i * 2] << " 1: " << vc1[i * 2] << std::endl;
-//	}
-	while (it != vc0.end())
+	vector<int>::iterator it = vc0.begin();
+	for (int i = 0; i < 10; i++)
 	{
-		std::cout << *it << std::endl;
-		it++;
+		std::cout << "0: " << vc0[i] * 2 << " 1: " << vc1[i] * 2 << std::endl;
 	}
+//	while (it != vc0.end())
+//	{
+//		std::cout << *it << std::endl;
+//		it++;
+//	}
+}
+
+void	assign_test()
+{
+	vector<int> first;
+	vector<int> second;
+	vector<int> third;
+
+	first.assign (7,100);             // 7 ints with a value of 100
+
+	vector<int>::iterator it;
+	it = first.begin()+1;
+
+	second.assign (it,first.end()-1); // the 5 central values of first
+
+	int myints[] = {1776,7,4};
+	third.assign (myints,myints+3);   // assigning from array.
+
+	std::cout << "Size of first: " << int (first.size()) << '\n';
+	std::cout << "Size of second: " << int (second.size()) << '\n';
+	std::cout << "Size of third: " << int (third.size()) << '\n';
 }
 
 int		main()
 {
 //	capacity_size_test();
-	basic_it();
+//	basic_it();
+	assign_test();
 }
