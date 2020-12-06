@@ -82,6 +82,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/RandomAccessIterator.hpp">
+			<Option target="tests"/>
+		</Unit>
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/ft_vector.hpp">
 			<Option target="tests"/>
 		</Unit>

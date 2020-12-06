@@ -13,6 +13,7 @@
 #ifndef FT_VECTOR_HPP
 # define FT_VECTOR_HPP
 # include <cstddef>
+# include "RandomAccessIterator.hpp"
 
 namespace ft
 {
@@ -20,20 +21,22 @@ namespace ft
 	class vector
 	{
 	public:
-		typedef T					value_type;
-		typedef Alloc				allocator_type;
-		typedef value_type&			reference;
-		typedef const value_type&	const_reference;
-		typedef value_type*			pointer;
-		typedef const value_type*	const_pointer;
-		// iterators
-		typedef ptrdiff_t			difference_type;
-		typedef size_t				size_type;
+		typedef T													value_type;
+		typedef Alloc												allocator_type;
+		typedef value_type&											reference;
+		typedef const value_type&									const_reference;
+		typedef value_type*											pointer;
+		typedef const value_type*									const_pointer;
+		typedef RandomAccessIterator<T, T*, T&>						iterator;
+		typedef RandomAccessIterator<const T, const T*, const T&>	const_iterator;
+		// reverse iterators
+		typedef ptrdiff_t											difference_type;
+		typedef size_t												size_type;
 
 	private:
 		size_type		_capacity;
 		size_type		_size;
-		value			_array;
+		pointer			_array;
 		allocator_type	_alloc;
 
 	public:
@@ -59,8 +62,16 @@ namespace ft
 		}
 
 		// range constructor
-//		template <class InputIterator>
-//		vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) :
+		template <class InputIterator>
+		vector(InputIterator first, InputIterator last,
+				const allocator_type& alloc = allocator_type()) :
+			_capacity(0),
+			_size(0),
+			_array(NULL),
+			_alloc(alloc)
+		{
+			assign(first, last);
+		}
 
 		// copy constructor
 		vector(const vector& x) :
@@ -95,9 +106,31 @@ namespace ft
 			this->_array = new value_type[this->_capacity];
 			for (size_type i = 0; i < this->_size; i++)
 				this->_array[i] = x._array[i];
+			return (*this);
 		}
 
 		/* ==ITERATOR FUNCTIONS== */
+		iterator		begin()
+		{
+			return (iterator(this->_array));
+		}
+
+		const_iterator		begin() const
+		{
+			return (const_iterator(this->_array));
+		}
+
+		iterator		end()
+		{
+			return (iterator(&this->_array[this->_size]));
+		}
+
+		const_iterator		end() const
+		{
+			return (const_iterator(&this->_array[this->_size]));
+		}
+
+		// need rbegin and rend
 
 		/* ==CAPACITY FUNCTIONS== */
 		size_type		size() const
@@ -112,7 +145,7 @@ namespace ft
 
 		void			resize(size_type n, value_type val = value_type())
 		{
-			this->reserve(n);
+			reserve(n);
 			for (;this->_size < n; this->_size++)
 				push_back(val);
 			while (this->_size > n)
@@ -135,10 +168,7 @@ namespace ft
 		{
 			if (this->_capacity >= n)
 				return;
-			if (!this->_capacity)
-				this->_capacity = 1;
-			while (this->_capacity < n)
-				this->_capacity *= 2;
+			this->_capacity = n;
 			pointer new_arr = new value_type [this->_capacity]; //NOLINT
 			for (size_type i = 0; i < this->_size; i++)
 				new_arr[i] = this->_array[i];
@@ -160,41 +190,49 @@ namespace ft
 		reference		at(size_type n)
 		{
 			if (n < 0 || n >= this->_size)
-				throw(std::out_of_range("vector::_M_range_check"));
+				throw(std::out_of_range("ft::vector: index out of range"));
 			return (this->_array[n]);
 		}
 
 		const_reference	at(size_type n) const
 		{
 			if (n < 0 || n >= this->_size)
-				throw(std::out_of_range("vector::_M_range_check"));
+				throw(std::out_of_range("ft::vector: index out of range"));
 			return (this->_array[n]);
 		}
 
-		reference		front(size_type n)
+		reference		front()
 		{
 			return (this->_array[0]);
 		}
 
-		const_reference	front(size_type n) const
+		const_reference	front() const
 		{
 			return (this->_array[0]);
 		}
 
-		reference		back(size_type n)
+		reference		back()
 		{
 			return (this->_array[this->_size - 1]);
 		}
 
-		const_reference	back(size_type n) const
+		const_reference	back() const
 		{
 			return (this->_array[this->_size - 1]);
 		}
 
 		/* ==MODIFIER FUNCTIONS== */
-//		template <class InputIterator>
-//		void		assign(InputIterator first, InputIterator last)
-//		{}
+		template <class InputIterator>
+		void			assign(InputIterator first, InputIterator last)
+		{
+			clear();
+			reserve(ft::distance(first, last));
+			while (first != last)
+			{
+				this->push_back(*first);
+				first++;
+			}
+		}
 
 		void			assign(size_type n, const value_type& val)
 		{
@@ -207,7 +245,12 @@ namespace ft
 
 		void			push_back(const value_type& val)
 		{
-			reserve(this->_size + 1);
+			if (this->_size == this->_capacity)
+			{
+				if (!this->_capacity)
+					this->_capacity = 1;
+				reserve(2 * this->_capacity);
+			}
 			this->_array[this->_size] = val;
 			this->_size++;
 		}
@@ -266,7 +309,7 @@ namespace ft
 	template <class T, class Alloc>
 	bool	operator<(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
 	{
-
+		return (lhs == rhs);
 	}
 
 	template <class T, class Alloc>
