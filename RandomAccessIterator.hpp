@@ -114,12 +114,12 @@ namespace ft
 			return (*this);
 		}
 
-		bool operator==(RandomAccessIterator<T, Pointer, Reference>& rhs)
+		bool operator==(RandomAccessIterator<T, Pointer, Reference> rhs)
 		{
 			return (this->_val == rhs._val);
 		}
 
-		bool operator!=(RandomAccessIterator<T, Pointer, Reference>& rhs)
+		bool operator!=(RandomAccessIterator<T, Pointer, Reference> rhs)
 		{
 			return (this->_val != rhs._val);
 		}

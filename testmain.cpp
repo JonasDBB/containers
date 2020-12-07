@@ -48,11 +48,11 @@ void	basic_it()
 	{
 		std::cout << "0: " << vc0[i] * 2 << " 1: " << vc1[i] * 2 << std::endl;
 	}
-//	while (it != vc0.end())
-//	{
-//		std::cout << *it << std::endl;
-//		it++;
-//	}
+	while (it != vc0.end())
+	{
+		std::cout << *it << std::endl;
+		it++;
+	}
 }
 
 void	assign_test()
