@@ -13,12 +13,12 @@
 #ifndef RANDOMACCESSITERATOR_HPP
 # define RANDOMACCESSITERATOR_HPP
 # include <cstddef>
-# include <iterator>
+# include "type_traits.hpp"
 
 namespace ft
 {
 	template <class T, class Pointer, class Reference,
-	        class Category = std::random_access_iterator_tag, class Distance = ptrdiff_t>
+	        class Category = ft::random_access_iterator_tag>
 	class RandomAccessIterator {
 	public:
 		typedef Category iterator_category;
@@ -42,8 +42,7 @@ namespace ft
 			*this = og;
 		}
 
-		~RandomAccessIterator()
-		{} //NOLINT
+		~RandomAccessIterator() {} //NOLINT
 
 		reference operator*() const
 		{
@@ -129,6 +128,7 @@ namespace ft
 	ptrdiff_t	distance(Iterator first, Iterator last)
 	{
 		ptrdiff_t	ret = 0;
+		// should just return last - first
 		while (first != last)
 		{
 			first++;

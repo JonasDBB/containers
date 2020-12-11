@@ -14,6 +14,7 @@
 # define FT_VECTOR_HPP
 # include <cstddef>
 # include "RandomAccessIterator.hpp"
+# include "type_traits.hpp"
 
 namespace ft
 {
@@ -168,6 +169,8 @@ namespace ft
 		{
 			if (this->_capacity >= n)
 				return;
+			if (n > this->max_size())
+				throw std::length_error("ft::vector: length error");
 			this->_capacity = n;
 			pointer new_arr = new value_type [this->_capacity]; //NOLINT
 			for (size_type i = 0; i < this->_size; i++)
@@ -223,7 +226,8 @@ namespace ft
 
 		/* ==MODIFIER FUNCTIONS== */
 		template <class InputIterator>
-		void			assign(InputIterator first, InputIterator last)
+		void			assign(InputIterator first, InputIterator last,
+				typename enable_if<is_iterator<typename InputIterator::iterator_category>::result, InputIterator>::type* = NULL)
 		{
 			clear();
 			reserve(ft::distance(first, last));
