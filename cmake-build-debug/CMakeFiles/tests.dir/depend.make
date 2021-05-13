@@ -4,4 +4,5 @@
 CMakeFiles/tests.dir/testmain.cpp.o: ../RandomAccessIterator.hpp
 CMakeFiles/tests.dir/testmain.cpp.o: ../ft_vector.hpp
 CMakeFiles/tests.dir/testmain.cpp.o: ../testmain.cpp
+CMakeFiles/tests.dir/testmain.cpp.o: ../type_traits.hpp
 

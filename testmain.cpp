@@ -15,14 +15,90 @@
 #include "ft_vector.hpp"
 #include "RandomAccessIterator.hpp"
 
+class testclass
+{
+private:
+	char *str;
+public:
+	testclass()
+	{
+		this->str = (char*)malloc(5);
+		std::cout << "constructor" << std::endl;
+	}
+	~testclass()
+	{
+		free(this->str);
+	}
+};
+
+class Test
+{
+public:
+	Test() : _x(0)
+	{
+		std::cout << "ik ben test" << std::endl;
+		std::cout << this << std::endl;
+	}
+	Test(Test const &src) : _x(1)
+	{
+		std::cout << "ik ben test copy" << std::endl;
+		std::cout << this << std::endl;
+		*this = src;
+	}
+	~Test()
+	{
+		std::cout << "ik was test" << std::endl;
+	}
+	Test		&operator=(Test const &src)
+	{
+		std::cout << "Ik assign test" << std::endl;
+		this->_x = src._x;
+		return *this;
+	}
+
+	void		setX(int newX)
+	{
+		this->_x = newX;
+	}
+	int			getX()
+	{
+		return this->_x;
+	}
+
+private:
+	int		_x;
+};
+
 using namespace ft;
+
+void	complexclass()
+{
+	vector<Test> vc;
+
+	vc.reserve(10);
+	vc.push_back(Test());
+	for (int i = 0; i < 10; i++)
+		std::cout << vc[i].getX() << std::endl;
+	std::allocator<Test>	alloc;
+	Test					sample;
+	int						amount;
+
+	amount = 15;
+	Test*	tests = alloc.allocate(amount);
+	std::cout << "pointer " << tests << std::endl;
+	alloc.construct(tests + 1, sample);
+	tests[0].setX(18);
+	tests[1].setX(19);
+
+	for (int i = 0; i < amount; i++)
+		std::cout << "Test " << i << ": " << tests[i].getX() << std::endl;
+}
 
 void	capacity_size_test()
 {
 	vector<int> vc0;
 	vector<int> vc1;
 	vector<int> vc2;
-
 	std::cout << "\n==CAPACITY AND RESIZE TESTS==\n" << std::endl;
 	std::cout << "with push back\n" << vc0.capacity() << " " << vc0.size() << std::endl;
 	for (int i = 0; i < 5000000; i++)
@@ -53,6 +129,27 @@ void	basic_it()
 		std::cout << *it << std::endl;
 		it++;
 	}
+	std::cout << "dist: " << vc0.end() - vc0.begin() << std::endl;
+	std::cout << "begin > begin: ";
+	if (vc0.begin() > vc0.begin())
+		std::cout << "true" << std::endl;
+	else
+		std::cout << "false" << std::endl;
+	std::cout << "begin < begin: ";
+	if (vc0.begin() < vc0.begin())
+		std::cout << "true" << std::endl;
+	else
+		std::cout << "false" << std::endl;
+	std::cout << "begin >= begin: ";
+	if (vc0.begin() >= vc0.begin())
+		std::cout << "true" << std::endl;
+	else
+		std::cout << "false" << std::endl;
+	std::cout << "begin <= begin: ";
+	if (vc0.begin() <= vc0.begin())
+		std::cout << "true" << std::endl;
+	else
+		std::cout << "false" << std::endl;
 }
 
 void	assign_test()
@@ -76,9 +173,18 @@ void	assign_test()
 //	std::cout << "Size of third: " << int (third.size()) << '\n';
 }
 
-int		main()
+int		main(int ac, char **av)
 {
+	complexclass();
 //	capacity_size_test();
 //	basic_it();
-	assign_test();
+//	assign_test();
+#ifndef ASAN
+	std::string line = av[0];
+	line = "leaks " + line.substr(line.rfind('/') + 1, line.back()) +
+		   " | grep \"total leaked bytes\"";
+	system(line.c_str());
+#endif
+	(void) ac;
+	(void) av;
 }

@@ -80,6 +80,10 @@ namespace ft
 			return (tmp);
 		}
 
+		difference_type operator-(RandomAccessIterator it) const
+		{
+			return (this->_val - it._val);
+		}
 		RandomAccessIterator operator-(const difference_type &n) const
 		{
 			RandomAccessIterator<T, Pointer, Reference> tmp(*this);
@@ -122,19 +126,32 @@ namespace ft
 		{
 			return (this->_val != rhs._val);
 		}
+
+		bool operator<(RandomAccessIterator<T, Pointer, Reference> rhs)
+		{
+			return ((rhs - *this) > 0);
+		}
+
+		bool operator>(RandomAccessIterator<T, Pointer, Reference> rhs)
+		{
+			return (rhs < *this);
+		}
+
+		bool operator<=(RandomAccessIterator<T, Pointer, Reference> rhs)
+		{
+			return !(rhs < *this);
+		}
+
+		bool operator>=(RandomAccessIterator<T, Pointer, Reference> rhs)
+		{
+			return !(*this < rhs);
+		}
 	};
 
 	template<class Iterator>
 	ptrdiff_t	distance(Iterator first, Iterator last)
 	{
-		ptrdiff_t	ret = 0;
-		// should just return last - first
-		while (first != last)
-		{
-			first++;
-			ret++;
-		}
-		return (ret);
+		return (last - first);
 	}
 }
 #endif
