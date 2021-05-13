@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   random_access_iterator.hpp                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jbennink <jbennink@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2020/12/06 11:28:30 by jbennink      #+#    #+#                 */
-/*   Updated: 2020/12/06 11:28:30 by jbennink      ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef RANDOMACCESSITERATOR_HPP
 # define RANDOMACCESSITERATOR_HPP
 # include <cstddef>
@@ -42,7 +30,7 @@ namespace ft
 			*this = og;
 		}
 
-		~RandomAccessIterator() {} //NOLINT
+		virtual ~RandomAccessIterator() {} //NOLINT
 
 		reference operator*() const
 		{

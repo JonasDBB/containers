@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_vector.hpp                                      :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jbennink <jbennink@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2020/11/30 10:55:25 by jbennink      #+#    #+#                 */
-/*   Updated: 2020/11/30 10:55:25 by jbennink      ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef FT_VECTOR_HPP
 # define FT_VECTOR_HPP
 # include <cstddef>
@@ -136,9 +124,25 @@ namespace ft
 			return (const_iterator(&this->_array[this->_size]));
 		}
 
+		reverse_iterator		rbegin()
+		{
+			return (reverse_iterator(this->end() - 1));
+		}
 
+		const_reverse_iterator		rbegin() const
+		{
+			return (const_reverse_iterator(this->end() - 1));
+		}
 
-		// need rbegin and rend
+		reverse_iterator		rend()
+		{
+			return (reverse_iterator(this->begin() - 1));
+		}
+
+		const_reverse_iterator		rend() const
+		{
+			return (const_reverse_iterator(this->begin() - 1));
+		}
 
 		/* ==CAPACITY FUNCTIONS== */
 		size_type		size() const

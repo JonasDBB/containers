@@ -88,6 +88,9 @@
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/ft_vector.hpp">
 			<Option target="tests"/>
 		</Unit>
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/reverse_iterator.hpp">
+			<Option target="tests"/>
+		</Unit>
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/testmain.cpp">
 			<Option target="tests"/>
 		</Unit>

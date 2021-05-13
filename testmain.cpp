@@ -1,35 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   testmain.cpp                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jbennink <jbennink@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2020/11/30 10:56:31 by jbennink      #+#    #+#                 */
-/*   Updated: 2020/11/30 10:56:31 by jbennink      ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <iostream>
 #include <vector>
 #include "ft_vector.hpp"
 #include "RandomAccessIterator.hpp"
-
-class testclass
-{
-private:
-	char *str;
-public:
-	testclass()
-	{
-		this->str = (char*)malloc(5);
-		std::cout << "constructor" << std::endl;
-	}
-	~testclass()
-	{
-		free(this->str);
-	}
-};
 
 class Test
 {
@@ -69,7 +41,7 @@ private:
 	int		_x;
 };
 
-using namespace ft;
+using namespace std;
 
 void	complexclass()
 {
@@ -119,37 +91,47 @@ void	basic_it()
 	for (int i = 0; i < 10; i++)
 		vc0.push_back(i);
 	vector<int>	vc1(vc0.begin(), vc0.end());
-	vector<int>::iterator it = vc0.begin();
-	for (int i = 0; i < 10; i++)
-	{
-		std::cout << "0: " << vc0[i] * 2 << " 1: " << vc1[i] * 2 << std::endl;
-	}
-	while (it != vc0.end())
-	{
-		std::cout << *it << std::endl;
-		it++;
-	}
-	std::cout << "dist: " << vc0.end() - vc0.begin() << std::endl;
-	std::cout << "begin > begin: ";
-	if (vc0.begin() > vc0.begin())
-		std::cout << "true" << std::endl;
-	else
-		std::cout << "false" << std::endl;
-	std::cout << "begin < begin: ";
-	if (vc0.begin() < vc0.begin())
-		std::cout << "true" << std::endl;
-	else
-		std::cout << "false" << std::endl;
-	std::cout << "begin >= begin: ";
-	if (vc0.begin() >= vc0.begin())
-		std::cout << "true" << std::endl;
-	else
-		std::cout << "false" << std::endl;
-	std::cout << "begin <= begin: ";
-	if (vc0.begin() <= vc0.begin())
-		std::cout << "true" << std::endl;
-	else
-		std::cout << "false" << std::endl;
+//	vector<int>::iterator it = vc0.begin();
+//	for (int i = 0; i < 10; i++)
+//	{
+//		std::cout << "0: " << vc0[i] * 2 << " 1: " << vc1[i] * 2 << std::endl;
+//	}
+//	while (it != vc0.end())
+//	{
+//		std::cout << *it << std::endl;
+//		it++;
+//	}
+	vector<int>::reverse_iterator rit = vc0.rbegin();
+	std::cout << *rit << std::endl;
+	std::cout << *(rit + 1) << std::endl;
+	std::cout << *(rit + 3) << std::endl;
+
+//	while (rit != vc0.rend())
+//	{
+//		std::cout << *rit << std::endl;
+//		rit++;
+//	}
+//	std::cout << "dist: " << vc0.end() - vc0.begin() << std::endl;
+//	std::cout << "begin > begin: ";
+//	if (vc0.begin() > vc0.begin())
+//		std::cout << "true" << std::endl;
+//	else
+//		std::cout << "false" << std::endl;
+//	std::cout << "begin < begin: ";
+//	if (vc0.begin() < vc0.begin())
+//		std::cout << "true" << std::endl;
+//	else
+//		std::cout << "false" << std::endl;
+//	std::cout << "begin >= begin: ";
+//	if (vc0.begin() >= vc0.begin())
+//		std::cout << "true" << std::endl;
+//	else
+//		std::cout << "false" << std::endl;
+//	std::cout << "begin <= begin: ";
+//	if (vc0.begin() <= vc0.begin())
+//		std::cout << "true" << std::endl;
+//	else
+//		std::cout << "false" << std::endl;
 }
 
 void	assign_test()
@@ -175,9 +157,9 @@ void	assign_test()
 
 int		main(int ac, char **av)
 {
-	complexclass();
+//	complexclass();
 //	capacity_size_test();
-//	basic_it();
+	basic_it();
 //	assign_test();
 #ifndef ASAN
 	std::string line = av[0];

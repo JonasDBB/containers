@@ -6,6 +6,6 @@ set(CMAKE_CXX_STANDARD 98)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra -g3 ${DEBUGFLAGS}")
 set(CMAKE_LINKER_FLAGS)
 
-add_executable(tests testmain.cpp ft_vector.hpp RandomAccessIterator.hpp type_traits.hpp)
+add_executable(tests testmain.cpp ft_vector.hpp RandomAccessIterator.hpp type_traits.hpp reverse_iterator.hpp)
 set_target_properties(tests PROPERTIES LINKER_LANGUAGE CXX CXX_STANDARD 98)
 #target_include_directories(tests ${dirname})
