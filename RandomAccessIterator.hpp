@@ -9,11 +9,11 @@ namespace ft
 	        class Category = ft::random_access_iterator_tag>
 	class RandomAccessIterator {
 	public:
-		typedef Category iterator_category;
-		typedef T value_type;
-		typedef ptrdiff_t difference_type;
-		typedef value_type *pointer;
-		typedef value_type &reference;
+		typedef Category	iterator_category;
+		typedef T			value_type;
+		typedef ptrdiff_t	difference_type;
+		typedef value_type	*pointer;
+		typedef value_type	&reference;
 
 	private:
 		pointer _val;
@@ -72,6 +72,7 @@ namespace ft
 		{
 			return (this->_val - it._val);
 		}
+
 		RandomAccessIterator operator-(const difference_type &n) const
 		{
 			RandomAccessIterator<T, Pointer, Reference> tmp(*this);
@@ -112,7 +113,7 @@ namespace ft
 
 		bool operator!=(RandomAccessIterator<T, Pointer, Reference> rhs)
 		{
-			return (this->_val != rhs._val);
+			return !(this->_val == rhs._val);
 		}
 
 		bool operator<(RandomAccessIterator<T, Pointer, Reference> rhs)
@@ -134,10 +135,15 @@ namespace ft
 		{
 			return !(*this < rhs);
 		}
+
+		reference operator[](difference_type n) const
+		{
+			return ((*(this + n)->_val));
+		}
 	};
 
-	template<class Iterator>
-	ptrdiff_t	distance(Iterator first, Iterator last)
+	template<class RandomAccessIterator>
+	ptrdiff_t	distance(RandomAccessIterator first, RandomAccessIterator last)
 	{
 		return (last - first);
 	}

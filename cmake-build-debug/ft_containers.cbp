@@ -85,10 +85,10 @@
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/RandomAccessIterator.hpp">
 			<Option target="tests"/>
 		</Unit>
-		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/ft_vector.hpp">
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/ReverseIterator.hpp">
 			<Option target="tests"/>
 		</Unit>
-		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/reverse_iterator.hpp">
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/ft_vector.hpp">
 			<Option target="tests"/>
 		</Unit>
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/testmain.cpp">

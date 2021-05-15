@@ -2,6 +2,7 @@
 #include <vector>
 #include "ft_vector.hpp"
 #include "RandomAccessIterator.hpp"
+#include "ReverseIterator.hpp"
 
 class Test
 {
@@ -41,7 +42,7 @@ private:
 	int		_x;
 };
 
-using namespace std;
+using namespace ft;
 
 void	complexclass()
 {
@@ -90,7 +91,14 @@ void	basic_it()
 
 	for (int i = 0; i < 10; i++)
 		vc0.push_back(i);
-	vector<int>	vc1(vc0.begin(), vc0.end());
+//	vector<int>::reverse_iterator rit1 = vc0.rbegin();
+//	vector<int>::reverse_iterator rit2 = vc0.rend();
+	std::cout << "end - begin = " << vc0.end() - vc0.begin() << std::endl;
+	std::cout << "rend - rbegin = " << vc0.rend() - vc0.rbegin() << std::endl;
+	std::cout << "DIST begin end = " << distance(vc0.begin(), vc0.end()) << std::endl;
+	std::cout << "DIST rbegin rend = " << distance(vc0.rbegin(), vc0.rend()) << std::endl;
+
+	vector<int>	vc1(vc0.rbegin(), vc0.rend());
 //	vector<int>::iterator it = vc0.begin();
 //	for (int i = 0; i < 10; i++)
 //	{
@@ -101,37 +109,33 @@ void	basic_it()
 //		std::cout << *it << std::endl;
 //		it++;
 //	}
-	vector<int>::reverse_iterator rit = vc0.rbegin();
-	std::cout << *rit << std::endl;
-	std::cout << *(rit + 1) << std::endl;
-	std::cout << *(rit + 3) << std::endl;
 
 //	while (rit != vc0.rend())
 //	{
 //		std::cout << *rit << std::endl;
 //		rit++;
 //	}
-//	std::cout << "dist: " << vc0.end() - vc0.begin() << std::endl;
-//	std::cout << "begin > begin: ";
-//	if (vc0.begin() > vc0.begin())
-//		std::cout << "true" << std::endl;
-//	else
-//		std::cout << "false" << std::endl;
-//	std::cout << "begin < begin: ";
-//	if (vc0.begin() < vc0.begin())
-//		std::cout << "true" << std::endl;
-//	else
-//		std::cout << "false" << std::endl;
-//	std::cout << "begin >= begin: ";
-//	if (vc0.begin() >= vc0.begin())
-//		std::cout << "true" << std::endl;
-//	else
-//		std::cout << "false" << std::endl;
-//	std::cout << "begin <= begin: ";
-//	if (vc0.begin() <= vc0.begin())
-//		std::cout << "true" << std::endl;
-//	else
-//		std::cout << "false" << std::endl;
+	std::cout << "dist: " << vc0.end() - vc0.begin() << std::endl;
+	std::cout << "begin > begin: ";
+	if (vc0.begin() > vc0.begin())
+		std::cout << "true" << std::endl;
+	else
+		std::cout << "false" << std::endl;
+	std::cout << "begin < begin: ";
+	if (vc0.begin() < vc0.begin())
+		std::cout << "true" << std::endl;
+	else
+		std::cout << "false" << std::endl;
+	std::cout << "begin >= begin: ";
+	if (vc0.begin() >= vc0.begin())
+		std::cout << "true" << std::endl;
+	else
+		std::cout << "false" << std::endl;
+	std::cout << "begin <= begin: ";
+	if (vc0.begin() <= vc0.begin())
+		std::cout << "true" << std::endl;
+	else
+		std::cout << "false" << std::endl;
 }
 
 void	assign_test()

@@ -2,6 +2,7 @@
 # define FT_VECTOR_HPP
 # include <cstddef>
 # include "RandomAccessIterator.hpp"
+# include "ReverseIterator.hpp"
 # include "type_traits.hpp"
 
 namespace ft
@@ -18,8 +19,8 @@ namespace ft
 		typedef const value_type*									const_pointer;
 		typedef RandomAccessIterator<T, T*, T&>						iterator;
 		typedef RandomAccessIterator<const T, const T*, const T&>	const_iterator;
-		typedef RandomAccessIterator<T, T*, T&>						reverse_iterator;
-		typedef RandomAccessIterator<const T, const T*, const T&>	const_reverse_iterator;
+		typedef ReverseIterator<iterator>							reverse_iterator;
+		typedef ReverseIterator<const iterator>						const_reverse_iterator;
 		typedef ptrdiff_t											difference_type;
 		typedef size_t												size_type;
 
