@@ -2,6 +2,7 @@
 # define RANDOMACCESSITERATOR_HPP
 # include <cstddef>
 # include "type_traits.hpp"
+# include "BidirectionalIterator.hpp"
 
 namespace ft
 {
@@ -32,6 +33,13 @@ namespace ft
 
 		virtual ~RandomAccessIterator() {} //NOLINT
 
+		RandomAccessIterator &
+		operator=(const RandomAccessIterator<T, Pointer, Reference> &x)
+		{
+			this->_val = x._val;
+			return (*this);
+		}
+
 		reference operator*() const
 		{
 			return (*this->_val);
@@ -40,13 +48,6 @@ namespace ft
 		pointer operator->() const
 		{
 			return &(*this->_val);
-		}
-
-		RandomAccessIterator &
-		operator=(const RandomAccessIterator<T, Pointer, Reference> &x)
-		{
-			this->_val = x._val;
-			return (*this);
 		}
 
 		RandomAccessIterator &operator+=(const difference_type &n)
@@ -142,10 +143,12 @@ namespace ft
 		}
 	};
 
-	template<class RandomAccessIterator>
-	ptrdiff_t	distance(RandomAccessIterator first, RandomAccessIterator last)
-	{
-		return (last - first);
-	}
+//	template<class RandomAccessIterator>
+//	ptrdiff_t distance(RandomAccessIterator first, RandomAccessIterator last)
+//	{
+//		return (last - first);
+//	}
+
+
 }
 #endif

@@ -25,20 +25,34 @@ namespace ft
 	template <typename T>
 	struct is_iterator
 	{
-		static const bool result = false;
+	private:
+		typedef char	true_type;
+		typedef int		false_type;
+
+		template <typename U>
+		static true_type test(typename U::iterator_category* = 0);
+		template <typename U>
+		static false_type test(...);
+
+	public:
+		static const bool result = (sizeof(true_type) == sizeof(test<T>(0)));
 	};
 
-	template <>
-	struct is_iterator<ft::random_access_iterator_tag>
+	template <typename T>
+	struct iterator_traits : public enable_if<is_iterator<T>::result, T> {};
+
+	template <typename T>
+	struct iterator_traits<T*>
 	{
-		static const bool result = true;
+		typedef random_access_iterator_tag type;
 	};
 
-	template <>
-	struct is_iterator<ft::bidirectional_iterator_tag>
+	template <typename T>
+	struct iterator_traits<const T*>
 	{
-		static const bool result = true;
+		typedef random_access_iterator_tag type;
 	};
+
 
 }
 #endif

@@ -143,6 +143,33 @@ tests/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/build
 .PHONY : tests/fast
 
+Utils.o: Utils.cpp.o
+
+.PHONY : Utils.o
+
+# target to build an object file
+Utils.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/Utils.cpp.o
+.PHONY : Utils.cpp.o
+
+Utils.i: Utils.cpp.i
+
+.PHONY : Utils.i
+
+# target to preprocess a source file
+Utils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/Utils.cpp.i
+.PHONY : Utils.cpp.i
+
+Utils.s: Utils.cpp.s
+
+.PHONY : Utils.s
+
+# target to generate assembly for a file
+Utils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/Utils.cpp.s
+.PHONY : Utils.cpp.s
+
 testmain.o: testmain.cpp.o
 
 .PHONY : testmain.o
@@ -179,6 +206,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... tests"
+	@echo "... Utils.o"
+	@echo "... Utils.i"
+	@echo "... Utils.s"
 	@echo "... testmain.o"
 	@echo "... testmain.i"
 	@echo "... testmain.s"

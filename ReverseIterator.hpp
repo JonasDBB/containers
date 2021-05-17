@@ -1,6 +1,7 @@
-#ifndef REVERSERANDOMACCESSITERATOR_HPP
-# define REVERSERANDOMACCESSITERATOR_HPP
+#ifndef REVERSEACCESSITERATOR_HPP
+# define REVERSEACCESSITERATOR_HPP
 # include "RandomAccessIterator.hpp"
+# include "BidirectionalIterator.hpp"
 # include "type_traits.hpp"
 
 namespace ft {
@@ -22,14 +23,14 @@ namespace ft {
 	public:
 		ReverseIterator() : _base() {}
 
-		explicit ReverseIterator(iterator_type it) : _base(it + 1)
-		{}
+		explicit ReverseIterator(iterator_type it)
+		{
+			Iterator tmp(it);
+			this->_base = ++tmp;
+		}
 
 		template <class Iter>
-		ReverseIterator(const ReverseIterator<Iter>& rev_it)
-		{
-			*this = rev_it;
-		}
+		explicit ReverseIterator(const ReverseIterator<Iter>& rev_it) : _base(rev_it._base) {}
 
 		~ReverseIterator() {} //NOLINT
 
@@ -40,13 +41,13 @@ namespace ft {
 
 		reference operator*() const
 		{
-			return (*(this->_base - 1));
+			Iterator tmp = this->_base;
+			return (*--tmp);
 		}
 
-		ReverseIterator operator+(difference_type n) const
+		pointer operator->() const
 		{
-			ReverseIterator tmp(this->_base - n - 1);
-			return (tmp);
+			return &(operator*());
 		}
 
 		ReverseIterator& operator++()
@@ -58,19 +59,7 @@ namespace ft {
 		ReverseIterator operator++(int)
 		{
 			ReverseIterator tmp(*this);
-			++(*this);
-			return (tmp);
-		}
-
-		ReverseIterator& operator+=(difference_type n)
-		{
-			this->_base -= n;
-			return (*this);
-		}
-
-		ReverseIterator operator-(difference_type n) const
-		{
-			ReverseIterator tmp(this->_base + n - 1);
+			this->_base--;
 			return (tmp);
 		}
 
@@ -83,24 +72,39 @@ namespace ft {
 		ReverseIterator operator--(int)
 		{
 			ReverseIterator tmp(*this);
-			--(*this);
+			this->_base++;
 			return (tmp);
 		}
 
+		// only works for Random Access Iterator
+		ReverseIterator operator+(difference_type n) const
+		{
+			return (ReverseIterator(this->_base - n));
+		}
+
+		// only works for Random Access Iterator
+		ReverseIterator& operator+=(difference_type n)
+		{
+			this->_base -= n;
+			return (*this);
+		}
+
+		// only works for Random Access Iterator
+		ReverseIterator operator-(difference_type n) const
+		{
+			return (ReverseIterator(this->_base + n));
+		}
+
+		// only works for Random Access Iterator
 		ReverseIterator& operator-=(difference_type n)
 		{
 			this->_base += n;
 			return (*this);
 		}
 
-		pointer operator->() const
-		{
-			return &(operator*());
-		}
-
 		reference operator[](difference_type n) const
 		{
-			return (this->_base[-n-1]);
+			return *(*this + n);
 		}
 	};
 
@@ -113,31 +117,31 @@ namespace ft {
 	template <class Iterator>
 	bool operator!=(const ReverseIterator<Iterator>& lhs, const ReverseIterator<Iterator>& rhs)
 	{
-		return (lhs.base() != rhs.base());
+		return !(lhs == rhs);
 	}
 
 	template <class Iterator>
 	bool operator<(const ReverseIterator<Iterator>& lhs, const ReverseIterator<Iterator>& rhs)
 	{
-		return (lhs.base() > rhs.base());
+		return (rhs.base() < lhs.base());
 	}
 
 	template <class Iterator>
 	bool operator<=(const ReverseIterator<Iterator>& lhs, const ReverseIterator<Iterator>& rhs)
 	{
-		return (lhs.base() >= rhs.base());
+		return !(rhs < lhs);
 	}
 
 	template <class Iterator>
 	bool operator>(const ReverseIterator<Iterator>& lhs, const ReverseIterator<Iterator>& rhs)
 	{
-		return (lhs.base() < rhs.base());
+		return (rhs < lhs);
 	}
 
 	template <class Iterator>
 	bool operator>=(const ReverseIterator<Iterator>& lhs, const ReverseIterator<Iterator>& rhs)
 	{
-		return (lhs.base() <= rhs.base());
+		return !(lhs < rhs);
 	}
 
 	template <class Iterator>

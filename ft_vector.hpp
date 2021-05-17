@@ -4,6 +4,7 @@
 # include "RandomAccessIterator.hpp"
 # include "ReverseIterator.hpp"
 # include "type_traits.hpp"
+# include "Utils.hpp"
 
 namespace ft
 {
@@ -46,10 +47,10 @@ namespace ft
 			_alloc(alloc)
 		{
 			while (this->_capacity < this->_size)
-				this->_capacity << 1;
+				this->_capacity <<= 1;
 			this->_array = this->_alloc.allocate(this->_capacity);
 			for (size_type i = 0; i < this->_size; i++)
-				this->_alloc.construct(this->_array[i], val);
+				this->_alloc.construct(&this->_array[i], val);
 		}
 
 		// range constructor
@@ -61,7 +62,7 @@ namespace ft
 			_array(NULL),
 			_alloc(alloc)
 		{
-			assign(first, last);
+			this->assign(first, last);
 		}
 
 		// copy constructor
@@ -100,7 +101,7 @@ namespace ft
 				return (*this);
 			this->_array = this->_alloc.allocate(this->_capacity);
 			for (size_type i = 0; i < this->_size; i++)
-				this->_alloc.construct(this->_array[i], x._array[i]);//this->_array[i] = x._array[i];
+				this->_alloc.construct(&this->_array[i], x._array[i]);//this->_array[i] = x._array[i];
 			return (*this);
 		}
 
@@ -159,7 +160,7 @@ namespace ft
 		void			resize(size_type n, value_type val = value_type())
 		{
 			reserve(n);
-			for (;this->_size < n; this->_size++)
+			while (this->_size < n)
 				push_back(val);
 			while (this->_size > n)
 				this->_size--;
@@ -186,9 +187,10 @@ namespace ft
 			this->_capacity = n;
 			pointer new_arr = this->_alloc.allocate(this->_capacity); //NOLINT
 			for (size_type i = 0; i < this->_size; i++)
+			{
 				this->_alloc.construct(&new_arr[i], this->_array[i]);
-			for (size_type i = 0; i < this->_size; i++)
 				this->_alloc.destroy(&this->_array[i]);
+			}
 			this->_alloc.deallocate(this->_array, this->_capacity);
 			this->_array = new_arr;
 		}
@@ -241,7 +243,7 @@ namespace ft
 		/* ==MODIFIER FUNCTIONS== */
 		template <class InputIterator>
 		void			assign(InputIterator first, InputIterator last,
-				typename enable_if<is_iterator<typename InputIterator::iterator_category>::result, InputIterator>::type* = NULL)
+				typename iterator_traits<InputIterator>::type* = NULL)
 		{
 			clear();
 			reserve(ft::distance(first, last));
@@ -277,7 +279,7 @@ namespace ft
 		{
 			if (!this->_size)
 				return;
-			this->_alloc.destroy(this->_array[this->_size - 1]);
+			this->_alloc.destroy(&this->_array[this->_size - 1]);
 			this->_size--;
 		}
 
@@ -287,7 +289,8 @@ namespace ft
 			iterator tmp(end() - 1);
 			while (tmp != position)
 			{
-				*tmp = *(tmp - 1);
+				this->_alloc.construct(&(*tmp), *(tmp - 1));
+				this->_alloc.destroy(&(*tmp));
 				tmp--;
 			}
 			this->_alloc.construct(*position, val);
@@ -296,23 +299,23 @@ namespace ft
 
 		void			insert(iterator position, size_type n, const value_type& val)
 		{
-			resize(this->_size + n);
-			iterator tmp(end() - 1);
-			while (tmp - n != position)
+			difference_type index = distance(this->begin(), position);
+			reserve(this->_size + n);
+			for (size_type i = this->_size + n - 1; i >= index + n; i--)
 			{
-				*tmp = *(tmp - n);
-				tmp--;
+				this->_alloc.construct(&this->_array[i], this->_array[i - n]);
+				this->_alloc.destroy(&this->_array[i - n]);
 			}
-			*tmp = *(tmp - n);
 			for (size_type i = 0; i < n; i++)
 			{
-				this->_alloc.construct(*position, val);
-				position++;
+				this->_alloc.construct(&this->_array[index + i], val);
 			}
+			this->_size += n;
 		}
 
 		template <class InputIterator>
-		void			insert(iterator position, InputIterator first, InputIterator last)
+		void			insert(iterator position, InputIterator first, InputIterator last,
+							   typename iterator_traits<InputIterator>::type* = NULL)
 		{
 			difference_type	len = ft::distance(first, last);
 			resize(this->_size + len);
@@ -415,6 +418,7 @@ namespace ft
 	bool	operator<(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
 	{
 		return (lhs == rhs);
+//		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
 	}
 
 	template <class T, class Alloc>
