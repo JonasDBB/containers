@@ -86,20 +86,6 @@ namespace ft
 		}
 	};
 
-//	template<class BidirectionalIterator>
-//	ptrdiff_t distance(BidirectionalIterator first, BidirectionalIterator last)
-//	{
-//		std::cout << "\nmydist" << std::endl;
-//		ptrdiff_t	ret = 0;
-//		BidirectionalIterator tmp(first);
-//		while (tmp != last)
-//		{
-//			tmp++;
-//			ret++;
-//		}
-//		return (ret);
-//	}
-
 }
 
 #endif

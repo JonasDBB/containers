@@ -299,7 +299,7 @@ namespace ft
 
 		void			insert(iterator position, size_type n, const value_type& val)
 		{
-			difference_type index = distance(this->begin(), position);
+			difference_type index = ft::distance(this->begin(), position);
 			reserve(this->_size + n);
 			for (size_type i = this->_size + n - 1; i >= index + n; i--)
 			{
@@ -368,15 +368,10 @@ namespace ft
 
 		void			swap(vector& x)
 		{
-			size_type tmp = this->_size;
-			this->_size = x._size;
-			x._size = tmp;
-			tmp = this->_capacity;
-			this->_capacity = x._capacity;
-			x._capacity = tmp;
-			pointer tmp_arr = this->_array;
-			this->_array = x._array;
-			x._array = tmp_arr;
+			ft::swap(this->_capacity, x._capacity);
+			ft::swap(this->_size, x._size);
+			ft::swap(this->_array, x._array);
+			ft::swap(this->_alloc, x._alloc);
 		}
 
 		void			clear()
@@ -417,8 +412,8 @@ namespace ft
 	template <class T, class Alloc>
 	bool	operator<(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
 	{
-		return (lhs == rhs);
-//		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+//		return (lhs == rhs);
+		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
 	}
 
 	template <class T, class Alloc>

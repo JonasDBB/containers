@@ -39,18 +39,37 @@ namespace ft
 	};
 
 	template <typename T>
-	struct iterator_traits : public enable_if<is_iterator<T>::result, T> {};
+	struct iterator_traits : public enable_if<is_iterator<T>::result, T>
+	{
+		typedef ptrdiff_t					difference_type;
+		typedef T							value_type;
+		typedef T*							pointer;
+		typedef T&							reference;
+		typedef random_access_iterator_tag	iterator_category;
+	};
 
 	template <typename T>
 	struct iterator_traits<T*>
 	{
-		typedef random_access_iterator_tag type;
+		typedef ptrdiff_t					difference_type;
+		typedef T							value_type;
+		typedef T*							pointer;
+		typedef T&							reference;
+		typedef random_access_iterator_tag	iterator_category;
+
+		typedef random_access_iterator_tag	type;
 	};
 
 	template <typename T>
 	struct iterator_traits<const T*>
 	{
-		typedef random_access_iterator_tag type;
+		typedef ptrdiff_t					difference_type;
+		typedef T							value_type;
+		typedef T*							pointer;
+		typedef T&							reference;
+		typedef random_access_iterator_tag	iterator_category;
+
+		typedef random_access_iterator_tag	type;
 	};
 
 

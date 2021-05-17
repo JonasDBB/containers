@@ -91,9 +91,6 @@
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/ReverseIterator.hpp">
 			<Option target="tests"/>
 		</Unit>
-		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/Utils.cpp">
-			<Option target="tests"/>
-		</Unit>
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/Utils.hpp">
 			<Option target="tests"/>
 		</Unit>
