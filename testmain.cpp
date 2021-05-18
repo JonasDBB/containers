@@ -324,24 +324,24 @@ void	vecInsert()
 	std::cout << '\n';
 }
 
-//void	vecErase()
-//{
-//	vector<int> myvector;
-//
-//	// set some values (from 1 to 10)
-//	for (int i=1; i<=10; i++) myvector.push_back(i);
-//
-//	// erase the 6th element
-//	myvector.erase (myvector.begin()+5);
-//
-//	// erase the first 3 elements:
-//	myvector.erase (myvector.begin(),myvector.begin()+3);
-//
-//	std::cout << "myvector contains:";
-//	for (unsigned i=0; i<myvector.size(); ++i)
-//		std::cout << ' ' << myvector[i];
-//	std::cout << '\n';
-//}
+void	vecErase()
+{
+	vector<int> myvector;
+
+	// set some values (from 1 to 10)
+	for (int i=1; i<=10; i++) myvector.push_back(i);
+
+	// erase the 6th element
+	myvector.erase (myvector.begin()+5);
+
+	// erase the first 3 elements:
+	myvector.erase (myvector.begin(),myvector.begin()+3);
+
+	std::cout << "myvector contains:";
+	for (unsigned i=0; i<myvector.size(); ++i)
+		std::cout << ' ' << myvector[i];
+	std::cout << '\n';
+}
 
 void	vecSwap()
 {
@@ -416,27 +416,27 @@ void	vecSwapOverload()
 
 void	vectests()
 {
-//	vecConstr();
+	vecConstr();
 //	The contents of fifth are: 16 2 77 29
-//	vecAssignOp();
+	vecAssignOp();
 //	Size of foo: 0
 //	Size of bar: 3
-//	vecBeginEnd();
+	vecBeginEnd();
 //	myvector contains: 1 2 3 4 5
-//	vecRbeginRend();
+	vecRbeginRend();
 //	myvector contains: 5 4 3 2 1
-//	vecSize();
+	vecSize();
 //	0. size: 0
 //	1. size: 10
 //	2. size: 20
 //	3. size: 19
-//	vecMaxsize();
+	vecMaxsize();
 //	size: 100
 //	capacity: 128
 //	max_size: 4611686018427387903
-//	vecResize();
+	vecResize();
 //	myvector contains: 1 2 3 4 5 100 100 100 0 0 0 0
-//	vecReserv();
+	vecReserv();
 //	making foo grow:
 //	capacity changed: 1
 //	capacity changed: 2
@@ -448,37 +448,37 @@ void	vectests()
 //	capacity changed: 128
 //	making bar grow:
 //	capacity changed: 100
-//	vecBrckOp();
+	vecBrckOp();
 //	myvector contains: 9 8 7 6 5 4 3 2 1 0
-//	vecAt();
+	vecAt();
 //	myvector contains: 0 1 2 3 4 5 6 7 8 9
-//	vecFront();
+	vecFront();
 //	myvector.front() is now 62
-//	vecBack();
+	vecBack();
 //	myvector contains: 10 9 8 7 6 5 4 3 2 1 0
-//	vecAssign();
+	vecAssign();
 //	Size of first: 7
 //	Size of second: 5
 //	Size of third: 3
-//	vecPushb();
+	vecPushb();
 //	myvector stores n numbers. // where n is the amount of numbers entered
-//	vecPopb();
+	vecPopb();
 //	The elements of myvector add up to 600
 	vecInsert();
 //	myvector contains: 501 502 503 300 300 400 400 200 100 100 100
-//	==============================================================vecErase();
+	vecErase();
 //	myvector contains: 4 5 7 8 9 10
-//	vecSwap();
+	vecSwap();
 //	foo contains: 200 200 200 200 200
 //	bar contains: 100 100 100
-//	vecClear();
+	vecClear();
 //	myvector contains: 100 200 300
 //	myvector contains: 1101 2202
-//	vecRelOps();
+	vecRelOps();
 //	foo and bar are not equal
 //	foo is less than bar
 //	foo is less than or equal to bar
-//	vecSwapOverload();
+	vecSwapOverload();
 //	foo contains: 200 200 200 200 200
 //	bar contains: 100 100 100
 }

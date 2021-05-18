@@ -131,6 +131,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named catch
+
+# Build rule for target.
+catch: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 catch
+.PHONY : catch
+
+# fast build rule for target.
+catch/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/build
+.PHONY : catch/fast
+
+#=============================================================================
 # Target rules for targets named tests
 
 # Build rule for target.
@@ -142,6 +155,60 @@ tests: cmake_check_build_system
 tests/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/build
 .PHONY : tests/fast
+
+catch.o: catch.cpp.o
+
+.PHONY : catch.o
+
+# target to build an object file
+catch.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch.cpp.o
+.PHONY : catch.cpp.o
+
+catch.i: catch.cpp.i
+
+.PHONY : catch.i
+
+# target to preprocess a source file
+catch.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch.cpp.i
+.PHONY : catch.cpp.i
+
+catch.s: catch.cpp.s
+
+.PHONY : catch.s
+
+# target to generate assembly for a file
+catch.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch.cpp.s
+.PHONY : catch.cpp.s
+
+catch2_main.o: catch2_main.cpp.o
+
+.PHONY : catch2_main.o
+
+# target to build an object file
+catch2_main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2_main.cpp.o
+.PHONY : catch2_main.cpp.o
+
+catch2_main.i: catch2_main.cpp.i
+
+.PHONY : catch2_main.i
+
+# target to preprocess a source file
+catch2_main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2_main.cpp.i
+.PHONY : catch2_main.cpp.i
+
+catch2_main.s: catch2_main.cpp.s
+
+.PHONY : catch2_main.s
+
+# target to generate assembly for a file
+catch2_main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2_main.cpp.s
+.PHONY : catch2_main.cpp.s
 
 testmain.o: testmain.cpp.o
 
@@ -178,7 +245,14 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... catch"
 	@echo "... tests"
+	@echo "... catch.o"
+	@echo "... catch.i"
+	@echo "... catch.s"
+	@echo "... catch2_main.o"
+	@echo "... catch2_main.i"
+	@echo "... catch2_main.s"
 	@echo "... testmain.o"
 	@echo "... testmain.i"
 	@echo "... testmain.s"

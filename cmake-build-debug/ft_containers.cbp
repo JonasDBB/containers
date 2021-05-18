@@ -37,6 +37,50 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="catch">
+				<Option output="/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/catch" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Users/jbennink/homebrew/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 catch"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="catch/fast">
+				<Option output="/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/catch" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Users/jbennink/homebrew/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 catch/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 			<Target title="tests">
 				<Option output="/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/tests" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug"/>
@@ -93,6 +137,15 @@
 		</Unit>
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/Utils.hpp">
 			<Option target="tests"/>
+		</Unit>
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/catch.cpp">
+			<Option target="catch"/>
+		</Unit>
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/catch.hpp">
+			<Option target="catch"/>
+		</Unit>
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/catch2_main.cpp">
+			<Option target="catch"/>
 		</Unit>
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/ft_vector.hpp">
 			<Option target="tests"/>

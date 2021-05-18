@@ -56,7 +56,8 @@ namespace ft
 		// range constructor
 		template <class InputIterator>
 		vector(InputIterator first, InputIterator last,
-				const allocator_type& alloc = allocator_type()) :
+				const allocator_type& alloc = allocator_type(),
+				typename iterator_traits<InputIterator>::type* = NULL) :
 			_capacity(0),
 			_size(0),
 			_array(NULL),
@@ -285,15 +286,7 @@ namespace ft
 
 		iterator		insert(iterator position, const value_type& val)
 		{
-			resize(this->_size + 1);
-			iterator tmp(end() - 1);
-			while (tmp != position)
-			{
-				this->_alloc.construct(&(*tmp), *(tmp - 1));
-				this->_alloc.destroy(&(*tmp));
-				tmp--;
-			}
-			this->_alloc.construct(*position, val);
+			this->insert(position, 1, val);
 			return (position);
 		}
 
@@ -307,9 +300,7 @@ namespace ft
 				this->_alloc.destroy(&this->_array[i - n]);
 			}
 			for (size_type i = 0; i < n; i++)
-			{
 				this->_alloc.construct(&this->_array[index + i], val);
-			}
 			this->_size += n;
 		}
 
@@ -318,32 +309,29 @@ namespace ft
 							   typename iterator_traits<InputIterator>::type* = NULL)
 		{
 			difference_type	len = ft::distance(first, last);
-			resize(this->_size + len);
-			iterator tmp(end() - 1);
-			while (tmp - len != position)
+			difference_type pos = ft::distance(this->begin(), position);
+			reserve(this->_size + len);
+			for (difference_type i = this->size() + len - 1; i >= pos + len; i--)
 			{
-				*tmp = *(tmp - len);
-				tmp--;
+				this->_alloc.construct(&this->_array[i], this->_array[i - len]);
+				this->_alloc.destroy(&this->_array[i - len]);
 			}
-			*tmp = *(tmp - len);
-			while (first != last)
-			{
-				this->_alloc.construct(*position, *first);
-				position++;
-				first++;
-			}
+			for (difference_type i = 0; i < len; i++, first++)
+				this->_alloc.construct(&this->_array[pos + i], *first);
+			this->_size += len;
 		}
 
 		iterator		erase(iterator position)
 		{
 			iterator	tmp(position);
 
-			this->_alloc.destroy(*position);
+			this->_alloc.destroy(&(*position));
 			this->_size--;
 			position++;
-			while (position != end())
+			while (position <= this->end())
 			{
-				*(position - 1) = *position;
+				this->_alloc.construct(&(*(position - 1)), *position);
+				this->_alloc.destroy(&(*position));
 				position++;
 			}
 			return (tmp);
@@ -355,14 +343,15 @@ namespace ft
 			difference_type	len = ft::distance(first, last);
 
 			for (iterator tmp1 = first; tmp1 != last; tmp1++)
-				this->_alloc.destroy(*tmp);
-			this->_size -= len;
-			while (last != end())
+				this->_alloc.destroy(&(*tmp));
+			while (last <= end())
 			{
-				*first = *last;
+				this->_alloc.construct(&(*first), (*last));
+				this->_alloc.destroy(&(*last));
 				first++;
 				last++;
 			}
+			this->_size -= len;
 			return (tmp);
 		}
 
