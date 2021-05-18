@@ -126,34 +126,37 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/BidirectionalIterator.hpp">
-			<Option target="tests"/>
-		</Unit>
-		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/RandomAccessIterator.hpp">
-			<Option target="tests"/>
-		</Unit>
-		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/ReverseIterator.hpp">
-			<Option target="tests"/>
-		</Unit>
-		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/Utils.hpp">
-			<Option target="tests"/>
-		</Unit>
-		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/catch.cpp">
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/catch2tests/catch.cpp">
 			<Option target="catch"/>
 		</Unit>
-		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/catch.hpp">
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/catch2tests/catch.hpp">
 			<Option target="catch"/>
 		</Unit>
-		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/catch2_main.cpp">
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/catch2tests/main.cpp">
 			<Option target="catch"/>
 		</Unit>
-		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/ft_vector.hpp">
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/catch2tests/vector_tests.cpp">
+			<Option target="catch"/>
+		</Unit>
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/srcs/ft_vector.hpp">
 			<Option target="tests"/>
 		</Unit>
-		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/testmain.cpp">
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/srcs/iterators/BidirectionalIterator.hpp">
 			<Option target="tests"/>
 		</Unit>
-		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/type_traits.hpp">
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/srcs/iterators/RandomAccessIterator.hpp">
+			<Option target="tests"/>
+		</Unit>
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/srcs/iterators/ReverseIterator.hpp">
+			<Option target="tests"/>
+		</Unit>
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/srcs/testmain.cpp">
+			<Option target="tests"/>
+		</Unit>
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/srcs/utils/Utils.hpp">
+			<Option target="tests"/>
+		</Unit>
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/srcs/utils/type_traits.hpp">
 			<Option target="tests"/>
 		</Unit>
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/CMakeLists.txt">

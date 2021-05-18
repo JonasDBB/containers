@@ -1,10 +1,10 @@
 #ifndef FT_VECTOR_HPP
 # define FT_VECTOR_HPP
 # include <cstddef>
-# include "RandomAccessIterator.hpp"
-# include "ReverseIterator.hpp"
-# include "type_traits.hpp"
-# include "Utils.hpp"
+# include "iterators/RandomAccessIterator.hpp"
+# include "iterators/ReverseIterator.hpp"
+# include "utils/type_traits.hpp"
+# include "utils/Utils.hpp"
 
 namespace ft
 {
@@ -42,12 +42,10 @@ namespace ft
 
 		// fill constructor
 		explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) :
-			_capacity(1),
+			_capacity(n),
 			_size(n),
 			_alloc(alloc)
 		{
-			while (this->_capacity < this->_size)
-				this->_capacity <<= 1;
 			this->_array = this->_alloc.allocate(this->_capacity);
 			for (size_type i = 0; i < this->_size; i++)
 				this->_alloc.construct(&this->_array[i], val);
@@ -70,10 +68,9 @@ namespace ft
 		vector(const vector& x) :
 			_capacity(x._capacity),
 			_size(x._size),
+			_array(NULL),
 			_alloc(x._alloc)
 		{
-			delete[] this->_array;
-			this->_array = NULL;
 			if (!this->_capacity)
 				return;
 			this->_array = this->_alloc.allocate(this->_capacity);

@@ -2,7 +2,7 @@
 # define REVERSEACCESSITERATOR_HPP
 # include "RandomAccessIterator.hpp"
 # include "BidirectionalIterator.hpp"
-# include "type_traits.hpp"
+# include "../utils/type_traits.hpp"
 
 namespace ft {
 	template<class Iterator>

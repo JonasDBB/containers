@@ -156,86 +156,113 @@ tests/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/build
 .PHONY : tests/fast
 
-catch.o: catch.cpp.o
+catch2tests/catch.o: catch2tests/catch.cpp.o
 
-.PHONY : catch.o
-
-# target to build an object file
-catch.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch.cpp.o
-.PHONY : catch.cpp.o
-
-catch.i: catch.cpp.i
-
-.PHONY : catch.i
-
-# target to preprocess a source file
-catch.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch.cpp.i
-.PHONY : catch.cpp.i
-
-catch.s: catch.cpp.s
-
-.PHONY : catch.s
-
-# target to generate assembly for a file
-catch.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch.cpp.s
-.PHONY : catch.cpp.s
-
-catch2_main.o: catch2_main.cpp.o
-
-.PHONY : catch2_main.o
+.PHONY : catch2tests/catch.o
 
 # target to build an object file
-catch2_main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2_main.cpp.o
-.PHONY : catch2_main.cpp.o
+catch2tests/catch.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2tests/catch.cpp.o
+.PHONY : catch2tests/catch.cpp.o
 
-catch2_main.i: catch2_main.cpp.i
+catch2tests/catch.i: catch2tests/catch.cpp.i
 
-.PHONY : catch2_main.i
+.PHONY : catch2tests/catch.i
 
 # target to preprocess a source file
-catch2_main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2_main.cpp.i
-.PHONY : catch2_main.cpp.i
+catch2tests/catch.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2tests/catch.cpp.i
+.PHONY : catch2tests/catch.cpp.i
 
-catch2_main.s: catch2_main.cpp.s
+catch2tests/catch.s: catch2tests/catch.cpp.s
 
-.PHONY : catch2_main.s
+.PHONY : catch2tests/catch.s
 
 # target to generate assembly for a file
-catch2_main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2_main.cpp.s
-.PHONY : catch2_main.cpp.s
+catch2tests/catch.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2tests/catch.cpp.s
+.PHONY : catch2tests/catch.cpp.s
 
-testmain.o: testmain.cpp.o
+catch2tests/main.o: catch2tests/main.cpp.o
 
-.PHONY : testmain.o
+.PHONY : catch2tests/main.o
 
 # target to build an object file
-testmain.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/testmain.cpp.o
-.PHONY : testmain.cpp.o
+catch2tests/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2tests/main.cpp.o
+.PHONY : catch2tests/main.cpp.o
 
-testmain.i: testmain.cpp.i
+catch2tests/main.i: catch2tests/main.cpp.i
 
-.PHONY : testmain.i
+.PHONY : catch2tests/main.i
 
 # target to preprocess a source file
-testmain.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/testmain.cpp.i
-.PHONY : testmain.cpp.i
+catch2tests/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2tests/main.cpp.i
+.PHONY : catch2tests/main.cpp.i
 
-testmain.s: testmain.cpp.s
+catch2tests/main.s: catch2tests/main.cpp.s
 
-.PHONY : testmain.s
+.PHONY : catch2tests/main.s
 
 # target to generate assembly for a file
-testmain.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/testmain.cpp.s
-.PHONY : testmain.cpp.s
+catch2tests/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2tests/main.cpp.s
+.PHONY : catch2tests/main.cpp.s
+
+catch2tests/vector_tests.o: catch2tests/vector_tests.cpp.o
+
+.PHONY : catch2tests/vector_tests.o
+
+# target to build an object file
+catch2tests/vector_tests.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2tests/vector_tests.cpp.o
+.PHONY : catch2tests/vector_tests.cpp.o
+
+catch2tests/vector_tests.i: catch2tests/vector_tests.cpp.i
+
+.PHONY : catch2tests/vector_tests.i
+
+# target to preprocess a source file
+catch2tests/vector_tests.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2tests/vector_tests.cpp.i
+.PHONY : catch2tests/vector_tests.cpp.i
+
+catch2tests/vector_tests.s: catch2tests/vector_tests.cpp.s
+
+.PHONY : catch2tests/vector_tests.s
+
+# target to generate assembly for a file
+catch2tests/vector_tests.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2tests/vector_tests.cpp.s
+.PHONY : catch2tests/vector_tests.cpp.s
+
+srcs/testmain.o: srcs/testmain.cpp.o
+
+.PHONY : srcs/testmain.o
+
+# target to build an object file
+srcs/testmain.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/srcs/testmain.cpp.o
+.PHONY : srcs/testmain.cpp.o
+
+srcs/testmain.i: srcs/testmain.cpp.i
+
+.PHONY : srcs/testmain.i
+
+# target to preprocess a source file
+srcs/testmain.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/srcs/testmain.cpp.i
+.PHONY : srcs/testmain.cpp.i
+
+srcs/testmain.s: srcs/testmain.cpp.s
+
+.PHONY : srcs/testmain.s
+
+# target to generate assembly for a file
+srcs/testmain.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/srcs/testmain.cpp.s
+.PHONY : srcs/testmain.cpp.s
 
 # Help Target
 help:
@@ -247,15 +274,18 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... catch"
 	@echo "... tests"
-	@echo "... catch.o"
-	@echo "... catch.i"
-	@echo "... catch.s"
-	@echo "... catch2_main.o"
-	@echo "... catch2_main.i"
-	@echo "... catch2_main.s"
-	@echo "... testmain.o"
-	@echo "... testmain.i"
-	@echo "... testmain.s"
+	@echo "... catch2tests/catch.o"
+	@echo "... catch2tests/catch.i"
+	@echo "... catch2tests/catch.s"
+	@echo "... catch2tests/main.o"
+	@echo "... catch2tests/main.i"
+	@echo "... catch2tests/main.s"
+	@echo "... catch2tests/vector_tests.o"
+	@echo "... catch2tests/vector_tests.i"
+	@echo "... catch2tests/vector_tests.s"
+	@echo "... srcs/testmain.o"
+	@echo "... srcs/testmain.i"
+	@echo "... srcs/testmain.s"
 .PHONY : help
 
 

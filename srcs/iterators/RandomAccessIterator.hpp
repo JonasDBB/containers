@@ -1,13 +1,13 @@
 #ifndef RANDOMACCESSITERATOR_HPP
 # define RANDOMACCESSITERATOR_HPP
 # include <cstddef>
-# include "type_traits.hpp"
+# include "../utils/type_traits.hpp"
 # include "BidirectionalIterator.hpp"
 
 namespace ft
 {
 	template <class T, class Pointer, class Reference,
-	        class Category = ft::random_access_iterator_tag>
+	        class Category = std::random_access_iterator_tag>
 	class RandomAccessIterator {
 	public:
 		typedef Category	iterator_category;

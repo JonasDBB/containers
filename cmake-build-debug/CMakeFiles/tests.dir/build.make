@@ -77,27 +77,27 @@ include CMakeFiles/tests.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/tests.dir/flags.make
 
-CMakeFiles/tests.dir/testmain.cpp.o: CMakeFiles/tests.dir/flags.make
-CMakeFiles/tests.dir/testmain.cpp.o: ../testmain.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/tests.dir/testmain.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tests.dir/testmain.cpp.o -c /Users/jbennink/Documents/Projects/ft_containers/testmain.cpp
+CMakeFiles/tests.dir/srcs/testmain.cpp.o: CMakeFiles/tests.dir/flags.make
+CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/testmain.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/tests.dir/srcs/testmain.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tests.dir/srcs/testmain.cpp.o -c /Users/jbennink/Documents/Projects/ft_containers/srcs/testmain.cpp
 
-CMakeFiles/tests.dir/testmain.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tests.dir/testmain.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jbennink/Documents/Projects/ft_containers/testmain.cpp > CMakeFiles/tests.dir/testmain.cpp.i
+CMakeFiles/tests.dir/srcs/testmain.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tests.dir/srcs/testmain.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jbennink/Documents/Projects/ft_containers/srcs/testmain.cpp > CMakeFiles/tests.dir/srcs/testmain.cpp.i
 
-CMakeFiles/tests.dir/testmain.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tests.dir/testmain.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jbennink/Documents/Projects/ft_containers/testmain.cpp -o CMakeFiles/tests.dir/testmain.cpp.s
+CMakeFiles/tests.dir/srcs/testmain.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tests.dir/srcs/testmain.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jbennink/Documents/Projects/ft_containers/srcs/testmain.cpp -o CMakeFiles/tests.dir/srcs/testmain.cpp.s
 
 # Object files for target tests
 tests_OBJECTS = \
-"CMakeFiles/tests.dir/testmain.cpp.o"
+"CMakeFiles/tests.dir/srcs/testmain.cpp.o"
 
 # External object files for target tests
 tests_EXTERNAL_OBJECTS =
 
-tests: CMakeFiles/tests.dir/testmain.cpp.o
+tests: CMakeFiles/tests.dir/srcs/testmain.cpp.o
 tests: CMakeFiles/tests.dir/build.make
 tests: CMakeFiles/tests.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable tests"

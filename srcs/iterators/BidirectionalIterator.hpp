@@ -1,7 +1,7 @@
 #ifndef BIDIRECTIONALITERATOR_HPP
 # define BIDIRECTIONALITERATOR_HPP
 # include <cstddef>
-# include "type_traits.hpp"
+# include "../utils/type_traits.hpp"
 
 namespace ft
 {

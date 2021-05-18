@@ -1,12 +1,29 @@
 cmake_minimum_required(VERSION 3.17)
 project(ft_containers)
 
-set(CMAKE_CXX_STANDARD 98)
-#SET(DEBUGFLAGS "-fsanitize=address -D ASAN")
+set(CMAKE_CXX_STANDARD 14)
+SET(DEBUGFLAGS "-fsanitize=address -D ASAN")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra -g3 ${DEBUGFLAGS}")
 set(CMAKE_LINKER_FLAGS)
 
-add_executable(tests testmain.cpp ft_vector.hpp RandomAccessIterator.hpp type_traits.hpp ReverseIterator.hpp BidirectionalIterator.hpp Utils.hpp)
-add_executable(catch catch.cpp catch.hpp catch2_main.cpp)
+add_executable( tests
+                srcs/testmain.cpp
+
+                srcs/ft_vector.hpp
+
+                srcs/iterators/RandomAccessIterator.hpp
+                srcs/iterators/ReverseIterator.hpp
+                srcs/iterators/BidirectionalIterator.hpp
+
+                srcs/utils/type_traits.hpp
+                srcs/utils/Utils.hpp
+              )
+
+add_executable( catch
+                catch2tests/main.cpp
+                catch2tests/vector_tests.cpp
+                catch2tests/catch.cpp
+                catch2tests/catch.hpp
+              )
 set_target_properties(tests PROPERTIES LINKER_LANGUAGE CXX CXX_STANDARD 98)
-#target_include_directories(tests ${dirname})
+set_source_files_properties(catch2tests/catch.cpp catch2tests/catch.hpp PROPERTIES COMPILE_FLAGS "-std=c++14")

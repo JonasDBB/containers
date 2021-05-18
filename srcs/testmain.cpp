@@ -1,8 +1,8 @@
 #include <iostream>
 //#include <vector>
 #include "ft_vector.hpp"
-#include "RandomAccessIterator.hpp"
-#include "ReverseIterator.hpp"
+#include "iterators/RandomAccessIterator.hpp"
+#include "iterators/ReverseIterator.hpp"
 
 class Test
 {
@@ -482,10 +482,14 @@ void	vectests()
 //	foo contains: 200 200 200 200 200
 //	bar contains: 100 100 100
 }
-
+#include <vector>
+#include <iterator>
 int		main(int ac, char **av)
 {
 	vectests();
+//	ft::vector<int> myvec(5, 100);
+//	std::vector<int> realvec(myvec.begin(), myvec.end());
+
 #ifndef ASAN
 	std::string line = av[0];
 	line = "leaks " + line.substr(line.rfind('/') + 1, line.back()) +
