@@ -425,5 +425,42 @@ namespace ft
 	{
 		x.swap(y);
 	}
+
+# include <vector>
+	template<class T, class Alloc>
+	bool operator==(const ft::vector<T, Alloc> &mine,
+					const std::vector<T, Alloc> &real)
+	{
+		if (mine.capacity() != real.capacity())
+			return (false);
+		if (mine.size() != real.size())
+			return (false);
+		if (mine.get_allocator() != real.get_allocator())
+			return (false);
+		auto myit = mine.begin();
+		auto realit = real.begin();
+		for (size_t i = 0; i < mine.size(); i++, myit++, realit++)
+		{
+			if (*myit != *realit)
+				return (false);
+		}
+		return (true);
+	}
+
+	template<class T, class Alloc>
+	bool operator==(const std::vector<T, Alloc> &real,
+					const ft::vector<T, Alloc> &mine)
+	{ return (mine == real); }
+
+	template<class T, class Alloc>
+	bool operator!=(const ft::vector<T, Alloc> &mine,
+					const std::vector<T, Alloc> &real)
+	{ return !(mine == real); }
+
+	template<class T, class Alloc>
+	bool operator!=(const std::vector<T, Alloc> &real,
+					const ft::vector<T, Alloc> &mine)
+	{ return !(mine == real); }
+
 }
 #endif

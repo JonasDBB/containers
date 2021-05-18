@@ -1,85 +1,74 @@
 #include "catch.hpp"
 #include "../srcs/ft_vector.hpp"
 #include <vector>
-#include <iostream>
 
-namespace ft {
-
-	template<class T, class Alloc>
-	bool operator==(const ft::vector<T, Alloc> &mine,
-					const std::vector<T, Alloc> &real)
-	{
-		if (mine.capacity() != real.capacity())
-			return (false);
-		if (mine.size() != real.size())
-			return (false);
-		if (mine.get_allocator() != real.get_allocator())
-			return (false);
-		auto myit = mine.begin();
-		auto realit = real.begin();
-		for (size_t i = 0; i < mine.size(); i++, myit++, realit++)
-		{
-			if (*myit != *realit)
-				return (false);
-		}
-		return (true);
-	}
-
-	template<class T, class Alloc>
-	bool operator==(const std::vector<T, Alloc> &real,
-					const ft::vector<T, Alloc> &mine)
-	{ return (mine == real); }
-
-	template<class T, class Alloc>
-	bool operator!=(const ft::vector<T, Alloc> &mine,
-					const std::vector<T, Alloc> &real)
-	{ return !(mine == real); }
-
-	template<class T, class Alloc>
-	bool operator!=(const std::vector<T, Alloc> &real,
-					const ft::vector<T, Alloc> &mine)
-	{ return !(mine == real); }
-}
+#define realvect std::vector
+#define myvector ft::vector
 
 TEST_CASE("vector constructors", "[vector]")
 {
-	std::vector<int>	real1;
-	ft::vector<int>		mine1;
+	realvect<int>	real1;
+	myvector<int>	mine1;
 	REQUIRE(mine1 == real1);
 
-	std::vector<int>	real2(4, 100);
-	ft::vector<int>		mine2(4, 100);
+	realvect<int>	real2(4, 100);
+	myvector<int>	mine2(4, 100);
 	REQUIRE(mine2 == real2);
 
-	std::vector<int>	real3(real2.begin(), real2.end());
-	ft::vector<int>		mine3(mine2.begin(), mine2.end());
+	realvect<int>	real3(real2.begin(), real2.end());
+	myvector<int>	mine3(mine2.begin(), mine2.end());
 	REQUIRE(mine3 == real3);
 
-	std::vector<int>	real4(real3);
-	ft::vector<int>		mine4(mine3);
+	realvect<int>	real4(real3);
+	myvector<int>	mine4(mine3);
 	REQUIRE(mine4 == real4);
 
 	int intarr[] = {16, 2, 77, 29};
-	std::vector<int>	real5(intarr, intarr + sizeof(intarr) / sizeof(int));
-	ft::vector<int>		mine5(intarr, intarr + sizeof(intarr) / sizeof(int));
+	realvect<int>	real5(intarr, intarr + sizeof(intarr) / sizeof(int));
+	myvector<int>	mine5(intarr, intarr + sizeof(intarr) / sizeof(int));
 	REQUIRE(mine5 == real5);
 }
 
 TEST_CASE("vector assignment", "[vector]")
 {
-	std::vector<int>	real1 (3, 0);
-	ft::vector<int>		mine1 (3, 0);
+	realvect<int>	real1(3, 0);
+	myvector<int>	mine1(3, 0);
+	REQUIRE(mine1 == real1);
 
-	std::vector<int>	real2 (5, 0);
-	ft::vector<int>		mine2 (5, 0);
+	realvect<int>	real2(5, 0);
+	myvector<int>	mine2(5, 0);
+	REQUIRE(mine2 == real2);
 
 	real1 = real2;
 	mine1 = mine2;
-
-	real1 = std::vector<int>();
-	mine1 = ft::vector<int>();
-
 	REQUIRE(mine1 == real1);
 	REQUIRE(mine2 == real2);
+
+	real1 = realvect<int>();
+	mine1 = myvector<int>();
+	REQUIRE(mine1 == real1);
 }
+
+TEST_CASE("vector begin end", "[vector]")
+{
+	realvect<int> real1;
+	myvector<int> mine1;
+	for (int i = 1; i <= 5; i++)
+	{
+		real1.push_back(i);
+		mine1.push_back(i);
+	}
+	REQUIRE(mine1 == real1);
+
+	auto realIt1 = real1.begin();
+	auto myIt1 = mine1.begin();
+	REQUIRE(*realIt1 == *myIt1);
+
+	for (; realIt1 != real1.end() && myIt1 != mine1.end(); realIt1++, myIt1++)
+		REQUIRE(*realIt1 == *myIt1);
+	// check last value, since end iterator is 1 past the end
+	REQUIRE(*(realIt1 - 1) == *(myIt1 - 1));
+}
+
+
 
