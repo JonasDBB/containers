@@ -486,10 +486,15 @@ void	vectests()
 #include <iterator>
 int		main(int ac, char **av)
 {
-	vectests();
-//	ft::vector<int> myvec(5, 100);
-//	std::vector<int> realvec(myvec.begin(), myvec.end());
-
+//	vectests();
+	ft::vector<const int> rl(5, 100);
+	ft::vector<const int>::const_iterator it = rl.begin();
+	for (;it != rl.end(); it++)
+	{
+		*it += 1;
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
 #ifndef ASAN
 	std::string line = av[0];
 	line = "leaks " + line.substr(line.rfind('/') + 1, line.back()) +

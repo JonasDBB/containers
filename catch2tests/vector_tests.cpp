@@ -51,8 +51,8 @@ TEST_CASE("vector assignment", "[vector]")
 
 TEST_CASE("vector begin end", "[vector]")
 {
-	realvect<int> real1;
-	myvector<int> mine1;
+	realvect<int>	real1;
+	myvector<int>	mine1;
 	for (int i = 1; i <= 5; i++)
 	{
 		real1.push_back(i);
@@ -70,5 +70,25 @@ TEST_CASE("vector begin end", "[vector]")
 	REQUIRE(*(realIt1 - 1) == *(myIt1 - 1));
 }
 
+TEST_CASE("vector rbegin rend", "[vector]")
+{
+	realvect<int>	real1(5);
+	myvector<int>	mine1(5);
+	REQUIRE(mine1 == real1);
 
+	auto realRevIt = real1.rbegin();
+	auto mineRevIt = mine1.rbegin();
+	int i = 0;
+	for (; realRevIt != real1.rend(); realRevIt++)
+		*realRevIt = ++i;
+	i = 0;
+	for (; mineRevIt != mine1.rend(); mineRevIt++)
+		*mineRevIt = ++i;
+	REQUIRE(mine1 == real1);
+}
+
+TEST_CASE("const it", "[vector]")
+{
+
+}
 
