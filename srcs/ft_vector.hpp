@@ -5,8 +5,6 @@
 # include "iterators/ReverseIterator.hpp"
 # include "utils/type_traits.hpp"
 # include "utils/Utils.hpp"
-# include <vector>
-
 
 namespace ft
 {
@@ -268,8 +266,9 @@ namespace ft
 			if (this->_size == this->_capacity)
 			{
 				if (!this->_capacity)
-					this->_capacity = 1;
-				reserve(2 * this->_capacity);
+					reserve(1);
+				else
+					reserve(2 * this->_capacity);
 			}
 			this->_alloc.construct(&this->_array[this->_size], val);
 			this->_size++;
@@ -292,7 +291,10 @@ namespace ft
 		void			insert(iterator position, size_type n, const value_type& val)
 		{
 			difference_type index = ft::distance(this->begin(), position);
-			reserve(this->_size + n);
+			if (this->_size + n > 2 * this->_capacity)
+				reserve(this->_size + n);
+			else
+				reserve(2 * this->_capacity);
 			for (size_type i = this->_size + n - 1; i >= index + n; i--)
 			{
 				this->_alloc.construct(&this->_array[i], this->_array[i - n]);
@@ -400,7 +402,6 @@ namespace ft
 	template <class T, class Alloc>
 	bool	operator<(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
 	{
-//		return (lhs == rhs);
 		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
 	}
 
@@ -427,41 +428,5 @@ namespace ft
 	{
 		x.swap(y);
 	}
-
-	template<class T, class Alloc>
-	bool operator==(const ft::vector<T, Alloc> &mine,
-					const std::vector<T, Alloc> &real)
-	{
-		if (mine.capacity() != real.capacity())
-			return (false);
-		if (mine.size() != real.size())
-			return (false);
-		if (mine.get_allocator() != real.get_allocator())
-			return (false);
-		typename ft::vector<T>::iterator myit = mine.begin();
-		typename std::vector<T>::iterator realit = real.begin();
-		for (size_t i = 0; i < mine.size(); i++, myit++, realit++)
-		{
-			if (*myit != *realit)
-				return (false);
-		}
-		return (true);
-	}
-
-	template<class T, class Alloc>
-	bool operator==(const std::vector<T, Alloc> &real,
-					const ft::vector<T, Alloc> &mine)
-	{ return (mine == real); }
-
-	template<class T, class Alloc>
-	bool operator!=(const ft::vector<T, Alloc> &mine,
-					const std::vector<T, Alloc> &real)
-	{ return !(mine == real); }
-
-	template<class T, class Alloc>
-	bool operator!=(const std::vector<T, Alloc> &real,
-					const ft::vector<T, Alloc> &mine)
-	{ return !(mine == real); }
-
 }
 #endif

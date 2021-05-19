@@ -72,6 +72,5 @@ namespace ft
 		typedef random_access_iterator_tag	type;
 	};
 
-
 }
 #endif

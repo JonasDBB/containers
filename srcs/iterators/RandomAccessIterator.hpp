@@ -143,12 +143,5 @@ namespace ft
 		}
 	};
 
-//	template<class RandomAccessIterator>
-//	ptrdiff_t distance(RandomAccessIterator first, RandomAccessIterator last)
-//	{
-//		return (last - first);
-//	}
-
-
 }
 #endif
