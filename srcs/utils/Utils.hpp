@@ -1,8 +1,6 @@
 #ifndef FT_UTILS_HPP
 # define FT_UTILS_HPP
 # include "type_traits.hpp"
-# include "../ft_vector.hpp"
-# include <vector>
 
 namespace ft
 {
