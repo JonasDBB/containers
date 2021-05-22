@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include "../srcs/ft_vector.hpp"
+#include "../srcs/containers/ft_vector.hpp"
 #include <vector>
 
 namespace ft
@@ -8,10 +8,6 @@ namespace ft
 	bool operator==(const ft::vector<T, Alloc> &mine,
 					const std::vector<T, Alloc> &real)
 	{
-		auto x = mine.capacity();
-		auto y = real.capacity();
-		x = x + 1 - 1;
-		y = y + 1 - 1;
 		if (mine.capacity() != real.capacity())
 			return (false);
 		if (mine.size() != real.size())
@@ -495,4 +491,3 @@ TEST_CASE("vector swap overload", "[vector]")
 	REQUIRE(mine1 == real1);
 	REQUIRE(mine2 == real2);
 }
-

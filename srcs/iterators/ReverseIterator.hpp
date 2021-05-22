@@ -1,12 +1,9 @@
 #ifndef REVERSEACCESSITERATOR_HPP
 # define REVERSEACCESSITERATOR_HPP
-# include "RandomAccessIterator.hpp"
-# include "BidirectionalIterator.hpp"
 # include "../utils/type_traits.hpp"
 
 namespace ft {
 	template<class Iterator>
-
 	class ReverseIterator {
 
 	public:

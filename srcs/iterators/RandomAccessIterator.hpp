@@ -7,14 +7,14 @@
 namespace ft
 {
 	template <class T, class Pointer, class Reference,
-	        class Category = std::random_access_iterator_tag>
+	        class Category = ft::random_access_iterator_tag>
 	class RandomAccessIterator {
 	public:
 		typedef Category	iterator_category;
 		typedef T			value_type;
 		typedef ptrdiff_t	difference_type;
-		typedef value_type	*pointer;
-		typedef value_type	&reference;
+		typedef value_type*	pointer;
+		typedef value_type&	reference;
 
 	private:
 		pointer _val;
@@ -23,7 +23,7 @@ namespace ft
 		RandomAccessIterator() : _val(NULL)
 		{}
 
-		RandomAccessIterator(pointer val) : _val(val)
+		explicit RandomAccessIterator(pointer val) : _val(val)
 		{}
 
 		RandomAccessIterator(const RandomAccessIterator<T, Pointer, Reference> &og)
@@ -31,7 +31,7 @@ namespace ft
 			*this = og;
 		}
 
-		virtual ~RandomAccessIterator() {} //NOLINT
+		virtual ~RandomAccessIterator() {}
 
 		RandomAccessIterator &
 		operator=(const RandomAccessIterator<T, Pointer, Reference> &x)
@@ -140,6 +140,11 @@ namespace ft
 		reference operator[](difference_type n) const
 		{
 			return ((*(this + n)->_val));
+		}
+
+		operator RandomAccessIterator<T, const T*, const T&>() const
+		{
+			return RandomAccessIterator<T, const T*, const T&>(this->_val);
 		}
 	};
 

@@ -9,8 +9,8 @@ set(CMAKE_LINKER_FLAGS)
 add_executable( tests
                 srcs/testmain.cpp
 
-                srcs/ft_vector.hpp
-
+                srcs/containers/ft_vector.hpp
+                srcs/containers/ft_stack.hpp
                 srcs/iterators/RandomAccessIterator.hpp
                 srcs/iterators/ReverseIterator.hpp
                 srcs/iterators/BidirectionalIterator.hpp
