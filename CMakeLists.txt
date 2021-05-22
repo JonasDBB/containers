@@ -17,7 +17,7 @@ add_executable( tests
 
                 srcs/utils/type_traits.hpp
                 srcs/utils/Utils.hpp
-        srcs/ftvector.hpp)
+              )
 
 add_executable( catch
                 catch2tests/main.cpp

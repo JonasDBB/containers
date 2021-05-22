@@ -284,14 +284,18 @@ namespace ft
 
 		iterator		insert(iterator position, const value_type& val)
 		{
+			difference_type index = ft::distance(this->begin(), position);
 			this->insert(position, 1, val);
-			return (position);
+			iterator ret = this->begin();
+			for (difference_type i = 0; i < index; i++)
+				ret++;
+			return (ret);
 		}
 
 		void			insert(iterator position, size_type n, const value_type& val)
 		{
 			difference_type index = ft::distance(this->begin(), position);
-			if (this->_size + n > 2 * this->_capacity)
+			if (this->_size + n > 2 * this->_capacity || this->_size + n <= this->_capacity)
 				reserve(this->_size + n);
 			else
 				reserve(2 * this->_capacity);
@@ -311,7 +315,10 @@ namespace ft
 		{
 			difference_type	len = ft::distance(first, last);
 			difference_type pos = ft::distance(this->begin(), position);
-			reserve(this->_size + len);
+			if (this->_size + len > 2 * this->_capacity || this->_size + len <= this->_capacity)
+				reserve(this->_size + len);
+			else
+				reserve(2 * this->_capacity);
 			for (difference_type i = this->size() + len - 1; i >= pos + len; i--)
 			{
 				this->_alloc.construct(&this->_array[i], this->_array[i - len]);
