@@ -11,6 +11,8 @@ add_executable( tests
 
                 srcs/containers/ft_vector.hpp
                 srcs/containers/ft_stack.hpp
+                srcs/containers/ft_queue.hpp
+
                 srcs/iterators/RandomAccessIterator.hpp
                 srcs/iterators/ReverseIterator.hpp
                 srcs/iterators/BidirectionalIterator.hpp
@@ -21,9 +23,10 @@ add_executable( tests
 
 add_executable( catch
                 catch2tests/main.cpp
-                catch2tests/vector_tests.cpp
                 catch2tests/catch.cpp
                 catch2tests/catch.hpp
+                catch2tests/vector_tests.cpp
+                catch2tests/stack_tests.cpp
               )
 set_target_properties(tests PROPERTIES LINKER_LANGUAGE CXX CXX_STANDARD 98)
 set_source_files_properties(catch2tests/catch.cpp catch2tests/catch.hpp PROPERTIES COMPILE_FLAGS "-std=c++14")
