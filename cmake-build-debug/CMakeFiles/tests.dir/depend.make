@@ -10,5 +10,6 @@ CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/iterators/RandomAccessIterator
 CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/iterators/ReverseIterator.hpp
 CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/testmain.cpp
 CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/utils/Utils.hpp
+CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/utils/listNode.hpp
 CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/utils/type_traits.hpp
 

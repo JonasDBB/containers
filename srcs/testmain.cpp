@@ -8,12 +8,13 @@
 
 int		main(int ac, char **av)
 {
-	std::list<int> lst(5, 10);
-	std::list<int>::iterator it1 = lst.begin();
-	std::list<int>::iterator it2 = lst.begin();
-	it2++;
-//	if (it1 < it2)
-//		std::cout << "yay";
+	ft::list<int> lst;
+
+	for (int i = 0; i < 5; i++)
+		lst.push_front(i);
+	for (int i = 0; i < 5; i++)
+		lst.push_back(i);
+
 #ifndef ASAN
 	std::string line = av[0];
 	line = "leaks " + line.substr(line.rfind('/') + 1, line.back()) +

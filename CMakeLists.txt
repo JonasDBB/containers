@@ -20,7 +20,7 @@ add_executable( tests
 
                 srcs/utils/type_traits.hpp
                 srcs/utils/Utils.hpp
-              )
+        srcs/utils/listNode.hpp)
 
 add_executable( catch
                 catch2tests/main.cpp
