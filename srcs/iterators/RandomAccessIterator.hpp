@@ -13,8 +13,8 @@ namespace ft
 		typedef Category	iterator_category;
 		typedef T			value_type;
 		typedef ptrdiff_t	difference_type;
-		typedef value_type*	pointer;
-		typedef value_type&	reference;
+		typedef T*			pointer;
+		typedef T&			reference;
 
 	private:
 		pointer _val;
@@ -114,7 +114,7 @@ namespace ft
 
 		bool operator!=(RandomAccessIterator<T, Pointer, Reference> rhs)
 		{
-			return !(this->_val == rhs._val);
+			return !(*this == rhs);
 		}
 
 		bool operator<(RandomAccessIterator<T, Pointer, Reference> rhs)
@@ -147,6 +147,12 @@ namespace ft
 			return RandomAccessIterator<T, const T*, const T&>(this->_val);
 		}
 	};
+
+	template <class T, class Pointer, class Reference>
+	bool operator==(RandomAccessIterator<T, Pointer, Reference> lhs, RandomAccessIterator<T, const Pointer, const Reference> rhs)
+	{
+		return (*lhs == *rhs);
+	}
 
 }
 #endif

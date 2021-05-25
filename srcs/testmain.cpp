@@ -5,12 +5,18 @@
 int		main(int ac, char **av)
 {
 	ft::vector<int> vec1(5, 100);
-
+//	ft::vector<int>	vec2(vec1);
 
 	ft::vector<int>::iterator it1 = vec1.begin();
-	ft::vector<int>::const_iterator it2 = vec1.begin();
+	ft::vector<int>::iterator it2 = vec1.begin();
+	it1++; it2++;
+	if (it1 == it2)
+		std::cout << "yay" << std::endl;
+	else
+		std::cout << "fak" << std::endl;
+//	ft::vector<int>::const_iterator it2 = vec1.begin();
 //	ft::vector<int>::const_iterator it3(it1);
-//	if (it1 == it2)
+//	if (it3 == it2)
 //		std::cout << "yay" << std::endl;
 //	else
 //		std::cout << "sad" << std::endl;
