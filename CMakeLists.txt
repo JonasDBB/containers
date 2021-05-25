@@ -12,6 +12,7 @@ add_executable( tests
                 srcs/containers/ft_vector.hpp
                 srcs/containers/ft_stack.hpp
                 srcs/containers/ft_queue.hpp
+                srcs/containers/ft_list.hpp
 
                 srcs/iterators/RandomAccessIterator.hpp
                 srcs/iterators/ReverseIterator.hpp
