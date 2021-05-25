@@ -6,23 +6,23 @@
 namespace ft
 {
 	template <class T, class Pointer, class Reference,
-			class Category = ft::bidirectional_iterator_tag>
+	        class Category = ft::random_access_iterator_tag>
 	class BidirectionalIterator {
 	public:
 		typedef Category	iterator_category;
 		typedef T			value_type;
 		typedef ptrdiff_t	difference_type;
-		typedef value_type	*pointer;
-		typedef value_type	&reference;
+		typedef T*			pointer;
+		typedef T&			reference;
 
-	private:
+	protected:
 		pointer _val;
 
 	public:
 		BidirectionalIterator() : _val(NULL)
 		{}
 
-		BidirectionalIterator(pointer val) : _val(val)
+		explicit BidirectionalIterator(pointer val) : _val(val)
 		{}
 
 		BidirectionalIterator(const BidirectionalIterator<T, Pointer, Reference> &og)
@@ -30,7 +30,7 @@ namespace ft
 			*this = og;
 		}
 
-		virtual ~BidirectionalIterator() {} //NOLINT
+		virtual ~BidirectionalIterator() {}
 
 		BidirectionalIterator &
 		operator=(const BidirectionalIterator<T, Pointer, Reference> &x)
@@ -82,10 +82,20 @@ namespace ft
 
 		bool operator!=(BidirectionalIterator<T, Pointer, Reference> rhs)
 		{
-			return !(this->_val == rhs._val);
+			return !(*this == rhs);
+		}
+
+		operator BidirectionalIterator<T, const T*, const T&>() const
+		{
+			return BidirectionalIterator<T, const T*, const T&>(this->_val);
 		}
 	};
+//
+//	template <class T, class Pointer, class Reference>
+//	bool operator==(BidirectionalIterator<T, Pointer, Reference> lhs, BidirectionalIterator<T, const Pointer, const Reference> rhs)
+//	{
+//		return (*lhs == *rhs);
+//	}
 
 }
-
 #endif

@@ -2,25 +2,15 @@
 #include "containers/ft_vector.hpp"
 #include <iostream>
 #include <vector>
+#include <list>
 int		main(int ac, char **av)
 {
-	ft::vector<int> vec1(5, 100);
-//	ft::vector<int>	vec2(vec1);
-
-	ft::vector<int>::iterator it1 = vec1.begin();
-	ft::vector<int>::iterator it2 = vec1.begin();
-	it1++; it2++;
-	if (it1 == it2)
-		std::cout << "yay" << std::endl;
-	else
-		std::cout << "fak" << std::endl;
-//	ft::vector<int>::const_iterator it2 = vec1.begin();
-//	ft::vector<int>::const_iterator it3(it1);
-//	if (it3 == it2)
-//		std::cout << "yay" << std::endl;
-//	else
-//		std::cout << "sad" << std::endl;
-
+	std::list<int> lst(5, 10);
+	std::list<int>::iterator it1 = lst.begin();
+	std::list<int>::iterator it2 = lst.begin();
+	it2++;
+	if (it1 < it2)
+		std::cout << "yay";
 #ifndef ASAN
 	std::string line = av[0];
 	line = "leaks " + line.substr(line.rfind('/') + 1, line.back()) +
