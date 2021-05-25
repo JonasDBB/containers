@@ -103,12 +103,38 @@ namespace ft
 
 		// copy constructor
 		list(const list& x) :
-			_size(0),
-			_start(x._start),
-			_end(x._end),
-			_alloc(x._alloc)
+				_size(0),
+				_start(0),
+				_end(0),
+				_alloc(x._alloc)
 		{
 			this->assign(x.begin(), x.end());
+		}
+
+		~list()
+		{
+
+		}
+
+		/* ==ITERATOR FUNCTIONS== */
+		iterator		begin()
+		{
+			return (iterator(this->_start._next));
+		}
+
+		const_iterator	begin() const
+		{
+			return (const_iterator(this->_start._next));
+		}
+
+		iterator		end()
+		{
+			return (iterator(this->end()._previous));
+		}
+
+		const_iterator		end()
+		{
+			return (const_iterator(this->end()._previous));
 		}
 
 		/* ==MODIFIER FUNCTIONS== */

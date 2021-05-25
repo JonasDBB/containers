@@ -37,6 +37,31 @@ namespace ft
 			this->_next = x._next;
 			this->_val = x._val;
 		}
+
+		listNode	operator++(int)
+		{
+			listNode<T>	tmp(*this);
+			*this = this->_next;
+			return (tmp);
+		}
+
+		listNode	operator--(int)
+		{
+			listNode<T> tmp(*this);
+			*this = this->_previous;
+			return (tmp);
+		}
+
+		listNode&	operator++()
+		{
+			*this = this->_next;
+		}
+
+		listNode&	operator--()
+		{
+			*this = *this->_previous;
+		}
+
 	};
 }
 

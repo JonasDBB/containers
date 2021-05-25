@@ -110,7 +110,7 @@ namespace ft
 			return (iterator(this->_array));
 		}
 
-		const_iterator		begin() const
+		const_iterator	begin() const
 		{
 			return (const_iterator(this->_array));
 		}
@@ -120,7 +120,7 @@ namespace ft
 			return (iterator(&this->_array[this->_size]));
 		}
 
-		const_iterator		end() const
+		const_iterator	end() const
 		{
 			return (const_iterator(&this->_array[this->_size]));
 		}
