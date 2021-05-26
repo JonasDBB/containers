@@ -89,6 +89,11 @@ namespace ft
 		{
 			return BidirectionalIterator<T, const T*, const T&>(this->_val);
 		}
+
+		operator BidirectionalIterator<T, T*, T&>() const
+		{
+			return BidirectionalIterator<T, T*, T&>(this->_val);
+		}
 	};
 //
 //	template <class T, class Pointer, class Reference>

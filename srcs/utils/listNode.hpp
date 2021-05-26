@@ -29,13 +29,24 @@ namespace ft
 		}
 
 		~listNode()
-		{}
+		{
+			if (this->_next && this->_previous)	// both exist
+			{
+				this->_previous->_next = this->_next;
+				this->_next->_previous = this->_previous;
+			}
+			else if (this->_next)				// only next exists
+				this->_next->_previous = NULL;
+			else if (this->_previous)			// only previous exists
+				this->_previous->_next = NULL;
+		}
 
 		listNode&	operator=(const listNode& x)
 		{
 			this->_previous = x._previous;
 			this->_next = x._next;
 			this->_val = x._val;
+			return (*this);
 		}
 
 		listNode	operator++(int)
@@ -62,6 +73,10 @@ namespace ft
 			*this = *this->_previous;
 		}
 
+		operator value_type() const
+		{
+			return (this->_val);
+		}
 	};
 }
 

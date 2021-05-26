@@ -144,6 +144,9 @@
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/catch2tests/vector_tests.cpp">
 			<Option target="catch"/>
 		</Unit>
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/srcs/containers/alsolist.hpp">
+			<Option target="tests"/>
+		</Unit>
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/srcs/containers/ft_list.hpp">
 			<Option target="tests"/>
 		</Unit>

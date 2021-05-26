@@ -2,7 +2,8 @@
 # define REVERSEACCESSITERATOR_HPP
 # include "../utils/type_traits.hpp"
 
-namespace ft {
+namespace ft
+{
 	template<class Iterator>
 	class ReverseIterator {
 
@@ -20,14 +21,11 @@ namespace ft {
 	public:
 		ReverseIterator() : _base() {}
 
-		explicit ReverseIterator(iterator_type it)
-		{
-			Iterator tmp(it);
-			this->_base = ++tmp;
-		}
+		explicit ReverseIterator(iterator_type it) : _base(it)
+		{}
 
 		template <class Iter>
-		explicit ReverseIterator(const ReverseIterator<Iter>& rev_it) : _base(rev_it._base) {}
+		ReverseIterator(const ReverseIterator<Iter>& rev_it) : _base(rev_it.base()) {}
 
 		~ReverseIterator() {} //NOLINT
 
@@ -73,26 +71,26 @@ namespace ft {
 			return (tmp);
 		}
 
-		// only works for Random Access Iterator
+		// only works if underlying iterator is of type Random Access Iterator
 		ReverseIterator operator+(difference_type n) const
 		{
 			return (ReverseIterator(this->_base - n));
 		}
 
-		// only works for Random Access Iterator
+		// only works if underlying iterator is of type Random Access Iterator
 		ReverseIterator& operator+=(difference_type n)
 		{
 			this->_base -= n;
 			return (*this);
 		}
 
-		// only works for Random Access Iterator
+		// only works if underlying iterator is of type Random Access Iterator
 		ReverseIterator operator-(difference_type n) const
 		{
 			return (ReverseIterator(this->_base + n));
 		}
 
-		// only works for Random Access Iterator
+		// only works if underlying iterator is of type Random Access Iterator
 		ReverseIterator& operator-=(difference_type n)
 		{
 			this->_base += n;
@@ -103,6 +101,7 @@ namespace ft {
 		{
 			return *(*this + n);
 		}
+
 	};
 
 	template <class Iterator>

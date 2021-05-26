@@ -145,13 +145,13 @@ namespace ft
 		{
 			return RandomAccessIterator<T, const T*, const T&>(this->_val);
 		}
-	};
 
-	template <class T, class Pointer, class Reference>
-	bool operator==(RandomAccessIterator<T, Pointer, Reference> lhs, RandomAccessIterator<T, const Pointer, const Reference> rhs)
-	{
-		return (*lhs == *rhs);
-	}
+		operator RandomAccessIterator<T, T*, T&>() const
+		{
+			return RandomAccessIterator<T, T*, T&>(this->_val);
+		}
+
+	};
 
 }
 #endif
