@@ -9,11 +9,13 @@ namespace ft
 	        class Category = ft::random_access_iterator_tag>
 	class RandomAccessIterator {
 	public:
-		typedef Category	iterator_category;
-		typedef T			value_type;
-		typedef ptrdiff_t	difference_type;
-		typedef T*			pointer;
-		typedef T&			reference;
+		typedef	RandomAccessIterator<T, T*, T&>				this_type;
+		typedef RandomAccessIterator<T, const T*, const T&>	const_type;
+		typedef Category									iterator_category;
+		typedef T											value_type;
+		typedef ptrdiff_t									difference_type;
+		typedef T*											pointer;
+		typedef T&											reference;
 
 	private:
 		pointer _val;

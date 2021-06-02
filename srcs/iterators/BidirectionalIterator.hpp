@@ -9,11 +9,13 @@ namespace ft
 	        class Category = ft::random_access_iterator_tag>
 	class BidirectionalIterator {
 	public:
-		typedef Category	iterator_category;
-		typedef T			value_type;
-		typedef ptrdiff_t	difference_type;
-		typedef T*			pointer;
-		typedef T&			reference;
+		typedef	BidirectionalIterator<T, T*, T&>				this_type;
+		typedef BidirectionalIterator<T, const T*, const T&>	const_type;
+		typedef Category										iterator_category;
+		typedef T												value_type;
+		typedef ptrdiff_t										difference_type;
+		typedef T*												pointer;
+		typedef T&												reference;
 
 	protected:
 		pointer _val;
@@ -95,12 +97,5 @@ namespace ft
 			return BidirectionalIterator<T, T*, T&>(this->_val);
 		}
 	};
-//
-//	template <class T, class Pointer, class Reference>
-//	bool operator==(BidirectionalIterator<T, Pointer, Reference> lhs, BidirectionalIterator<T, const Pointer, const Reference> rhs)
-//	{
-//		return (*lhs == *rhs);
-//	}
-
 }
 #endif

@@ -4,7 +4,7 @@
 # include "../iterators/ReverseIterator.hpp"
 # include "../utils/type_traits.hpp"
 # include "../utils/Utils.hpp"
-# include "../utils/listNode.hpp"
+# include "../utils/ListNode.hpp"
 # include <cstddef>
 # include <memory>
 # include <iostream>
@@ -21,14 +21,14 @@ namespace ft
 		typedef const value_type&										const_reference;
 		typedef value_type*												pointer;
 		typedef const value_type*										const_pointer;
-		typedef BidirectionalIterator<listNode<T>, listNode<T>*, listNode<T>&>						iterator;
-		typedef BidirectionalIterator<listNode<T>, const listNode<T>*, const listNode<T>&>			const_iterator;
+		typedef	ListNode<T>												node;
+		typedef BidirectionalIterator<node, node*, node&>				iterator;
+		typedef BidirectionalIterator<node, const node*, const node&>	const_iterator;
 		typedef ReverseIterator<iterator>								reverse_iterator;
 		typedef ReverseIterator<const_iterator>							const_reverse_iterator;
 		typedef ptrdiff_t												difference_type;
 		typedef size_t													size_type;
-		typedef typename Alloc::template rebind<listNode<T> >::other	node_alloc;
-		typedef	listNode<T>												node;
+		typedef typename Alloc::template rebind<ListNode<T> >::other	node_alloc;
 
 	private:
 		size_type	_size;
@@ -39,13 +39,14 @@ namespace ft
 	public:
 		void	printlist()
 		{
-			node *crnt = this->_start._next;
+			ANode<T> *crnt = this->_start._next;
 			std::cout << "begin list:";
 			if (this->_size)
 				std::cout << "\t[";
 			for (size_type i = 0; i < this->_size; i++)
 			{
-				std::cout << crnt->_val << " - " << crnt << "]";
+//				std::cout << crnt->_val << " - " << crnt << "]";
+				std::cout << crnt->_val << "]";
 				crnt = crnt->_next;
 				if (i < this->_size - 1)
 					std::cout << " [";
@@ -55,7 +56,7 @@ namespace ft
 
 		void	printlistbackwards()
 		{
-			node *crnt = this->_tail._previous;
+			ANode<T> *crnt = this->_tail._previous;
 			std::cout << "end list:";
 			if (this->_size)
 				std::cout << "\t[";
@@ -252,8 +253,8 @@ namespace ft
 			this->_tail._previous->_next = newNode;
 			this->_tail._previous = newNode;
 			++this->_size;
-//			printlist();
-//			printlistbackwards();
+			printlist();
+			printlistbackwards();
 		}
 
 		void	pop_back()

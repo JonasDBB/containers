@@ -7,7 +7,8 @@ CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/iterators/BidirectionalIterato
 CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/iterators/RandomAccessIterator.hpp
 CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/iterators/ReverseIterator.hpp
 CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/testmain.cpp
+CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/utils/ANode.hpp
+CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/utils/ListNode.hpp
 CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/utils/Utils.hpp
-CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/utils/listNode.hpp
 CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/utils/type_traits.hpp
 

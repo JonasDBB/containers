@@ -8,12 +8,14 @@ namespace ft
 	class ReverseIterator {
 
 	public:
-		typedef Iterator								iterator_type;
-		typedef typename Iterator::iterator_category	iterator_category;
-		typedef typename Iterator::value_type			value_type;
-		typedef typename Iterator::difference_type		difference_type;
-		typedef typename Iterator::pointer				pointer;
-		typedef typename Iterator::reference			reference;
+		typedef Iterator											iterator_type;
+		typedef typename Iterator::iterator_category				iterator_category;
+		typedef typename Iterator::value_type						value_type;
+		typedef typename Iterator::difference_type					difference_type;
+		typedef typename Iterator::pointer							pointer;
+		typedef typename Iterator::reference						reference;
+		typedef ReverseIterator<iterator_type>	this_type;
+		typedef ReverseIterator<typename iterator_type::const_type>	const_type;
 
 	private:
 		Iterator _base;
@@ -97,11 +99,23 @@ namespace ft
 			return (*this);
 		}
 
+		// only works if underlying iterator is of type Random Access Iterator
 		reference operator[](difference_type n) const
 		{
 			return *(*this + n);
 		}
 
+		operator const_type() const
+		{
+			typename iterator_type::const_type tmp(this->_base);
+			return (ReverseIterator<typename iterator_type::const_type>(tmp));
+		}
+
+//		operator this_type() const
+//		{
+//			typename iterator_type::this_type tmp(this->_base);
+//			return (ReverseIterator<typename iterator_type::this_type>(tmp));
+//		}
 	};
 
 	template <class Iterator>

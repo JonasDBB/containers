@@ -1,34 +1,35 @@
-#ifndef LISTNODE_HPP
-# define LISTNODE_HPP
+#ifndef ANODE_HPP
+# define ANODE_HPP
 # include <cstddef>
 
 namespace ft
 {
 	template <class T>
-	class listNode
+	class ANode
 	{
 	public:
 		typedef	T			value_type;
 		typedef value_type&	reference;
 		typedef	value_type*	pointer;
+		typedef ANode		this_type;
 
-		listNode		*_previous;
-		listNode		*_next;
-		T				_val;
+		ANode		*_previous;
+		ANode		*_next;
+		T			_val;
 
 	public:
-		explicit listNode(const value_type & val = value_type()) :
+		explicit ANode(const value_type& val = value_type()) :
 				_previous(NULL),
 				_next(NULL),
 				_val(val)
 		{}
 
-		listNode(const listNode& x)
+		ANode(const ANode& x)
 		{
 			*this = x;
 		}
 
-		~listNode()
+		virtual ~ANode()
 		{
 			if (this->_next && this->_previous)	// both exist
 			{
@@ -41,7 +42,7 @@ namespace ft
 				this->_previous->_next = NULL;
 		}
 
-		listNode&	operator=(const listNode& x)
+		ANode&	operator=(const ANode& x)
 		{
 			this->_previous = x._previous;
 			this->_next = x._next;
@@ -49,29 +50,29 @@ namespace ft
 			return (*this);
 		}
 
-		listNode	operator++(int)
-		{
-			listNode<T>	tmp(*this);
-			*this = this->_next;
-			return (tmp);
-		}
+//		ANode	operator++(int)
+//		{
+//			ANode<T>	tmp(*this);
+//			*this = this->_next;
+//			return (tmp);
+//		}
+//
+//		ANode	operator--(int)
+//		{
+//			ANode<T> tmp(*this);
+//			*this = this->_previous;
+//			return (tmp);
+//		}
 
-		listNode	operator--(int)
-		{
-			listNode<T> tmp(*this);
-			*this = this->_previous;
-			return (tmp);
-		}
+		virtual ANode&	operator++() = 0;
+//		{
+//			*this = this->_next;
+//		}
 
-		listNode&	operator++()
-		{
-			*this = this->_next;
-		}
-
-		listNode&	operator--()
-		{
-			*this = *this->_previous;
-		}
+		virtual ANode&	operator--() = 0;
+//		{
+//			*this = *this->_previous;
+//		}
 
 		operator value_type() const
 		{
