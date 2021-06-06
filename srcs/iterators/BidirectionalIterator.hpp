@@ -51,27 +51,27 @@ namespace ft
 			return &(*this->_val);
 		}
 
-		BidirectionalIterator operator++(int)
+		virtual BidirectionalIterator operator++(int)
 		{
 			BidirectionalIterator<T, Pointer, Reference> tmp(*this);
 			this->_val++;
 			return (tmp);
 		}
 
-		BidirectionalIterator operator--(int)
+		virtual BidirectionalIterator operator--(int)
 		{
 			BidirectionalIterator<T, Pointer, Reference> tmp(*this);
 			this->_val--;
 			return (tmp);
 		}
 
-		BidirectionalIterator &operator++()
+		virtual BidirectionalIterator &operator++()
 		{
 			this->_val++;
 			return (*this);
 		}
 
-		BidirectionalIterator &operator--()
+		virtual BidirectionalIterator &operator--()
 		{
 			this->_val--;
 			return (*this);

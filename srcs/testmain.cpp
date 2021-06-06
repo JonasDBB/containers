@@ -34,7 +34,9 @@ void	lsttest()
 	ft::list<int> lst;
 	for (int i = 0; i < 5; i++)
 		lst.push_back(i);
-
+//	lst.assign(10, 15);
+	lst.printlist();
+	lst.printlistbackwards();
 }
 
 

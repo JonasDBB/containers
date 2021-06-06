@@ -159,6 +159,9 @@
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/srcs/iterators/BidirectionalIterator.hpp">
 			<Option target="tests"/>
 		</Unit>
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/srcs/iterators/NodeIterator.hpp">
+			<Option target="tests"/>
+		</Unit>
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/srcs/iterators/RandomAccessIterator.hpp">
 			<Option target="tests"/>
 		</Unit>

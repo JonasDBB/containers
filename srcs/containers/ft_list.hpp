@@ -1,6 +1,6 @@
 #ifndef FT_LIST_HPP
 # define FT_LIST_HPP
-# include "../iterators/BidirectionalIterator.hpp"
+# include "../iterators/NodeIterator.hpp"
 # include "../iterators/ReverseIterator.hpp"
 # include "../utils/type_traits.hpp"
 # include "../utils/Utils.hpp"
@@ -22,8 +22,8 @@ namespace ft
 		typedef value_type*												pointer;
 		typedef const value_type*										const_pointer;
 		typedef	ListNode<T>												node;
-		typedef BidirectionalIterator<node, node*, node&>				iterator;
-		typedef BidirectionalIterator<node, const node*, const node&>	const_iterator;
+		typedef NodeIterator<node, node*, node&>				iterator;
+		typedef NodeIterator<node, const node*, const node&>	const_iterator;
 		typedef ReverseIterator<iterator>								reverse_iterator;
 		typedef ReverseIterator<const_iterator>							const_reverse_iterator;
 		typedef ptrdiff_t												difference_type;
@@ -39,7 +39,7 @@ namespace ft
 	public:
 		void	printlist()
 		{
-			ANode<T> *crnt = this->_start._next;
+			node *crnt = this->_start._next;
 			std::cout << "begin list:";
 			if (this->_size)
 				std::cout << "\t[";
@@ -56,7 +56,7 @@ namespace ft
 
 		void	printlistbackwards()
 		{
-			ANode<T> *crnt = this->_tail._previous;
+			node *crnt = this->_tail._previous;
 			std::cout << "end list:";
 			if (this->_size)
 				std::cout << "\t[";

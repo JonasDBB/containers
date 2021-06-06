@@ -13,6 +13,9 @@ namespace ft
 		typedef	value_type*	pointer;
 		typedef ListNode	this_type;
 
+		ListNode *_previous;
+		ListNode *_next;
+
 		ListNode(const value_type& val) :	ANode<T>(val)
 		{}
 
@@ -57,7 +60,10 @@ namespace ft
 //			*this = *this->_previous;
 			return (*this);
 		}
-
+		operator ListNode<T>() const
+		{
+			return ListNode<T>(this->_val);
+		}
 	};
 }
 

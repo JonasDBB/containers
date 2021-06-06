@@ -11,14 +11,15 @@ namespace ft
 		typedef	T			value_type;
 		typedef value_type&	reference;
 		typedef	value_type*	pointer;
-		typedef ANode		this_type;
+		typedef ANode<T>	this_type;
+
 
 		ANode		*_previous;
 		ANode		*_next;
 		T			_val;
 
 	public:
-		explicit ANode(const value_type& val = value_type()) :
+		ANode(const value_type& val = value_type()) :
 				_previous(NULL),
 				_next(NULL),
 				_val(val)

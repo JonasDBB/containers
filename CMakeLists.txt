@@ -21,7 +21,7 @@ add_executable( tests
                 srcs/utils/type_traits.hpp
                 srcs/utils/Utils.hpp
         srcs/utils/ANode.hpp
-        srcs/utils/ListNode.hpp)
+        srcs/utils/ListNode.hpp srcs/iterators/NodeIterator.hpp)
 
 add_executable( catch
                 catch2tests/main.cpp

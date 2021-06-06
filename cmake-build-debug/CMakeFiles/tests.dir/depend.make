@@ -4,6 +4,7 @@
 CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/containers/ft_list.hpp
 CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/containers/ft_vector.hpp
 CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/iterators/BidirectionalIterator.hpp
+CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/iterators/NodeIterator.hpp
 CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/iterators/RandomAccessIterator.hpp
 CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/iterators/ReverseIterator.hpp
 CMakeFiles/tests.dir/srcs/testmain.cpp.o: ../srcs/testmain.cpp
