@@ -16,7 +16,7 @@ namespace ft
 		ListNode *_previous;
 		ListNode *_next;
 
-		ListNode(const value_type& val) :	ANode<T>(val)
+		ListNode(const value_type& val) : ANode<T>(val), _previous(NULL), _next(NULL)
 		{}
 
 		ListNode(const ListNode& x)
@@ -25,7 +25,17 @@ namespace ft
 		}
 
 		~ListNode()
-		{}
+		{
+			if (this->_next && this->_previous)	// both exist
+			{
+				this->_previous->_next = this->_next;
+				this->_next->_previous = this->_previous;
+			}
+			else if (this->_next)				// only next exists
+				this->_next->_previous = NULL;
+			else if (this->_previous)			// only previous exists
+				this->_previous->_next = NULL;
+		}
 
 		ListNode&	operator=(const ListNode& x)
 		{

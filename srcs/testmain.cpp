@@ -1,6 +1,7 @@
 //#include "containers/ft_stack.hpp"
-#include "containers/ft_vector.hpp"
 //#include "containers/ft_queue.hpp"
+//#include "containers/ft_vector.hpp"
+#include "iterators/BidirectionalIterator.hpp"
 #include "containers/ft_list.hpp"
 #include <iostream>
 #include <vector>
@@ -9,20 +10,20 @@
 
 void	ittests()
 {
-		ft::vector<int> vec(4, 5);
-
-	ft::vector<int>::iterator it1 = vec.begin();
-	ft::vector<int>::const_iterator it2 = vec.begin();
-	if (it1 == it2)
-		std::cout << "yay" << std::endl;
-	if (it2 == it1)
-		std::cout << "yay" << std::endl;
-
-	ft::vector<int>::iterator it3;
-	it3 = it2;
-
-	ft::vector<int>::reverse_iterator rit1 = vec.rbegin();
-	ft::vector<int>::const_reverse_iterator rit2 = vec.rbegin();
+//		ft::vector<int> vec(4, 5);
+//
+//	ft::vector<int>::iterator it1 = vec.begin();
+//	ft::vector<int>::const_iterator it2 = vec.begin();
+//	if (it1 == it2)
+//		std::cout << "yay" << std::endl;
+//	if (it2 == it1)
+//		std::cout << "yay" << std::endl;
+//
+//	ft::vector<int>::iterator it3;
+//	it3 = it2;
+//
+//	ft::vector<int>::reverse_iterator rit1 = vec.rbegin();
+//	ft::vector<int>::const_reverse_iterator rit2 = vec.rbegin();
 //	if (rit1 == rit2)
 //		std::cout << "yay" << std::endl;
 //	if (rit2 == rit1)
@@ -35,8 +36,10 @@ void	lsttest()
 	for (int i = 0; i < 5; i++)
 		lst.push_back(i);
 //	lst.assign(10, 15);
-	lst.printlist();
-	lst.printlistbackwards();
+	ft::list<int>::iterator it = lst.begin();
+	for (; it != lst.end(); it++)
+		std::cout << *it << std::endl;
+
 }
 
 

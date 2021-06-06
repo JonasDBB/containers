@@ -1,6 +1,7 @@
 #ifndef ANODE_HPP
 # define ANODE_HPP
 # include <cstddef>
+#include <iostream>
 
 namespace ft
 {
@@ -32,15 +33,15 @@ namespace ft
 
 		virtual ~ANode()
 		{
-			if (this->_next && this->_previous)	// both exist
-			{
-				this->_previous->_next = this->_next;
-				this->_next->_previous = this->_previous;
-			}
-			else if (this->_next)				// only next exists
-				this->_next->_previous = NULL;
-			else if (this->_previous)			// only previous exists
-				this->_previous->_next = NULL;
+//			if (this->_next && this->_previous)	// both exist
+//			{
+//				this->_previous->_next = this->_next;
+//				this->_next->_previous = this->_previous;
+//			}
+//			else if (this->_next)				// only next exists
+//				this->_next->_previous = NULL;
+//			else if (this->_previous)			// only previous exists
+//				this->_previous->_next = NULL;
 		}
 
 		ANode&	operator=(const ANode& x)

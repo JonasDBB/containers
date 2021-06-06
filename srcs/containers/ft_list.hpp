@@ -22,8 +22,8 @@ namespace ft
 		typedef value_type*												pointer;
 		typedef const value_type*										const_pointer;
 		typedef	ListNode<T>												node;
-		typedef NodeIterator<node, node*, node&>				iterator;
-		typedef NodeIterator<node, const node*, const node&>	const_iterator;
+		typedef NodeIterator<T, node, node*, node&>						iterator;
+		typedef NodeIterator<T, node, const node*, const node&>			const_iterator;
 		typedef ReverseIterator<iterator>								reverse_iterator;
 		typedef ReverseIterator<const_iterator>							const_reverse_iterator;
 		typedef ptrdiff_t												difference_type;
@@ -122,7 +122,8 @@ namespace ft
 		// destructor
 		~list()
 		{
-
+			while (this->_size)
+				pop_back();
 		}
 
 		// assignment operator
@@ -136,7 +137,8 @@ namespace ft
 		/* ==ITERATOR FUNCTIONS== */
 		iterator				begin()
 		{
-			return (iterator(this->_start._next));
+			iterator tmp(this->_start._next);
+			return (tmp);
 		}
 
 		const_iterator			begin() const
@@ -146,12 +148,12 @@ namespace ft
 
 		iterator				end()
 		{
-			return (iterator(this->_tail._previous));
+			return (iterator(&this->_tail));
 		}
 
 		const_iterator			end() const
 		{
-			return (const_iterator(this->_tail._previous));
+			return (const_iterator(&this->_tail));
 		}
 
 		reverse_iterator		rbegin()
@@ -260,6 +262,7 @@ namespace ft
 		void	pop_back()
 		{
 			node *tmp = this->_tail._previous;
+//			this->_tail._previous = tmp->_previous;
 			this->_alloc.destroy(tmp);
 			this->_alloc.deallocate(tmp, 1);
 			--this->_size;

@@ -6,7 +6,7 @@
 namespace ft
 {
 	template <class T, class Pointer, class Reference,
-	        class Category = ft::random_access_iterator_tag>
+	        class Category = ft::bidirectional_iterator_tag>
 	class BidirectionalIterator {
 	public:
 		typedef	BidirectionalIterator<T, T*, T&>				this_type;
@@ -24,7 +24,7 @@ namespace ft
 		BidirectionalIterator() : _val(NULL)
 		{}
 
-		explicit BidirectionalIterator(pointer val) : _val(val)
+		BidirectionalIterator(pointer val) : _val(val)
 		{}
 
 		BidirectionalIterator(const BidirectionalIterator<T, Pointer, Reference> &og)
