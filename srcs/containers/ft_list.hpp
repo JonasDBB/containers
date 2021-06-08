@@ -33,7 +33,6 @@ namespace ft
 	private:
 		size_type	_size;
 		node		_sentinel;
-//		node		_sentinel;
 		node_alloc	_alloc;
 
 	public:
@@ -73,7 +72,6 @@ namespace ft
 		explicit list(const allocator_type& alloc = allocator_type()) :
 				_size(0),
 				_sentinel(0),
-//				_sentinel(0),
 				_alloc(alloc)
 		{
 			this->_sentinel._next = &this->_sentinel;
@@ -84,7 +82,6 @@ namespace ft
 		explicit list(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) :
 				_size(0),
 				_sentinel(0),
-//				_sentinel(0),
 				_alloc(alloc)
 		{
 			this->assign(n, val);
@@ -99,9 +96,10 @@ namespace ft
 			 typename iterator_traits<InputIterator>::type* = NULL) :
 			 _size(0),
 			 _sentinel(0),
-//			 _sentinel(0),
 			 _alloc(alloc)
 		{
+			this->_sentinel._next = &this->_sentinel;
+			this->_sentinel._previous = &this->_sentinel;
 			this->assign(first, last);
 		}
 
@@ -109,7 +107,6 @@ namespace ft
 		list(const list& x) :
 				_size(0),
 				_sentinel(0),
-//				_sentinel(0),
 				_alloc(x._alloc)
 		{
 			this->_sentinel._next = &this->_sentinel;
@@ -268,13 +265,187 @@ namespace ft
 			--this->_size;
 		}
 
+//		iterator	insert(iterator position, const value_type& val)
+//		{
+//
+//		}
+//
+//		void		insert(iterator position, size_type n, const value_type& val)
+//		{
+//
+//		}
+//
+//		template <class InputIterator>
+//		void		insert(iterator position, InputIterator first, InputIterator last,
+//						   typename iterator_traits<InputIterator>::type* = NULL)
+//		{
+//
+//		}
+//
+		iterator	erase(iterator position)
+		{
+			node *tmp = &(*position);
+			position++;
+			this->_alloc.destroy(tmp);
+			this->_alloc.deallocate(tmp, 1);
+			--this->_size;
+			return (position);
+		}
+
+		iterator	erase(iterator first, iterator last)
+		{
+			iterator ret = ++last;
+			while (1)
+			{
+				node *tmp = &(*first);
+				if (++first == last)
+					break;
+				this->_alloc.destroy(tmp);
+				this->_alloc.deallocate(tmp, 1);
+				--this->_size;
+			}
+			return (ret);
+		}
+
+		void	swap(list& x)
+		{
+			ft::swap(this->_size, x._size);
+			ft::swap(this->_sentinel, x._sentinel);
+			ft::swap(this->_alloc, x._alloc);
+		}
+
+		void	resize(size_type n, value_type val = value_type())
+		{
+			while (this->_size > n)
+				pop_back();
+			while (this->_size < n)
+				push_back(val);
+		}
+
 		void	clear()
 		{
 			while (this->_size)
 				pop_back();
 		}
 
+		/* ==OPERATION FUNCTIONS== */
+//		void	splice(iterator position, list& x)
+//		{
+//
+//		}
+//
+//		void	splice(iterator position, list& x, iterator i)
+//		{
+//
+//		}
+//
+//		void	splice(iterator position, list& x, iterator first, iterator last)
+//		{
+//
+//		}
+
+		void	remove(const value_type& val)
+		{
+			for (iterator it = this->begin(); it != this->end(); it++)
+			{
+				if (*it == val)
+				{
+					node *tmp = &(*it);
+					--it;
+					this->_alloc.destroy(tmp);
+					this->_alloc.deallocate(tmp, 1);
+					--this->_size;
+				}
+			}
+		}
+
+		template <class Predicate>
+		void	remove_if(Predicate pred)
+		{
+			for (iterator it = this->begin(); it != this->end(); it++)
+			{
+				if (pred(*it))
+				{
+					node *tmp = &(*it);
+					--it;
+					this->_alloc.destroy(tmp);
+					this->_alloc.deallocate(tmp, 1);
+					--this->_size;
+				}
+			}
+		}
+
+		void	unique()
+		{
+			for (iterator it0 = this->begin(); it0 != this->end(); it0++)
+			{
+				iterator it1 = it0;
+				for (; it1 != this->end(); it1++)
+				{
+					if (*it1 == *it0)
+						it1 = erase(it1);
+				}
+			}
+		}
+
+		template <class BinaryPredicate>
+		void	unique(BinaryPredicate binary_pred)
+		{
+			for (iterator it0 = this->begin(); it0 != this->end(); it0++)
+			{
+				iterator it1 = it0;
+				for (; it1 != this->end(); it1++)
+				{
+					if (binary_pred(it1, it0))
+						it1 = erase(it1);
+				}
+			}
+		}
+
+//		void	merge(list& x)
+//		{
+//
+//		}
+//
+//		template <class Compare>
+//		void	merge(list& x, Compare comp)
+//		{
+//
+//		}
+//
+//		void	sort()
+//		{
+//
+//		}
+//
+//		template <class Compare>
+//		void	sort(Compare comp)
+//		{
+//
+//		}
+//
+//		void	reverse()
+//		{
+//
+//		}
+
+		/* ==OBSERVER FUNCTIONS== */
+		allocator_type	get_allocator() const
+		{
+			return (this->_alloc);
+		}
 	};
+
+	/* ==NON-MEMBER FUNCTION OVERLOADS== */
+
+	// relational operators
+
+
+	template <class T, class Alloc>
+	void	swap(list<T,Alloc>& x, vector<T,Alloc>& y)
+	{
+		x.swap(y);
+	}
 }
 
 #endif

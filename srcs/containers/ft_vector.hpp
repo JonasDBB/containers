@@ -387,7 +387,6 @@ namespace ft
 	};
 
 	/* ==NON-MEMBER FUNCTION OVERLOADS== */
-
 	template <class T, class Alloc>
 	bool	operator==(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
 	{

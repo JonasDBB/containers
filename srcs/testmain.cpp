@@ -29,7 +29,16 @@ void	ittests()
 //	if (rit2 == rit1)
 //		std::cout << "yay" << std::endl;
 }
+#include <cmath>
+// a binary predicate implemented as a function:
+bool same_integral_part (double first, double second)
+{ return ( int(first)==int(second) ); }
 
+// a binary predicate implemented as a class:
+struct is_near {
+	bool operator()(double first, double second)
+	{ return (fabs(first - second) < 5.0); }
+};
 void	lsttest()
 {
 //	ft::list<int> lst1;
@@ -45,6 +54,25 @@ void	lsttest()
 //	for (ft::list<int>::iterator it = lst1.begin(); it != lst1.end(); it++)
 //		std::cout << *it << std::endl;
 
+	double mydoubles[]={ 2.72,  3.14, 12.15, 12.77, 12.77,
+			 15.3,  72.25, 72.25, 73.0,  73.35 };
+	ft::list<double> mylist (mydoubles,mydoubles+10);
+
+//	mylist.sort();             //  2.72,  3.14, 12.15, 12.77, 12.77,
+	// 15.3,  72.25, 72.25, 73.0,  73.35
+
+	mylist.unique();           //  2.72,  3.14, 12.15, 12.77
+	// 15.3,  72.25, 73.0,  73.35
+
+//	mylist.unique (same_integral_part);  //  2.72,  3.14, 12.15
+	// 15.3,  72.25, 73.0
+
+//	mylist.unique (is_near());           //  2.72, 12.15, 72.25
+
+	std::cout << "mylist contains:";
+	for (ft::list<double>::iterator it=mylist.begin(); it!=mylist.end(); ++it)
+		std::cout << ' ' << *it;
+	std::cout << '\n';
 }
 
 
