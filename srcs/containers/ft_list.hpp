@@ -137,8 +137,7 @@ namespace ft
 		/* ==ITERATOR FUNCTIONS== */
 		iterator				begin()
 		{
-			iterator tmp(this->_start._next);
-			return (tmp);
+			return(this->_start._next);
 		}
 
 		const_iterator			begin() const
@@ -255,14 +254,13 @@ namespace ft
 			this->_tail._previous->_next = newNode;
 			this->_tail._previous = newNode;
 			++this->_size;
-			printlist();
-			printlistbackwards();
+//			printlist();
+//			printlistbackwards();
 		}
 
 		void	pop_back()
 		{
 			node *tmp = this->_tail._previous;
-//			this->_tail._previous = tmp->_previous;
 			this->_alloc.destroy(tmp);
 			this->_alloc.deallocate(tmp, 1);
 			--this->_size;

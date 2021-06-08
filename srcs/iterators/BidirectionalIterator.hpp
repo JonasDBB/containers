@@ -64,13 +64,13 @@ namespace ft
 			return (tmp);
 		}
 
-		BidirectionalIterator &operator++()
+		virtual BidirectionalIterator &operator++()
 		{
 			this->_val++;
 			return (*this);
 		}
 
-		BidirectionalIterator &operator--()
+		virtual BidirectionalIterator &operator--()
 		{
 			this->_val--;
 			return (*this);
@@ -86,15 +86,33 @@ namespace ft
 			return !(*this == rhs);
 		}
 
-		operator BidirectionalIterator<T, const T*, const T&>() const
-		{
-			return BidirectionalIterator<T, const T*, const T&>(this->_val);
-		}
+//		virtual operator BidirectionalIterator<T, const T*, const T&>() const
+//		{
+//			return BidirectionalIterator<T, const T*, const T&>(this->_val);
+//		}
 
-		operator BidirectionalIterator<T, T*, T&>() const
-		{
-			return BidirectionalIterator<T, T*, T&>(this->_val);
-		}
+//		virtual operator BidirectionalIterator<T, T*, T&>() const
+//		{
+//			return BidirectionalIterator<T, T*, T&>(this->_val);
+//		}
+
+		template <class T1>
+		friend bool operator==(BidirectionalIterator<T1, T1*, T1&> lhs, BidirectionalIterator<T1, T1*, T1&> rhs);
+
 	};
+
+	template <class T>
+	bool operator==(BidirectionalIterator<T, T*, T&> lhs, BidirectionalIterator<T, T*, T&> rhs)
+	{
+		return (lhs._val == rhs._val);
+	}
+
+	template <class T>
+	bool operator!=(BidirectionalIterator<T, T*, T&> lhs, BidirectionalIterator<T, T*, T&> rhs)
+	{
+		return !(lhs == rhs);
+	}
 }
 #endif
+//NodeIterator<[2 * ...], const ft::list<int, std::__1::allocator<int> >::node *, const ft::list<int, std::__1::allocator<int> >::node &>
+//const NodeIterator<[2 * ...], ft::NodeIterator<int, ft::ListNode<int>, ft::ListNode<int> *, ft::ListNode<int> &, ft::bidirectional_iterator_tag>::node *, ft::NodeIterator<int, ft::ListNode<int>, ft::ListNode<int> *, ft::ListNode<int> &, ft::bidirectional_iterator_tag>::node &>

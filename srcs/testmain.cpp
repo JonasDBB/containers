@@ -1,18 +1,20 @@
 //#include "containers/ft_stack.hpp"
 //#include "containers/ft_queue.hpp"
-//#include "containers/ft_vector.hpp"
-#include "iterators/BidirectionalIterator.hpp"
+#include "containers/ft_vector.hpp"
+//#include "iterators/BidirectionalIterator.hpp"
 #include "containers/ft_list.hpp"
 #include <iostream>
 #include <vector>
 #include <list>
 
-
 void	ittests()
 {
-//		ft::vector<int> vec(4, 5);
-//
-//	ft::vector<int>::iterator it1 = vec.begin();
+	ft::vector<int> vec;
+	for (int i = 1; i <=5; i++)
+		vec.push_back(i);
+	ft::vector<int>::iterator it1 = vec.begin();
+	std::cout << *it1 << std::endl;
+	std::cout << *(3 + it1) << std::endl;
 //	ft::vector<int>::const_iterator it2 = vec.begin();
 //	if (it1 == it2)
 //		std::cout << "yay" << std::endl;
@@ -33,19 +35,19 @@ void	ittests()
 void	lsttest()
 {
 	ft::list<int> lst;
-	for (int i = 0; i < 5; i++)
+
+	for (int i = 1; i <= 5; i++)
 		lst.push_back(i);
-//	lst.assign(10, 15);
-	ft::list<int>::iterator it = lst.begin();
-	for (; it != lst.end(); it++)
-		std::cout << *it << std::endl;
+	ft::list<int>::iterator it1 = lst.begin();
+
 
 }
 
 
 int		main(int ac, char **av)
 {
-	lsttest();
+	ittests();
+//	lsttest();
 
 #ifndef ASAN
 	std::string line = av[0];
@@ -56,3 +58,5 @@ int		main(int ac, char **av)
 	(void) ac;
 	(void) av;
 }
+// const ft::nodeit<int, node, const node*, const node&, tag>
+// const ft::nodeit<int, node, node*, node&, tag>

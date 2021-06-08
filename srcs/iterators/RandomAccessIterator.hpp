@@ -17,7 +17,7 @@ namespace ft
 		typedef T*											pointer;
 		typedef T&											reference;
 
-	private:
+	protected:
 		pointer _val;
 
 	public:
@@ -153,7 +153,53 @@ namespace ft
 			return RandomAccessIterator<T, T*, T&>(this->_val);
 		}
 
+		template<class T1>
+		friend bool operator==(RandomAccessIterator<T1, T1*, T1&> lhs, RandomAccessIterator<T1, T1*, T1&> rhs);
+		template<class T1>
+		friend bool operator<(RandomAccessIterator<T1, T1*, T1&> lhs, RandomAccessIterator<T1, T1*, T1&> rhs);
 	};
 
+	template<class T>
+	bool operator==(RandomAccessIterator<T, T*, T&> lhs, RandomAccessIterator<T, T*, T&> rhs)
+	{
+		return (lhs._val == rhs._val);
+	}
+
+	template<class T>
+	bool operator!=(RandomAccessIterator<T, T*, T&> lhs, RandomAccessIterator<T, T*, T&> rhs)
+	{
+		return !(lhs == rhs);
+	}
+
+	template<class T>
+	bool operator<(RandomAccessIterator<T, T*, T&> lhs, RandomAccessIterator<T, T*, T&> rhs)
+	{
+		return ((rhs - lhs) > 0);
+	}
+
+	template<class T>
+	bool operator<=(RandomAccessIterator<T, T*, T&> lhs, RandomAccessIterator<T, T*, T&> rhs)
+	{
+		return !(rhs < lhs);
+	}
+
+	template<class T>
+	bool operator>(RandomAccessIterator<T, T*, T&> lhs, RandomAccessIterator<T, T*, T&> rhs)
+	{
+		return (rhs < lhs);
+	}
+
+	template<class T>
+	bool operator>=(RandomAccessIterator<T, T*, T&> lhs, RandomAccessIterator<T, T*, T&> rhs)
+	{
+		return !(lhs < rhs);
+	}
+
+	template<class T>
+	RandomAccessIterator<T, T*, T&>	operator+(typename RandomAccessIterator<T, T*, T&>::difference_type n,
+												const RandomAccessIterator<T, T*, T&>& it)
+	{
+		return (it + n);
+	}
 }
 #endif
