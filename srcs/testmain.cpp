@@ -13,8 +13,6 @@ void	ittests()
 	for (int i = 1; i <=5; i++)
 		vec.push_back(i);
 	ft::vector<int>::iterator it1 = vec.begin();
-	std::cout << *it1 << std::endl;
-	std::cout << *(3 + it1) << std::endl;
 //	ft::vector<int>::const_iterator it2 = vec.begin();
 //	if (it1 == it2)
 //		std::cout << "yay" << std::endl;
@@ -34,20 +32,26 @@ void	ittests()
 
 void	lsttest()
 {
-	ft::list<int> lst;
-
-	for (int i = 1; i <= 5; i++)
-		lst.push_back(i);
-	ft::list<int>::iterator it1 = lst.begin();
-
+//	ft::list<int> lst1;
+//
+//	for (int i = 1; i <= 5; i++)
+//		lst1.push_back(i);
+//
+//	ft::list<int> lst2;
+//	lst2.assign(lst1.rbegin(), lst1.rend());
+//	lst1.assign(3, 5);
+//	for (ft::list<int>::iterator it = lst2.begin(); it != lst2.end(); it++)
+//		std::cout << *it << std::endl;
+//	for (ft::list<int>::iterator it = lst1.begin(); it != lst1.end(); it++)
+//		std::cout << *it << std::endl;
 
 }
 
 
 int		main(int ac, char **av)
 {
-	ittests();
-//	lsttest();
+//	ittests();
+	lsttest();
 
 #ifndef ASAN
 	std::string line = av[0];

@@ -45,35 +45,12 @@ namespace ft
 			return (*this);
 		}
 
-		ListNode	operator++(int)
-		{
-			ListNode<T>	tmp(*this);
-//			*this = this->_next;
-			return (tmp);
-		}
-
-		ListNode	operator--(int)
-		{
-			ListNode<T> tmp(*this);
-//			*this = this->_previous;
-			return (tmp);
-		}
-
-		ListNode&	operator++()
-		{
-//			*this = this->_next;
-			return (*this);
-		}
-
-		ListNode&	operator--()
-		{
-//			*this = *this->_previous;
-			return (*this);
-		}
 		operator ListNode<T>() const
 		{
 			return ListNode<T>(this->_val);
 		}
+
+		void abstr() {}
 	};
 }
 

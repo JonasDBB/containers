@@ -32,14 +32,14 @@ namespace ft
 
 	private:
 		size_type	_size;
-		node		_start;
-		node		_tail;
+		node		_sentinel;
+//		node		_sentinel;
 		node_alloc	_alloc;
 
 	public:
 		void	printlist()
 		{
-			node *crnt = this->_start._next;
+			node *crnt = this->_sentinel._next;
 			std::cout << "begin list:";
 			if (this->_size)
 				std::cout << "\t[";
@@ -56,7 +56,7 @@ namespace ft
 
 		void	printlistbackwards()
 		{
-			node *crnt = this->_tail._previous;
+			node *crnt = this->_sentinel._previous;
 			std::cout << "end list:";
 			if (this->_size)
 				std::cout << "\t[";
@@ -72,50 +72,48 @@ namespace ft
 		// default constructor
 		explicit list(const allocator_type& alloc = allocator_type()) :
 				_size(0),
-				_start(0),
-				_tail(0),
+				_sentinel(0),
+//				_sentinel(0),
 				_alloc(alloc)
 		{
-			this->_start._next = &this->_tail;
-			this->_tail._previous = &this->_start;
+			this->_sentinel._next = &this->_sentinel;
+			this->_sentinel._previous = &this->_sentinel;
 		}
 
 		// fill constrcutor
 		explicit list(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) :
 				_size(0),
-				_start(0),
-				_tail(0),
+				_sentinel(0),
+//				_sentinel(0),
 				_alloc(alloc)
 		{
-//			this->assign(n, val);
-			this->_start._next = &this->_tail;
-			this->_tail._previous = &this->_start;
-			for (size_type i = 0; i < n; i++)
-				this->push_back(val);
+			this->assign(n, val);
+			this->_sentinel._next = &this->_sentinel;
+			this->_sentinel._previous = &this->_sentinel;
 		}
 
-//		// range constructor
-//		template <class InputIterator>
-//		list(InputIterator first, InputIterator last,
-//			 const allocator_type& alloc = allocator_type(),
-//			 typename iterator_traits<InputIterator>::type* = NULL) :
-//			 _size(0),
-//			 _start(),
-//			 _end(),
-//			 _alloc(alloc)
-//		{
-//			this->assign(first, last);
-//		}
+		// range constructor
+		template <class InputIterator>
+		list(InputIterator first, InputIterator last,
+			 const allocator_type& alloc = allocator_type(),
+			 typename iterator_traits<InputIterator>::type* = NULL) :
+			 _size(0),
+			 _sentinel(0),
+//			 _sentinel(0),
+			 _alloc(alloc)
+		{
+			this->assign(first, last);
+		}
 
 		// copy constructor
 		list(const list& x) :
 				_size(0),
-				_start(0),
-				_tail(0),
+				_sentinel(0),
+//				_sentinel(0),
 				_alloc(x._alloc)
 		{
-			this->_start._next = &this->_tail;
-			this->_tail._previous = &this->_start;
+			this->_sentinel._next = &this->_sentinel;
+			this->_sentinel._previous = &this->_sentinel;
 			this->assign(x.begin(), x.end());
 		}
 
@@ -137,42 +135,42 @@ namespace ft
 		/* ==ITERATOR FUNCTIONS== */
 		iterator				begin()
 		{
-			return(this->_start._next);
+			return(this->_sentinel._next);
 		}
 
 		const_iterator			begin() const
 		{
-			return (const_iterator(this->_start._next));
+			return (const_iterator(this->_sentinel._next));
 		}
 
 		iterator				end()
 		{
-			return (iterator(&this->_tail));
+			return (iterator(&this->_sentinel));
 		}
 
 		const_iterator			end() const
 		{
-			return (const_iterator(&this->_tail));
+			return (const_iterator(&this->_sentinel));
 		}
 
 		reverse_iterator		rbegin()
 		{
-
+			return (reverse_iterator(this->end()));
 		}
 
 		const_reverse_iterator	rbegin() const
 		{
-
+			return (const_reverse_iterator(this->end()));
 		}
 
 		reverse_iterator		rend()
 		{
-
+			return (reverse_iterator(this->begin()));
 		}
 
 		const_reverse_iterator	rend() const
 		{
-
+			return (reverse_iterator(this->begin()));
 		}
 
 		/* ==CAPACITY FUNCTIONS== */
@@ -194,22 +192,22 @@ namespace ft
 		/* ==ELEMENT ACCESS FUNCTIONS== */
 		reference		front()
 		{
-			return (this->_start._next);
+			return (this->_sentinel._next->_val);
 		}
 
 		const_reference	front() const
 		{
-			return (this->_start._next);
+			return (this->_sentinel._next->_val);
 		}
 
 		reference		back()
 		{
-			return (this->_tail._previous);
+			return (this->_sentinel._previous->_val);
 		}
 
 		const_reference	back() const
 		{
-			return (this->_tail._previous);
+			return (this->_sentinel._previous->_val);
 		}
 
 		/* ==MODIFIER FUNCTIONS== */
@@ -236,36 +234,38 @@ namespace ft
 		{
 			node *newNode = this->_alloc.allocate(1);
 			this->_alloc.construct(newNode, val);
-			newNode->_next = this->_start._next;
-			newNode->_previous = &this->_start;
-			this->_start._next->_previous = newNode;
-			this->_start._next = newNode;
+			newNode->_next = this->_sentinel._next;
+			newNode->_previous = &this->_sentinel;
+			this->_sentinel._next->_previous = newNode;
+			this->_sentinel._next = newNode;
 			++this->_size;
-//			printlist();
-//			printlistbackwards();
+		}
+
+		void	pop_front()
+		{
+			node *tmp = this->_sentinel._next;
+			this->_alloc.destroy(tmp);
+			this->_alloc.deallocate(tmp, 1);
+			--this->_size;
 		}
 
 		void	push_back(const value_type& val)
 		{
 			node *newNode = this->_alloc.allocate(1);
 			this->_alloc.construct(newNode, val);
-			newNode->_previous = this->_tail._previous;
-			newNode->_next = &this->_tail;
-			this->_tail._previous->_next = newNode;
-			this->_tail._previous = newNode;
+			newNode->_previous = this->_sentinel._previous;
+			newNode->_next = &this->_sentinel;
+			this->_sentinel._previous->_next = newNode;
+			this->_sentinel._previous = newNode;
 			++this->_size;
-//			printlist();
-//			printlistbackwards();
 		}
 
 		void	pop_back()
 		{
-			node *tmp = this->_tail._previous;
+			node *tmp = this->_sentinel._previous;
 			this->_alloc.destroy(tmp);
 			this->_alloc.deallocate(tmp, 1);
 			--this->_size;
-//			printlist();
-//			printlistbackwards();
 		}
 
 		void	clear()

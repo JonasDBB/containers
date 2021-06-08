@@ -52,34 +52,12 @@ namespace ft
 			return (*this);
 		}
 
-//		ANode	operator++(int)
-//		{
-//			ANode<T>	tmp(*this);
-//			*this = this->_next;
-//			return (tmp);
-//		}
-//
-//		ANode	operator--(int)
-//		{
-//			ANode<T> tmp(*this);
-//			*this = this->_previous;
-//			return (tmp);
-//		}
-
-		virtual ANode&	operator++() = 0;
-//		{
-//			*this = this->_next;
-//		}
-
-		virtual ANode&	operator--() = 0;
-//		{
-//			*this = *this->_previous;
-//		}
-
 		operator value_type() const
 		{
 			return (this->_val);
 		}
+
+		virtual void	abstr() = 0;
 	};
 }
 
