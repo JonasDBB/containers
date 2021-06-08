@@ -11,7 +11,7 @@ namespace ft
 		typedef Container container_type;
 		typedef size_t size_type;
 
-	private:
+	protected:
 		container_type _c;
 
 	public:
@@ -34,18 +34,20 @@ namespace ft
 
 		void pop()							{ this->_c.pop_front(); }
 
-		friend bool	operator==(const queue<T, Container>& lhs, const queue<T, Container>& rhs)	{ return (lhs._c == rhs._c); }
-		friend bool operator<(const queue<T, Container>& lhs, const queue<T, Container>&  rhs)	{ return (lhs._c < rhs._c); }
+		template<class T1, class Container1>
+		friend bool	operator==(const queue<T1, Container1>& lhs, const queue<T1, Container1>& rhs);
+		template<class T1, class Container1>
+		friend bool operator<(const queue<T1, Container1>& lhs, const queue<T1, Container1>& rhs);
 	};
 
-//	template<class T, class Container>
-//	bool	operator==(const queue<T, Container>& lhs, const queue<T, Container>& rhs)	{ return (lhs._c == rhs._c); }
+	template<class T, class Container>
+	bool	operator==(const queue<T, Container>& lhs, const queue<T, Container>& rhs)	{ return (lhs._c == rhs._c); }
 
 	template <class T, class Container>
 	bool operator!=(const queue<T, Container>& lhs, const queue<T, Container>& rhs)		{ return !(lhs == rhs); }
 
-//	template <class T, class Container>
-//	bool operator<(const queue<T, Container>& lhs, const queue<T, Container>& rhs)		{ return (lhs._c < rhs._c); }
+	template <class T, class Container>
+	bool operator<(const queue<T, Container>& lhs, const queue<T, Container>& rhs)		{ return (lhs._c < rhs._c); }
 
 	template <class T, class Container>
 	bool operator<=(const queue<T, Container>& lhs, const queue<T, Container>& rhs)		{ return !(rhs < lhs); }

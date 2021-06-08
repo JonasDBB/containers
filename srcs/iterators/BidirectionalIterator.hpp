@@ -1,6 +1,5 @@
 #ifndef BIDIRECTIONALITERATOR_HPP
 # define BIDIRECTIONALITERATOR_HPP
-# include <cstddef>
 # include "../utils/type_traits.hpp"
 
 namespace ft
@@ -21,7 +20,7 @@ namespace ft
 		pointer _val;
 
 	public:
-		BidirectionalIterator() : _val(NULL)
+		explicit BidirectionalIterator() : _val(NULL)
 		{}
 
 		BidirectionalIterator(pointer val) : _val(val)
@@ -51,27 +50,27 @@ namespace ft
 			return &(*this->_val);
 		}
 
-		virtual BidirectionalIterator operator++(int)
+		BidirectionalIterator operator++(int)
 		{
 			BidirectionalIterator<T, Pointer, Reference> tmp(*this);
 			this->_val++;
 			return (tmp);
 		}
 
-		virtual BidirectionalIterator operator--(int)
+		BidirectionalIterator operator--(int)
 		{
 			BidirectionalIterator<T, Pointer, Reference> tmp(*this);
 			this->_val--;
 			return (tmp);
 		}
 
-		virtual BidirectionalIterator &operator++()
+		BidirectionalIterator &operator++()
 		{
 			this->_val++;
 			return (*this);
 		}
 
-		virtual BidirectionalIterator &operator--()
+		BidirectionalIterator &operator--()
 		{
 			this->_val--;
 			return (*this);
