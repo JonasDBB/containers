@@ -26,9 +26,9 @@ namespace ft
 			this->_val = NULL;
 		}
 
-		NodeIterator(pointer val) //: _val(val)
+		NodeIterator(const pointer val) : BidirectionalIterator<Node, Node*, Node&>(val) //: _val(val)
 		{
-			this->_val = (val);
+//			this->_val = (val);
 		}
 
 		NodeIterator(const this_type& x)

@@ -84,9 +84,9 @@ namespace ft
 				_sentinel(0),
 				_alloc(alloc)
 		{
-			this->assign(n, val);
 			this->_sentinel._next = &this->_sentinel;
 			this->_sentinel._previous = &this->_sentinel;
+			this->assign(n, val);
 		}
 
 		// range constructor
@@ -126,7 +126,14 @@ namespace ft
 		{
 			this->clear();
 			this->_alloc = x._alloc;
-			this->assign(x.begin(), x.end());
+//			for (size_type i = 0; i < x.size(); ++i)
+//			{
+//				node* tmp = x._sentinel._next;
+//				this->push_back(*tmp);
+//				tmp = tmp->_next;
+//			}
+		 	this->assign(x.begin(), x.end());
+			return (*this);
 		}
 
 		/* ==ITERATOR FUNCTIONS== */
@@ -142,12 +149,12 @@ namespace ft
 
 		iterator				end()
 		{
-			return (iterator(&this->_sentinel));
+			return (iterator(this->_sentinel._next->_previous));
 		}
 
 		const_iterator			end() const
 		{
-			return (const_iterator(&this->_sentinel));
+			return (const_iterator(this->_sentinel._next->_previous));
 		}
 
 		reverse_iterator		rbegin()
@@ -285,7 +292,7 @@ namespace ft
 		iterator	erase(iterator position)
 		{
 			node *tmp = &(*position);
-			position++;
+			++position;
 			this->_alloc.destroy(tmp);
 			this->_alloc.deallocate(tmp, 1);
 			--this->_size;
@@ -294,7 +301,6 @@ namespace ft
 
 		iterator	erase(iterator first, iterator last)
 		{
-			iterator ret = ++last;
 			while (1)
 			{
 				node *tmp = &(*first);
@@ -304,7 +310,7 @@ namespace ft
 				this->_alloc.deallocate(tmp, 1);
 				--this->_size;
 			}
-			return (ret);
+			return (last);
 		}
 
 		void	swap(list& x)
@@ -380,10 +386,13 @@ namespace ft
 			for (iterator it0 = this->begin(); it0 != this->end(); it0++)
 			{
 				iterator it1 = it0;
+				++it1;
 				for (; it1 != this->end(); it1++)
 				{
 					if (*it1 == *it0)
 						it1 = erase(it1);
+					if (it1 == this->end())
+						break;
 				}
 			}
 		}
@@ -394,10 +403,13 @@ namespace ft
 			for (iterator it0 = this->begin(); it0 != this->end(); it0++)
 			{
 				iterator it1 = it0;
+				++it1;
 				for (; it1 != this->end(); it1++)
 				{
-					if (binary_pred(it1, it0))
+					if (binary_pred(*it1, *it0))
 						it1 = erase(it1);
+					if (it1 == this->end())
+						break;
 				}
 			}
 		}
@@ -423,11 +435,13 @@ namespace ft
 //		{
 //
 //		}
-//
-//		void	reverse()
-//		{
-//
-//		}
+
+		void	reverse()
+		{
+			ft::swap(this->_sentinel._next, this->_sentinel._previous);
+			for (iterator it = this->begin(); it != this->end(); it++)
+				ft::swap((*it)._next, (*it)._previous);
+		}
 
 		/* ==OBSERVER FUNCTIONS== */
 		allocator_type	get_allocator() const
@@ -438,11 +452,54 @@ namespace ft
 
 	/* ==NON-MEMBER FUNCTION OVERLOADS== */
 
-	// relational operators
+	template <class T, class Alloc>
+	bool	operator==(const list<T,Alloc>& lhs, const list<T,Alloc>& rhs)
+	{
+		if (lhs.size() != rhs.size())
+			return (false);
+		typename ft::list<T,Alloc>::iterator it0 = lhs.begin();
+		typename ft::list<T,Alloc>::iterator it1 = rhs.begin();
+		for (; it0 != lhs.end() && it1 != rhs.end(); ++it0, ++it1)
+		{
+			if (*it0 != *it1)
+				return (false);
+		}
+		return (true);
+	}
+
+	template <class T, class Alloc>
+	bool	operator!=(const list<T,Alloc>& lhs, const list<T,Alloc>& rhs)
+	{
+		return !(lhs == rhs);
+	}
+
+	template <class T, class Alloc>
+	bool	operator<(const list<T,Alloc>& lhs, const list<T,Alloc>& rhs)
+	{
+		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+	}
+
+	template <class T, class Alloc>
+	bool	operator<=(const list<T,Alloc>& lhs, const list<T,Alloc>& rhs)
+	{
+		return !(rhs < lhs);
+	}
+
+	template <class T, class Alloc>
+	bool	operator>(const list<T,Alloc>& lhs, const list<T,Alloc>& rhs)
+	{
+		return (rhs < lhs);
+	}
+
+	template <class T, class Alloc>
+	bool	operator>=(const list<T,Alloc>& lhs, const list<T,Alloc>& rhs)
+	{
+		return !(lhs < rhs);
+	}
 
 
 	template <class T, class Alloc>
-	void	swap(list<T,Alloc>& x, vector<T,Alloc>& y)
+	void	swap(list<T,Alloc>& x, list<T,Alloc>& y)
 	{
 		x.swap(y);
 	}

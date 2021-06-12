@@ -23,7 +23,7 @@ namespace ft
 		explicit BidirectionalIterator() : _val(NULL)
 		{}
 
-		BidirectionalIterator(pointer val) : _val(val)
+		explicit BidirectionalIterator(pointer val) : _val(val)
 		{}
 
 		BidirectionalIterator(const BidirectionalIterator<T, Pointer, Reference> &og)
