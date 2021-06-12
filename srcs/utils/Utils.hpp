@@ -13,23 +13,20 @@ namespace ft
 		second = tmp;
 	}
 
-	template<typename RandomAccessIterator>
+	template<class RandomAccessIterator>
 	typename iterator_traits<RandomAccessIterator>::difference_type
 	distance(RandomAccessIterator first, RandomAccessIterator last, random_access_iterator_tag)
 	{
 		return (last - first);
 	}
 
-	template<typename InputIterator>
+	template<class InputIterator>
 	typename iterator_traits<InputIterator>::difference_type
 	distance(InputIterator first, InputIterator last, input_iterator_tag)
 	{
 		typename iterator_traits<InputIterator>::difference_type ret(0);
-		while (first != last)
-		{
-			first++;
-			ret++;
-		}
+		for (; first != last; ++first)
+			++ret;
 		return (ret);
 	}
 
@@ -38,6 +35,33 @@ namespace ft
 	distance(Iterator first, Iterator last)
 	{
 		return (distance(first, last, typename iterator_traits<Iterator>::iterator_category()));
+	}
+
+	template <class InputIterator, class Distance>
+	void advance(InputIterator& it, Distance n, random_access_iterator_tag)
+	{
+		it += n;
+	}
+
+	template <class InputIterator, class Distance>
+	void advance(InputIterator& it, Distance n, input_iterator_tag)
+	{
+		if (n >= 0)
+		{
+			for (; n > 0; --n)
+				++it;
+		}
+		else
+		{
+			for (; n < 0; ++n)
+				--it;
+		}
+	}
+
+	template <class iterator, class Distance>
+	void	advance(iterator& it, Distance n)
+	{
+		ft::advance(it, n, typename iterator_traits<iterator>::iterator_category());
 	}
 
 	template <typename InputIterator1, typename InputIterator2>

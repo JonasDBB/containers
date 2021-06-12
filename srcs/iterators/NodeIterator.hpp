@@ -21,15 +21,11 @@ namespace ft
 		typedef node&											reference;
 
 	public:
-		NodeIterator() //: _val(NULL)
-		{
-			this->_val = NULL;
-		}
+		NodeIterator() : BidirectionalIterator<Node, Node*, Node&>()
+		{}
 
 		NodeIterator(const pointer val) : BidirectionalIterator<Node, Node*, Node&>(val) //: _val(val)
-		{
-//			this->_val = (val);
-		}
+		{}
 
 		NodeIterator(const this_type& x)
 		{

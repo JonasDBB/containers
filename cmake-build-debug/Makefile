@@ -183,6 +183,33 @@ catch2tests/catch.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2tests/catch.cpp.s
 .PHONY : catch2tests/catch.cpp.s
 
+catch2tests/list_tests.o: catch2tests/list_tests.cpp.o
+
+.PHONY : catch2tests/list_tests.o
+
+# target to build an object file
+catch2tests/list_tests.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2tests/list_tests.cpp.o
+.PHONY : catch2tests/list_tests.cpp.o
+
+catch2tests/list_tests.i: catch2tests/list_tests.cpp.i
+
+.PHONY : catch2tests/list_tests.i
+
+# target to preprocess a source file
+catch2tests/list_tests.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2tests/list_tests.cpp.i
+.PHONY : catch2tests/list_tests.cpp.i
+
+catch2tests/list_tests.s: catch2tests/list_tests.cpp.s
+
+.PHONY : catch2tests/list_tests.s
+
+# target to generate assembly for a file
+catch2tests/list_tests.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2tests/list_tests.cpp.s
+.PHONY : catch2tests/list_tests.cpp.s
+
 catch2tests/main.o: catch2tests/main.cpp.o
 
 .PHONY : catch2tests/main.o
@@ -331,6 +358,9 @@ help:
 	@echo "... catch2tests/catch.o"
 	@echo "... catch2tests/catch.i"
 	@echo "... catch2tests/catch.s"
+	@echo "... catch2tests/list_tests.o"
+	@echo "... catch2tests/list_tests.i"
+	@echo "... catch2tests/list_tests.s"
 	@echo "... catch2tests/main.o"
 	@echo "... catch2tests/main.i"
 	@echo "... catch2tests/main.s"

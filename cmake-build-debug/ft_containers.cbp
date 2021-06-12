@@ -132,6 +132,9 @@
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/catch2tests/catch.hpp">
 			<Option target="catch"/>
 		</Unit>
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/catch2tests/list_tests.cpp">
+			<Option target="catch"/>
+		</Unit>
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/catch2tests/main.cpp">
 			<Option target="catch"/>
 		</Unit>

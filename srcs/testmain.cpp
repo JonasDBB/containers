@@ -30,40 +30,56 @@ void	ittests()
 //		std::cout << "yay" << std::endl;
 }
 
+bool compare_nocase (const std::string& first, const std::string& second)
+{
+	unsigned int i=0;
+	while ( (i<first.length()) && (i<second.length()) )
+	{
+		if (tolower(first[i])<tolower(second[i])) return true;
+		else if (tolower(first[i])>tolower(second[i])) return false;
+		++i;
+	}
+	return ( first.length() < second.length() );
+}
+
 void	lsttest()
 {
-	ft::list<int> lst;
-//	const ft::list<int> lst1(5,3);
-	for (int i = 1; i <= 14; i++)
-		lst.push_back(i);
-	lst.reverse();
-	lst.printlist();
-//	ft::list<int>::iterator it1 = lst1.end();
-//	ft::list<int>::const_iterator it2 = lst1.end();
+//	std::list<std::string> mylist;
+//	std::list<std::string>::iterator it;
+//	mylist.push_back ("one");
+//	mylist.push_back ("two");
+//	mylist.push_back ("Three");
 //
-//	if (it1 == it2)
-//		std::cout << "yay" << std::endl;
-//	if (it2 == it1)
-//		std::cout << "yay" << std::endl;
+//	mylist.sort();
 //
-//	ft::list<int>::iterator it3;
-//	it3 = it2;
-
-//	ft::list<int> a;
-//	a.push_back(10);
-//	a.push_back(20);
-//	a.push_back(30);
-//	ft::list<int> b(a);
-//	ft::list<int> c(b);
-//	c.reverse();
+//	std::cout << "mylist contains:";
+//	for (it=mylist.begin(); it!=mylist.end(); ++it)
+//		std::cout << ' ' << *it;
+//	std::cout << '\n';
 //
-//	if (a==b) std::cout << "a and b are equal\n";
-//	if (b!=c) std::cout << "b and c are not equal\n";
-//	if (b<c) std::cout << "b is less than c\n";
-//	if (c>b) std::cout << "c is greater than b\n";
-//	if (a<=b) std::cout << "a is less than or equal to b\n";
-//	if (a>=b) std::cout << "a is greater than or equal to b\n";
+//	mylist.sort(compare_nocase);
+//
+//	std::cout << "mylist contains:";
+//	for (it=mylist.begin(); it!=mylist.end(); ++it)
+//		std::cout << ' ' << *it;
 //	std::cout << std::endl;
+//	std::string s(NULL);
+//	ft::list<std::string> lst;
+//	ft::list<std::string>::iterator it;
+//	lst.push_back ("one");
+//	lst.push_back ("two");
+//	lst.push_back ("Three");
+//	ft::list<int> lst(2, 3);
+//	ft::list<int>::iterator it;
+	ft::list<int> lst(2,3);
+	ft::list<int>::iterator it = lst.begin();
+	std::cout << *it << std::endl;
+	*it = 5;
+	std::cout << *it << std::endl;
+//	std::cout << "lst:";
+//	for (it = lst.begin(); it != lst.end(); ++it)
+//		std::cout << ' ' << *it;
+	std::cout << std::endl;
 }
 
 

@@ -36,38 +36,38 @@ namespace ft
 		node_alloc	_alloc;
 
 	public:
-		void	printlist()
-		{
-			node *crnt = this->_sentinel._next;
-			std::cout << "begin list:";
-			if (this->_size)
-				std::cout << "\t[";
-			for (size_type i = 0; i < this->_size; i++)
-			{
-//				std::cout << crnt->_val << " - " << crnt << "]";
-				std::cout << crnt->_val << "]";
-				crnt = crnt->_next;
-				if (i < this->_size - 1)
-					std::cout << " [";
-			}
-			std::cout << "\t  endlist" << std::endl;
-		}
-
-		void	printlistbackwards()
-		{
-			node *crnt = this->_sentinel._previous;
-			std::cout << "end list:";
-			if (this->_size)
-				std::cout << "\t[";
-			for (size_type i = 0; i < this->_size; i++)
-			{
-				std::cout << crnt->_val << "]";
-				crnt = crnt->_previous;
-				if (i < this->_size - 1)
-					std::cout << " [";
-			}
-			std::cout << "\t  beginlist" << std::endl;
-		}
+//		void	printlist()
+//		{
+//			node *crnt = this->_sentinel._next;
+//			std::cout << "begin list:";
+//			if (this->_size)
+//				std::cout << "\t[";
+//			for (size_type i = 0; i < this->_size; i++)
+//			{
+////				std::cout << crnt->_val << " - " << crnt << "]";
+//				std::cout << crnt->_val << "]";
+//				crnt = crnt->_next;
+//				if (i < this->_size - 1)
+//					std::cout << " [";
+//			}
+//			std::cout << "\t  endlist" << std::endl;
+//		}
+//
+//		void	printlistbackwards()
+//		{
+//			node *crnt = this->_sentinel._previous;
+//			std::cout << "end list:";
+//			if (this->_size)
+//				std::cout << "\t[";
+//			for (size_type i = 0; i < this->_size; i++)
+//			{
+//				std::cout << crnt->_val << "]";
+//				crnt = crnt->_previous;
+//				if (i < this->_size - 1)
+//					std::cout << " [";
+//			}
+//			std::cout << "\t  beginlist" << std::endl;
+//		}
 		// default constructor
 		explicit list(const allocator_type& alloc = allocator_type()) :
 				_size(0),
@@ -272,23 +272,33 @@ namespace ft
 			--this->_size;
 		}
 
-//		iterator	insert(iterator position, const value_type& val)
-//		{
-//
-//		}
-//
-//		void		insert(iterator position, size_type n, const value_type& val)
-//		{
-//
-//		}
-//
-//		template <class InputIterator>
-//		void		insert(iterator position, InputIterator first, InputIterator last,
-//						   typename iterator_traits<InputIterator>::type* = NULL)
-//		{
-//
-//		}
-//
+		iterator	insert(iterator position, const value_type& val)
+		{
+			node *newNode = this->_alloc.allocate(1);
+			this->_alloc.construct(newNode, val);
+			node *loc = &(*position);
+			newNode->_previous = loc->_previous;
+			newNode->_next = loc;
+			loc->_previous->_next = newNode;
+			loc->_previous = newNode;
+			++this->_size;
+			return (iterator(newNode));
+		}
+
+		void		insert(iterator position, size_type n, const value_type& val)
+		{
+			for (size_type i = 0; i < n; ++i)
+				insert(position, val);
+		}
+
+		template <class InputIterator>
+		void		insert(iterator position, InputIterator first, InputIterator last,
+						   typename iterator_traits<InputIterator>::type* = NULL)
+		{
+			for (; first != last; ++first)
+				insert(position, *first);
+		}
+
 		iterator	erase(iterator position)
 		{
 			node *tmp = &(*position);
@@ -301,15 +311,18 @@ namespace ft
 
 		iterator	erase(iterator first, iterator last)
 		{
-			while (1)
-			{
-				node *tmp = &(*first);
-				if (++first == last)
-					break;
-				this->_alloc.destroy(tmp);
-				this->_alloc.deallocate(tmp, 1);
-				--this->_size;
-			}
+//			while (1)
+//			{
+//				node *tmp = &(*first);
+//				if (++first == last)
+//					break;
+//				this->_alloc.destroy(tmp);
+//				this->_alloc.deallocate(tmp, 1);
+//				--this->_size;
+//			}
+//			return (last);
+			while (first != last)
+				this->erase(first++);
 			return (last);
 		}
 
@@ -335,20 +348,35 @@ namespace ft
 		}
 
 		/* ==OPERATION FUNCTIONS== */
-//		void	splice(iterator position, list& x)
-//		{
-//
-//		}
-//
-//		void	splice(iterator position, list& x, iterator i)
-//		{
-//
-//		}
-//
-//		void	splice(iterator position, list& x, iterator first, iterator last)
-//		{
-//
-//		}
+		void	splice(iterator position, list& x)
+		{
+			splice(position, x, x.begin(), x.end());
+		}
+
+		void	splice(iterator position, list& x, iterator i)
+		{
+			iterator n(i);
+			splice(position, x, i, ++n);
+		}
+
+		void	splice(iterator position, list& x, iterator first, iterator last)
+		{
+			node *loc = &(*position);
+			node *firstLoc = &(*first);
+			node *lastLoc = &(*--last);
+			size_type len = ft::distance(first, last) + 1;
+			this->_size += len;
+			x._size -= len;
+			// remove from x list
+			firstLoc->_previous->_next = lastLoc->_next;
+			lastLoc->_next->_previous = firstLoc->_previous;
+			// set links in new elems to this list
+			firstLoc->_previous = loc->_previous;
+			lastLoc->_next = loc;
+			// link this to new elems
+			loc->_previous->_next = firstLoc;
+			loc->_previous = lastLoc;
+		}
 
 		void	remove(const value_type& val)
 		{
@@ -413,28 +441,44 @@ namespace ft
 				}
 			}
 		}
-
+//
 //		void	merge(list& x)
 //		{
 //
 //		}
-//
+
 //		template <class Compare>
 //		void	merge(list& x, Compare comp)
 //		{
 //
 //		}
-//
-//		void	sort()
-//		{
-//
-//		}
-//
-//		template <class Compare>
-//		void	sort(Compare comp)
-//		{
-//
-//		}
+
+		void	sort()
+		{
+			for (iterator it = this->begin(); it != this->end(); ++it)
+			{
+				iterator it1(it);
+				if (*it >= *++it1)
+				{
+					ft::swap(*it, *it1);
+					it = this->begin();
+				}
+			}
+		}
+
+		template <class Compare>
+		void	sort(Compare comp)
+		{
+			for (iterator it = this->begin(); it != this->end(); ++it)
+			{
+				iterator it1(it);
+				if (comp(*it, *++it1))
+				{
+					ft::swap(*it, *it1);
+					it = this->begin();
+				}
+			}
+		}
 
 		void	reverse()
 		{

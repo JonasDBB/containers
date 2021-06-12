@@ -19,8 +19,15 @@ namespace ft
 		ANode		*_next;
 		T			_val;
 
-	public:
-		ANode(const value_type& val = value_type()) :
+//	public:
+//		ANode() :
+//			_previous(NULL),
+//			_next(NULL),
+//			_val()
+//		{}
+
+
+		explicit ANode(const value_type& val = value_type()) :
 				_previous(NULL),
 				_next(NULL),
 				_val(val)
@@ -59,6 +66,13 @@ namespace ft
 
 		virtual void	abstr() = 0;
 	};
+
+//	template <class T>
+//	std::ostream&	operator<<(std::ostream& os, const ANode<T>& nd)
+//	{
+//		os << nd._val;
+//		return (os);
+//	}
 }
 
 #endif
