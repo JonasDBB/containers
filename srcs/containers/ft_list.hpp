@@ -117,8 +117,7 @@ namespace ft
 		// destructor
 		~list()
 		{
-			while (this->_size)
-				pop_back();
+			clear();
 		}
 
 		// assignment operator
@@ -312,9 +311,7 @@ namespace ft
 
 		void	swap(list& x)
 		{
-			ft::swap(this->_size, x._size);
-			ft::swap(this->_sentinel, x._sentinel);
-			ft::swap(this->_alloc, x._alloc);
+			ft::swap(*this, x);
 		}
 
 		void	resize(size_type n, value_type val = value_type())

@@ -61,53 +61,20 @@ std::ostream& operator<<(std::ostream& os, const testclass &cls)
 
 void	lsttest()
 {
-	ft::list<testclass> lst;
-	for (int i = 5; i >= 1; --i)
-		lst.push_back(testclass(i));
-	std::cout << "lst has";
-	for (ft::list<testclass>::iterator it = lst.begin(); it != lst.end(); ++it)
+	ft::list<int> first (3,100);   // three ints with a value of 100
+	ft::list<int> second (5,200);  // five ints with a value of 200
+
+	first.swap(second);
+
+	std::cout << "first contains:";
+	for (ft::list<int>::iterator it=first.begin(); it!=first.end(); it++)
 		std::cout << ' ' << *it;
-	std::cout << std::endl;
-	lst.sort();
-	for (ft::list<testclass>::iterator it = lst.begin(); it != lst.end(); ++it)
+	std::cout << '\n';
+
+	std::cout << "second contains:";
+	for (ft::list<int>::iterator it=second.begin(); it!=second.end(); it++)
 		std::cout << ' ' << *it;
-	std::cout << std::endl;
-
-	//	ft::list<double> first, second;
-//
-//	first.push_back (3.1);
-//	first.push_back (2.9);
-//	first.push_back (2.2);
-//
-//	second.push_back (3.7);
-//	second.push_back (7.1);
-//	second.push_back (1.4);
-//
-//	first.sort(mycomparison);
-//	second.sort();
-//
-//	std::cout << "mylist contains:";
-//	for (ft::list<double>::iterator it=first.begin(); it!=first.end(); ++it)
-//		std::cout << ' ' << *it;
-//	std::cout << '\n';
-//
-//	std::cout << "mylist contains:";
-//	for (ft::list<double>::iterator it=second.begin(); it!=second.end(); ++it)
-//		std::cout << ' ' << *it;
-//	std::cout << '\n';
-//
-	ft::list<std::string> mylist;
-//	ft::list<std::string>::iterator it;
-	mylist.push_back ("one");
-	mylist.push_back ("two");
-	mylist.push_back ("Three");
-
-	mylist.sort();
-	for (ft::list<std::string>::iterator it = mylist.begin(); it != mylist.end(); ++it)
-		std::cout << ' ' << *it;
-
-//	mylist.printlist();
-
+	std::cout << '\n';
 }
 
 

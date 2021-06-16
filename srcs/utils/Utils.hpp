@@ -5,7 +5,7 @@
 namespace ft
 {
 
-	template<typename T>
+	template<class T>
 	void	swap(T& first, T& second)
 	{
 		T tmp = first;
