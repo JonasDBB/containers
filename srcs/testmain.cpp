@@ -3,6 +3,7 @@
 #include "containers/ft_vector.hpp"
 //#include "iterators/BidirectionalIterator.hpp"
 #include "containers/ft_list.hpp"
+#include "utils/ListNode.hpp"
 #include <iostream>
 #include <vector>
 #include <list>
@@ -30,56 +31,83 @@ void	ittests()
 //		std::cout << "yay" << std::endl;
 }
 
-bool compare_nocase (const std::string& first, const std::string& second)
-{
-	unsigned int i=0;
-	while ( (i<first.length()) && (i<second.length()) )
-	{
-		if (tolower(first[i])<tolower(second[i])) return true;
-		else if (tolower(first[i])>tolower(second[i])) return false;
-		++i;
-	}
-	return ( first.length() < second.length() );
-}
+bool mycomparison (double first, double second)
+{ return ( int(first)<int(second) ); }
+
+class testclass {
+private:
+	int x;
+public:
+	testclass() {}
+	testclass(int x) : x(x){}
+	int	getx() const {return this->x;}
+	bool operator==(const testclass rhs) const
+	{return (this->x == rhs.x);}
+	bool operator!=(const testclass rhs) const
+	{return (this->x != rhs.x);}
+	bool operator<(const testclass& rhs) const
+	{return (this->x < rhs.x);}
+	bool operator>(const testclass& rhs) const
+	{return (this-> x > rhs.x);}
+	bool operator>=(const testclass& rhs) const
+	{return (this-> x >= rhs.x);}
+	bool operator<=(const testclass& rhs) const
+	{return (this-> x <= rhs.x);}
+
+};
+
+std::ostream& operator<<(std::ostream& os, const testclass &cls)
+{os << cls.getx(); return os;}
 
 void	lsttest()
 {
-//	std::list<std::string> mylist;
-//	std::list<std::string>::iterator it;
-//	mylist.push_back ("one");
-//	mylist.push_back ("two");
-//	mylist.push_back ("Three");
+	ft::list<testclass> lst;
+	for (int i = 5; i >= 1; --i)
+		lst.push_back(testclass(i));
+	std::cout << "lst has";
+	for (ft::list<testclass>::iterator it = lst.begin(); it != lst.end(); ++it)
+		std::cout << ' ' << *it;
+	std::cout << std::endl;
+	lst.sort();
+	for (ft::list<testclass>::iterator it = lst.begin(); it != lst.end(); ++it)
+		std::cout << ' ' << *it;
+	std::cout << std::endl;
+
+	//	ft::list<double> first, second;
 //
-//	mylist.sort();
+//	first.push_back (3.1);
+//	first.push_back (2.9);
+//	first.push_back (2.2);
+//
+//	second.push_back (3.7);
+//	second.push_back (7.1);
+//	second.push_back (1.4);
+//
+//	first.sort(mycomparison);
+//	second.sort();
 //
 //	std::cout << "mylist contains:";
-//	for (it=mylist.begin(); it!=mylist.end(); ++it)
+//	for (ft::list<double>::iterator it=first.begin(); it!=first.end(); ++it)
 //		std::cout << ' ' << *it;
 //	std::cout << '\n';
 //
-//	mylist.sort(compare_nocase);
-//
 //	std::cout << "mylist contains:";
-//	for (it=mylist.begin(); it!=mylist.end(); ++it)
+//	for (ft::list<double>::iterator it=second.begin(); it!=second.end(); ++it)
 //		std::cout << ' ' << *it;
-//	std::cout << std::endl;
-//	std::string s(NULL);
-//	ft::list<std::string> lst;
+//	std::cout << '\n';
+//
+	ft::list<std::string> mylist;
 //	ft::list<std::string>::iterator it;
-//	lst.push_back ("one");
-//	lst.push_back ("two");
-//	lst.push_back ("Three");
-//	ft::list<int> lst(2, 3);
-//	ft::list<int>::iterator it;
-	ft::list<int> lst(2,3);
-	ft::list<int>::iterator it = lst.begin();
-	std::cout << *it << std::endl;
-	*it = 5;
-	std::cout << *it << std::endl;
-//	std::cout << "lst:";
-//	for (it = lst.begin(); it != lst.end(); ++it)
-//		std::cout << ' ' << *it;
-	std::cout << std::endl;
+	mylist.push_back ("one");
+	mylist.push_back ("two");
+	mylist.push_back ("Three");
+
+	mylist.sort();
+	for (ft::list<std::string>::iterator it = mylist.begin(); it != mylist.end(); ++it)
+		std::cout << ' ' << *it;
+
+//	mylist.printlist();
+
 }
 
 
@@ -97,3 +125,6 @@ int		main(int ac, char **av)
 	(void) ac;
 	(void) av;
 }
+
+
+

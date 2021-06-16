@@ -37,9 +37,13 @@ namespace ft
 		NodeIterator&	operator=(const this_type& x)
 		{
 			BidirectionalIterator<Node,Node*, Node&>::operator=(x);
-//			this->_val = &(*x);
 			return (*this);
 		}
+
+//		T&	operator*() const
+//		{
+//			return (this->_val->_val);
+//		}
 
 		NodeIterator operator++(int)
 		{
@@ -66,11 +70,6 @@ namespace ft
 			this->_val = this->_val->_previous;
 			return (*this);
 		}
-
-//		operator const_type() const
-//		{
-//			return const_type(this->_val);
-//		}
 
 		operator this_type() const
 		{

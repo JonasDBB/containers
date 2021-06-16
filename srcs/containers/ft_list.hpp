@@ -36,42 +36,42 @@ namespace ft
 		node_alloc	_alloc;
 
 	public:
-//		void	printlist()
-//		{
-//			node *crnt = this->_sentinel._next;
-//			std::cout << "begin list:";
-//			if (this->_size)
-//				std::cout << "\t[";
-//			for (size_type i = 0; i < this->_size; i++)
-//			{
-////				std::cout << crnt->_val << " - " << crnt << "]";
-//				std::cout << crnt->_val << "]";
-//				crnt = crnt->_next;
-//				if (i < this->_size - 1)
-//					std::cout << " [";
-//			}
-//			std::cout << "\t  endlist" << std::endl;
-//		}
-//
-//		void	printlistbackwards()
-//		{
-//			node *crnt = this->_sentinel._previous;
-//			std::cout << "end list:";
-//			if (this->_size)
-//				std::cout << "\t[";
-//			for (size_type i = 0; i < this->_size; i++)
-//			{
-//				std::cout << crnt->_val << "]";
-//				crnt = crnt->_previous;
-//				if (i < this->_size - 1)
-//					std::cout << " [";
-//			}
-//			std::cout << "\t  beginlist" << std::endl;
-//		}
+		void	printlist()
+		{
+			node *crnt = this->_sentinel._next;
+			std::cout << "begin list:";
+			if (this->_size)
+				std::cout << "\t[";
+			for (size_type i = 0; i < this->_size; i++)
+			{
+//				std::cout << crnt->_val << " - " << crnt << "]";
+				std::cout << crnt->_val << "]";
+				crnt = crnt->_next;
+				if (i < this->_size - 1)
+					std::cout << " [";
+			}
+			std::cout << "\t  endlist" << std::endl;
+		}
+
+		void	printlistbackwards()
+		{
+			node *crnt = this->_sentinel._previous;
+			std::cout << "end list:";
+			if (this->_size)
+				std::cout << "\t[";
+			for (size_type i = 0; i < this->_size; i++)
+			{
+				std::cout << crnt->_val << "]";
+				crnt = crnt->_previous;
+				if (i < this->_size - 1)
+					std::cout << " [";
+			}
+			std::cout << "\t  beginlist" << std::endl;
+		}
 		// default constructor
 		explicit list(const allocator_type& alloc = allocator_type()) :
 				_size(0),
-				_sentinel(0),
+				_sentinel(T()),
 				_alloc(alloc)
 		{
 			this->_sentinel._next = &this->_sentinel;
@@ -81,7 +81,7 @@ namespace ft
 		// fill constrcutor
 		explicit list(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) :
 				_size(0),
-				_sentinel(0),
+				_sentinel(T()),
 				_alloc(alloc)
 		{
 			this->_sentinel._next = &this->_sentinel;
@@ -95,7 +95,7 @@ namespace ft
 			 const allocator_type& alloc = allocator_type(),
 			 typename iterator_traits<InputIterator>::type* = NULL) :
 			 _size(0),
-			 _sentinel(0),
+			 _sentinel(T()),
 			 _alloc(alloc)
 		{
 			this->_sentinel._next = &this->_sentinel;
@@ -106,7 +106,7 @@ namespace ft
 		// copy constructor
 		list(const list& x) :
 				_size(0),
-				_sentinel(0),
+				_sentinel(T()),
 				_alloc(x._alloc)
 		{
 			this->_sentinel._next = &this->_sentinel;
@@ -126,12 +126,6 @@ namespace ft
 		{
 			this->clear();
 			this->_alloc = x._alloc;
-//			for (size_type i = 0; i < x.size(); ++i)
-//			{
-//				node* tmp = x._sentinel._next;
-//				this->push_back(*tmp);
-//				tmp = tmp->_next;
-//			}
 		 	this->assign(x.begin(), x.end());
 			return (*this);
 		}
@@ -311,16 +305,6 @@ namespace ft
 
 		iterator	erase(iterator first, iterator last)
 		{
-//			while (1)
-//			{
-//				node *tmp = &(*first);
-//				if (++first == last)
-//					break;
-//				this->_alloc.destroy(tmp);
-//				this->_alloc.deallocate(tmp, 1);
-//				--this->_size;
-//			}
-//			return (last);
 			while (first != last)
 				this->erase(first++);
 			return (last);
@@ -441,43 +425,77 @@ namespace ft
 				}
 			}
 		}
-//
-//		void	merge(list& x)
-//		{
-//
-//		}
 
-//		template <class Compare>
-//		void	merge(list& x, Compare comp)
-//		{
-//
-//		}
+		void	merge(list& x)
+		{
+			if (this == &x)
+				return;
+			while (x._size)
+			{
+				iterator it0 = x.begin();
+				iterator it1 = this->begin();
+				for (; *it1 < *it0 && it1 != this->end(); ++it1);
+				node* fromX = &(*it0);
+				node* loc = &(*it1);
+				fromX->_next->_previous = fromX->_previous;
+				fromX->_previous->_next = fromX->_next;
+				fromX->_previous = loc->_previous;
+				fromX->_next = loc;
+				loc->_previous->_next = fromX;
+				loc->_previous = fromX;
+				++this->_size;
+				--x._size;
+			}
+		}
+
+		template <class Compare>
+		void	merge(list& x, Compare comp)
+		{
+			if (this == &x)
+				return;
+			while (x._size)
+			{
+				iterator it0 = x.begin();
+				iterator it1 = this->begin();
+				for (; comp(*it1, *it0) && it1 != this->end(); ++it1);
+				node* fromX = &(*it0);
+				node* loc = &(*it1);
+				fromX->_next->_previous = fromX->_previous;
+				fromX->_previous->_next = fromX->_next;
+				fromX->_previous = loc->_previous;
+				fromX->_next = loc;
+				loc->_previous->_next = fromX;
+				loc->_previous = fromX;
+				++this->_size;
+				--x._size;
+			}
+		}
 
 		void	sort()
 		{
-			for (iterator it = this->begin(); it != this->end(); ++it)
-			{
-				iterator it1(it);
-				if (*it >= *++it1)
-				{
-					ft::swap(*it, *it1);
-					it = this->begin();
-				}
-			}
+			if (this->_size <= 1)
+				return;
+			iterator it = begin();
+			for (size_type m = this->_size / 2; m; --m, ++it);
+			ft::list<T> tmp;
+			tmp.splice(tmp.begin(), *this, it, this->end());
+			this->sort();
+			tmp.sort();
+			this->merge(tmp);
 		}
 
 		template <class Compare>
 		void	sort(Compare comp)
 		{
-			for (iterator it = this->begin(); it != this->end(); ++it)
-			{
-				iterator it1(it);
-				if (comp(*it, *++it1))
-				{
-					ft::swap(*it, *it1);
-					it = this->begin();
-				}
-			}
+			if (this->_size <= 1)
+				return;
+			iterator it = begin();
+			for (size_type m = this->_size / 2; m; --m, ++it);
+			ft::list<T> tmp;
+			tmp.splice(tmp.begin(), *this, it, this->end());
+			this->sort();
+			tmp.sort();
+			this->merge(tmp, comp);
 		}
 
 		void	reverse()

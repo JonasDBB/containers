@@ -183,15 +183,110 @@ TEST_CASE("list empty", "[list]")
 
 TEST_CASE("list max size", "[list]")
 {
+	// THIS WILL NOT WORK, MY LISTNODE IS NOT THE SAME AS THE REAL LISTNODE
+
+//	origilist<int>	real1;
+//	jonaslist<int>	mine1;
+//	REQUIRE(mine1 == real1);
+//	REQUIRE(mine1.max_size() == real1.max_size());
+}
+
+TEST_CASE("list front", "[list]")
+{
 	origilist<int>	real1;
 	jonaslist<int>	mine1;
 
-	for (int i = 0; i < 100; i++)
+	real1.push_back(77);
+	mine1.push_back(77);
+	real1.push_back(22);
+	mine1.push_back(22);
+
+	real1.front() -= real1.back();
+	mine1.front() -= mine1.back();
+	REQUIRE(mine1 == real1);
+}
+
+TEST_CASE("list back", "[list]")
+{
+	origilist<int>	real1;
+	jonaslist<int>	mine1;
+
+	real1.push_back(10);
+	mine1.push_back(10);
+	while (real1.back() != 0)
+		real1.push_back((real1.back() - 1));
+	while (mine1.back() != 0)
+		mine1.push_back((mine1.back() - 1));
+	REQUIRE(mine1 == real1);
+}
+
+TEST_CASE("list assign", "[list]")
+{
+	origilist<int>	real1;
+	jonaslist<int>	mine1;
+	origilist<int>	real2;
+	jonaslist<int>	mine2;
+
+	real1.assign(7, 100);
+	mine1. assign(7, 100);
+	REQUIRE(mine1 == real1);
+
+	real2.assign(real1.begin(), real1.end());
+	mine2.assign(mine1.begin(), mine1.end());
+	REQUIRE(mine2 == mine1);
+
+	int intarr[] = {1776, 7, 4};
+	real1.assign(intarr, intarr + 3);
+	mine1.assign(intarr, intarr + 3);
+	REQUIRE(mine1 == real1);
+}
+
+TEST_CASE("list push front", "[list]")
+{
+	origilist<int>	real1(2, 100);
+	jonaslist<int>	mine1(2, 100);
+
+	real1.push_back(200);
+	mine1.push_back(200);
+	REQUIRE(mine1 == real1);
+
+	real1.push_back(300);
+	mine1.push_back(300);
+	REQUIRE(mine1 == real1);
+}
+
+TEST_CASE("list pop front", "[list]")
+{
+	origilist<int>	real1;
+	jonaslist<int>	mine1;
+
+	real1.push_back(100);
+	mine1.push_back(100);
+	real1.push_back(200);
+	mine1.push_back(200);
+	real1.push_back(300);
+	mine1.push_back(300);
+
+	int realN = 0;
+	while (!real1.empty())
 	{
-		real1.push_back(i);
-		mine1.push_back(i);
+		real1.pop_front();
+		++realN;
+	}
+
+	int mineN = 0;
+	while (!mine1.empty())
+	{
+		mine1.pop_front();
+		++mineN;
 	}
 	REQUIRE(mine1 == real1);
-//	REQUIRE(mine1.max_size() == real1.max_size());
+	REQUIRE(realN == mineN);
 }
+
+TEST_CASE("list push back", "[list]")
+{
+
+}
+
 

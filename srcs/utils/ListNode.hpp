@@ -67,7 +67,44 @@ namespace ft
 		}
 
 		void abstr() {}
+
+		bool	operator==(const ListNode<T> &rhs) const
+		{
+			return (this->_val == rhs._val);
+		}
+
+		bool	operator!=(const ListNode<T> &rhs) const
+		{
+			return (this->_val != rhs._val);
+		}
+
+		bool	operator<(const ListNode<T> &rhs) const
+		{
+			return (this->_val < rhs._val);
+		}
+
+		bool	operator>(const ListNode<T> &rhs) const
+		{
+			return (this->_val > rhs._val);
+		}
+
+		bool	operator<=(const ListNode<T> &rhs) const
+		{
+			return (this->_val <= rhs._val);
+		}
+
+		bool	operator>=(const ListNode<T> &rhs) const
+		{
+			return (this->_val >= rhs._val);
+		}
 	};
+
+	template<class T>
+	std::ostream& operator<<(std::ostream& os, const ListNode<T> &node)
+	{
+		os << node._val;
+		return (os);
+	}
 }
 
 #endif

@@ -15,21 +15,13 @@ namespace ft
 		typedef ANode<T>	this_type;
 
 
-		ANode		*_previous;
-		ANode		*_next;
+//		ANode		*_previous;
+//		ANode		*_next;
 		T			_val;
 
-//	public:
-//		ANode() :
-//			_previous(NULL),
-//			_next(NULL),
-//			_val()
-//		{}
-
-
 		explicit ANode(const value_type& val = value_type()) :
-				_previous(NULL),
-				_next(NULL),
+//				_previous(NULL),
+//				_next(NULL),
 				_val(val)
 		{}
 
@@ -54,8 +46,8 @@ namespace ft
 		ANode&	operator=(const ANode& x)
 		{
 			this->_previous = x._previous;
-			this->_next = x._next;
-			this->_val = x._val;
+//			this->_next = x._next;
+//			this->_val = x._val;
 			return (*this);
 		}
 
