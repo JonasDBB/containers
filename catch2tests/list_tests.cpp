@@ -635,24 +635,19 @@ TEST_CASE("list sort", "[list]")
 	mine1.sort();
 	auto realit = real1.begin();
 	auto mineit = mine1.begin();
-	for (; realit != real1.end() && mineit != mine1.end(); ++realit, ++mineit)
-	{
-		std::string sreal = *realit;
-		std::string smine = *mineit;
-		REQUIRE(smine == sreal);
-	}
+	REQUIRE(mine1 == real1);
+//	for (; realit != real1.end() && mineit != mine1.end(); ++realit, ++mineit)
+//	{
+//		std::string sreal = *realit;
+//		std::string smine = *mineit;
+//		REQUIRE(smine == sreal);
+//	}
 
 	real1.sort(compare_nocase);
 	mine1.sort(compare_nocase);
 	realit = real1.begin();
 	mineit = mine1.begin();
-	for (; realit != real1.end() && mineit != mine1.end(); ++realit, ++mineit)
-	{
-		std::string sreal = *realit;
-		std::string smine = *mineit;
-		REQUIRE(smine == sreal);
-	}
-
+	REQUIRE(mine1 == real1);
 }
 
 TEST_CASE("list reverse", "[list]")

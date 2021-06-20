@@ -97,7 +97,44 @@ namespace ft
 		{
 			return (this->_val >= rhs._val);
 		}
+
+		bool	operator==(const T &rhs) const	{ return (this->_val == rhs); }
+
+		bool	operator!=(const T &rhs) const	{ return (this->_val != rhs); }
+
+		bool	operator<(const T &rhs) const	{ return (this->_val < rhs); }
+
+		bool	operator>(const T &rhs) const	{ return (this->_val > rhs); }
+
+		bool	operator<=(const T &rhs) const	{ return (this->_val <= rhs); }
+
+		bool	operator>=(const T &rhs) const	{ return (this->_val >= rhs); }
+
+		template <class T1>
+		friend 	bool	operator==(const T &lhs, const ListNode<T> &rhs);
+		template <class T1>
+		friend 	bool	operator<(const T &lhs, const ListNode<T> &rhs);
+
 	};
+
+	template <class T>
+	bool	operator==(const T &lhs, const ListNode<T> &rhs) 	{ return (lhs == rhs._val); }
+
+	template <class T>
+	bool	operator!=(const T &lhs, const ListNode<T> &rhs)	{ return !(lhs == rhs); }
+
+	template <class T>
+	bool	operator<(const T &lhs, const ListNode<T> &rhs)		{ return (lhs < rhs._val); }
+
+	template <class T>
+	bool	operator>(const T &lhs, const ListNode<T> &rhs)		{ return !(rhs > lhs); }
+
+	template <class T>
+	bool	operator<=(const T &lhs, const ListNode<T> &rhs)	{ return !(rhs < lhs); }
+
+	template <class T>
+	bool	operator>=(const T &lhs, const ListNode<T> &rhs)	{ return !(lhs < rhs); }
+
 
 	template<class T>
 	std::ostream& operator<<(std::ostream& os, const ListNode<T> &node)
