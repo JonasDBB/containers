@@ -36,38 +36,6 @@ namespace ft
 		node_alloc	_alloc;
 
 	public:
-		void	printlist()
-		{
-			node *crnt = this->_sentinel._next;
-			std::cout << "begin list:";
-			if (this->_size)
-				std::cout << "\t[";
-			for (size_type i = 0; i < this->_size; i++)
-			{
-//				std::cout << crnt->_val << " - " << crnt << "]";
-				std::cout << crnt->_val << "]";
-				crnt = crnt->_next;
-				if (i < this->_size - 1)
-					std::cout << " [";
-			}
-			std::cout << "\t  endlist" << std::endl;
-		}
-
-		void	printlistbackwards()
-		{
-			node *crnt = this->_sentinel._previous;
-			std::cout << "end list:";
-			if (this->_size)
-				std::cout << "\t[";
-			for (size_type i = 0; i < this->_size; i++)
-			{
-				std::cout << crnt->_val << "]";
-				crnt = crnt->_previous;
-				if (i < this->_size - 1)
-					std::cout << " [";
-			}
-			std::cout << "\t  beginlist" << std::endl;
-		}
 		// default constructor
 		explicit list(const allocator_type& alloc = allocator_type()) :
 				_size(0),
@@ -454,7 +422,7 @@ namespace ft
 			{
 				iterator it0 = x.begin();
 				iterator it1 = this->begin();
-				for (; comp(*it1, *it0) && it1 != this->end(); ++it1);
+				for (; !comp(*it0, *it1) && it1 != this->end(); ++it1);
 				node* fromX = &(*it0);
 				node* loc = &(*it1);
 				fromX->_next->_previous = fromX->_previous;

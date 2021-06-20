@@ -31,9 +31,6 @@ void	ittests()
 //		std::cout << "yay" << std::endl;
 }
 
-bool mycomparison (double first, double second)
-{ return ( int(first)<int(second) ); }
-
 class testclass {
 private:
 	int x;
@@ -56,23 +53,34 @@ public:
 
 };
 
-std::ostream& operator<<(std::ostream& os, const testclass &cls)
-{os << cls.getx(); return os;}
+bool mycomparison (double first, double second)
+{ return ( int(first)<int(second) ); }
 
 void	lsttest()
 {
-	ft::list<int> first (3,100);   // three ints with a value of 100
-	ft::list<int> second (5,200);  // five ints with a value of 200
+	ft::list<double> first, second;
 
-	first.swap(second);
+	first.push_back (3.1);
+	first.push_back (2.2);
+	first.push_back (2.9);
+
+	second.push_back (3.7);
+	second.push_back (7.1);
+	second.push_back (1.4);
+
+	first.sort();
+	second.sort();
+
+	first.merge(second);
+
+	// (second is now empty)
+
+	second.push_back (2.1);
+
+	first.merge(second,mycomparison);
 
 	std::cout << "first contains:";
-	for (ft::list<int>::iterator it=first.begin(); it!=first.end(); it++)
-		std::cout << ' ' << *it;
-	std::cout << '\n';
-
-	std::cout << "second contains:";
-	for (ft::list<int>::iterator it=second.begin(); it!=second.end(); it++)
+	for (ft::list<double>::iterator it=first.begin(); it!=first.end(); ++it)
 		std::cout << ' ' << *it;
 	std::cout << '\n';
 }
