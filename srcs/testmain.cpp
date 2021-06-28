@@ -10,10 +10,10 @@
 
 void	ittests()
 {
-	ft::vector<int> vec;
-	for (int i = 1; i <=5; i++)
-		vec.push_back(i);
-	ft::vector<int>::iterator it1 = vec.begin();
+//	ft::vector<int> vec;
+//	for (int i = 1; i <=5; i++)
+//		vec.push_back(i);
+//	ft::vector<int>::iterator it1 = vec.begin();
 //	ft::vector<int>::const_iterator it2 = vec.begin();
 //	if (it1 == it2)
 //		std::cout << "yay" << std::endl;
@@ -24,7 +24,11 @@ void	ittests()
 //	it3 = it2;
 //
 //	ft::vector<int>::reverse_iterator rit1 = vec.rbegin();
-//	ft::vector<int>::const_reverse_iterator rit2 = vec.rbegin();
+	ft::vector<int> vec(5,3);
+	ft::vector<int>::const_reverse_iterator rit1 = vec.rbegin();
+//	for (; rit1 != vec.rend(); ++rit1)
+//		std::cout << *rit1 << " ";
+	std::cout << std::endl;
 //	if (rit1 == rit2)
 //		std::cout << "yay" << std::endl;
 //	if (rit2 == rit1)
@@ -72,8 +76,8 @@ void	lsttest()
 
 int		main(int ac, char **av)
 {
-//	ittests();
-	lsttest();
+	ittests();
+//	lsttest();
 
 #ifndef ASAN
 	std::string line = av[0];

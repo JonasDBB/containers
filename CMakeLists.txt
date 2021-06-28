@@ -32,6 +32,6 @@ add_executable( catch
                 catch2tests/vector_tests.cpp
                 catch2tests/stack_tests.cpp
                 catch2tests/queue_tests.cpp
-		catch2tests/list_tests.cpp)
+		catch2tests/list_tests.cpp catch2tests/map_tests.cpp)
 set_target_properties(tests PROPERTIES LINKER_LANGUAGE CXX CXX_STANDARD 14)
 set_source_files_properties(catch2tests/catch.cpp catch2tests/catch.hpp PROPERTIES COMPILE_FLAGS "-std=c++14")

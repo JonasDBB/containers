@@ -40,11 +40,6 @@ namespace ft
 			return (*this);
 		}
 
-//		T&	operator*() const
-//		{
-//			return (this->_val->_val);
-//		}
-
 		NodeIterator operator++(int)
 		{
 			NodeIterator<T, Node, Pointer, Reference> tmp(*this);

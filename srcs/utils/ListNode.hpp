@@ -135,7 +135,6 @@ namespace ft
 	template <class T>
 	bool	operator>=(const T &lhs, const ListNode<T> &rhs)	{ return !(lhs < rhs); }
 
-
 	template<class T>
 	std::ostream& operator<<(std::ostream& os, const ListNode<T> &node)
 	{

@@ -94,7 +94,7 @@ TEST_CASE("list begin end", "[list]")
 	auto myIt1 = mine1.begin();
 	REQUIRE(*realIt1 == *myIt1);
 
-	for (; realIt1 != real1.end() && myIt1 != mine1.end(); realIt1++, myIt1++)
+	for (; realIt1 != real1.end() && myIt1 != mine1.end(); ++realIt1, ++myIt1)
 		REQUIRE(*realIt1 == *myIt1);
 
 	// check last value, since end iterator is 1 past the end
@@ -161,7 +161,7 @@ TEST_CASE("list empty", "[list]")
 	REQUIRE(minesum == realsum);
 }
 
-	TEST_CASE("list size", "[list]")
+TEST_CASE("list size", "[list]")
 {
 	origilist<int>	real1;
 	jonaslist<int>	mine1;
@@ -636,12 +636,6 @@ TEST_CASE("list sort", "[list]")
 	auto realit = real1.begin();
 	auto mineit = mine1.begin();
 	REQUIRE(mine1 == real1);
-//	for (; realit != real1.end() && mineit != mine1.end(); ++realit, ++mineit)
-//	{
-//		std::string sreal = *realit;
-//		std::string smine = *mineit;
-//		REQUIRE(smine == sreal);
-//	}
 
 	real1.sort(compare_nocase);
 	mine1.sort(compare_nocase);
@@ -693,5 +687,3 @@ TEST_CASE("list swap overload", "[list]")
 	REQUIRE(mine1 == real1);
 	REQUIRE(mine2 == real2);
 }
-
-

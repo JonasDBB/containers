@@ -14,7 +14,7 @@ namespace ft
 		typedef typename Iterator::difference_type					difference_type;
 		typedef typename Iterator::pointer							pointer;
 		typedef typename Iterator::reference						reference;
-		typedef ReverseIterator<iterator_type>	this_type;
+		typedef ReverseIterator<iterator_type>						this_type;
 		typedef ReverseIterator<typename iterator_type::const_type>	const_type;
 
 	private:

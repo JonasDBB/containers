@@ -58,13 +58,6 @@ namespace ft
 
 		virtual void	abstr() = 0;
 	};
-
-//	template <class T>
-//	std::ostream&	operator<<(std::ostream& os, const ANode<T>& nd)
-//	{
-//		os << nd._val;
-//		return (os);
-//	}
 }
 
 #endif
