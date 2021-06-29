@@ -186,6 +186,9 @@
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/srcs/utils/ListNode.hpp">
 			<Option target="tests"/>
 		</Unit>
+		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/srcs/utils/MapNode.hpp">
+			<Option target="tests"/>
+		</Unit>
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/srcs/utils/Utils.hpp">
 			<Option target="tests"/>
 		</Unit>

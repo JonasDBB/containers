@@ -10,29 +10,30 @@
 
 void	ittests()
 {
-//	ft::vector<int> vec;
-//	for (int i = 1; i <=5; i++)
-//		vec.push_back(i);
-//	ft::vector<int>::iterator it1 = vec.begin();
-//	ft::vector<int>::const_iterator it2 = vec.begin();
-//	if (it1 == it2)
-//		std::cout << "yay" << std::endl;
-//	if (it2 == it1)
-//		std::cout << "yay" << std::endl;
-//
-//	ft::vector<int>::iterator it3;
-//	it3 = it2;
-//
-//	ft::vector<int>::reverse_iterator rit1 = vec.rbegin();
-	ft::vector<int> vec(5,3);
-	ft::vector<int>::const_reverse_iterator rit1 = vec.rbegin();
-//	for (; rit1 != vec.rend(); ++rit1)
-//		std::cout << *rit1 << " ";
-	std::cout << std::endl;
-//	if (rit1 == rit2)
-//		std::cout << "yay" << std::endl;
-//	if (rit2 == rit1)
-//		std::cout << "yay" << std::endl;
+	ft::vector<int> vec;
+	for (int i = 1; i <=5; i++)
+		vec.push_back(i);
+	ft::vector<int>::iterator it1 = vec.begin();
+	ft::vector<int>::const_iterator it2 = vec.begin();
+	for (; it1 != vec.end(); ++it1);
+	for (; it2 != vec.end(); ++it2);
+	if (it1 == it2)
+		;
+	if (it2 == it1)
+		;
+	ft::vector<int>::const_iterator it3;
+	it3 = it1;
+
+	ft::vector<int>::reverse_iterator rit1 = vec.rbegin();
+	ft::vector<int>::const_reverse_iterator rit2 = vec.rbegin();
+	for (; rit1 != vec.rend(); ++rit1);
+	for (; rit2 != vec.rend(); ++rit2);
+	if (rit1 == rit2)
+		;
+	if (rit2 == rit1)
+		;
+	ft::vector<int>::reverse_iterator rit3;
+	rit3 = rit2;
 }
 
 class testclass {

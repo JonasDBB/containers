@@ -43,26 +43,26 @@ namespace ft
 		NodeIterator operator++(int)
 		{
 			NodeIterator<T, Node, Pointer, Reference> tmp(*this);
-			this->_val = this->_val->_next;
+			this->_val = this->_val->next();
 			return (tmp);
 		}
 
 		NodeIterator operator--(int)
 		{
 			NodeIterator<T, Node, Pointer, Reference> tmp(*this);
-			this->_val = this->_val->_previous;
+			this->_val = this->_val->previous();
 			return (tmp);
 		}
 
 		NodeIterator &operator++()
 		{
-			this->_val = this->_val->_next;
+			this->_val = this->_val->next();
 			return (*this);
 		}
 
 		NodeIterator &operator--()
 		{
-			this->_val = this->_val->_previous;
+			this->_val = this->_val->previous();
 			return (*this);
 		}
 

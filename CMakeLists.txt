@@ -23,7 +23,7 @@ add_executable( tests
         		srcs/utils/ANode.hpp
         		srcs/utils/ListNode.hpp
 				srcs/iterators/NodeIterator.hpp
-		srcs/utils/ft_pair.hpp)
+		srcs/utils/ft_pair.hpp srcs/utils/MapNode.hpp)
 
 add_executable( catch
                 catch2tests/main.cpp

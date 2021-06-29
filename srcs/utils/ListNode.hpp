@@ -16,11 +16,6 @@ namespace ft
 		ListNode *_previous;
 		ListNode *_next;
 
-//		ListNode() : _previous(NULL), _next(NULL)
-//		{
-//			this->_val;
-//		}
-
 		explicit ListNode(const value_type& val) : ANode<T>(val), _previous(NULL), _next(NULL)
 		{}
 
@@ -48,6 +43,16 @@ namespace ft
 			this->_next = x._next;
 			this->_val = x._val;
 			return (*this);
+		}
+
+		ListNode*	previous() const
+		{
+			return (this->_previous);
+		}
+
+		ListNode*	next() const
+		{
+			return (this->_next);
 		}
 
 		operator ListNode<T>() const
