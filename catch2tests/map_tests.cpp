@@ -214,6 +214,11 @@ TEST_CASE("map bracket operator", "[map]")
 	real1['c'] = real1['b'];
 	mine1['c'] = mine1['b'];
 	REQUIRE(mine1 == real1);
+
+	std::string dummy;
+	dummy = real1['d'];
+	dummy = mine1['d'];
+	REQUIRE(mine1 == real1);
 }
 
 TEST_CASE("map insert", "[map]")

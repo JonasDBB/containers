@@ -116,9 +116,9 @@ namespace ft
 		bool	operator>=(const T &rhs) const	{ return (this->_val >= rhs); }
 
 		template <class T1>
-		friend 	bool	operator==(const T &lhs, const ListNode<T> &rhs);
+		friend 	bool	operator==(const T1 &lhs, const ListNode<T1> &rhs);
 		template <class T1>
-		friend 	bool	operator<(const T &lhs, const ListNode<T> &rhs);
+		friend 	bool	operator<(const T1 &lhs, const ListNode<T1> &rhs);
 
 	};
 

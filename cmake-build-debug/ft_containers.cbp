@@ -154,7 +154,7 @@
 			<Option target="tests"/>
 		</Unit>
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/srcs/containers/ft_map.hpp">
-			<Option target="catch"/>
+			<Option target="tests"/>
 		</Unit>
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/srcs/containers/ft_queue.hpp">
 			<Option target="tests"/>

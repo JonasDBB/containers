@@ -27,7 +27,7 @@ namespace ft
 		typedef ReverseIterator<const_iterator>							const_reverse_iterator;
 		typedef ptrdiff_t												difference_type;
 		typedef size_t													size_type;
-		typedef typename Alloc::template rebind<ListNode<T> >::other	node_alloc;
+		typedef typename Alloc::template rebind<node>::other			node_alloc;
 
 	private:
 		size_type	_size;
@@ -84,7 +84,7 @@ namespace ft
 		// destructor
 		~list()
 		{
-			clear();
+			this->clear();
 		}
 
 		// assignment operator
@@ -522,7 +522,6 @@ namespace ft
 	{
 		return !(lhs < rhs);
 	}
-
 
 	template <class T, class Alloc>
 	void	swap(list<T,Alloc>& x, list<T,Alloc>& y)
