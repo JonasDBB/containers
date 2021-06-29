@@ -7,7 +7,6 @@
 # include "../utils/ListNode.hpp"
 # include <cstddef>
 # include <memory>
-# include <iostream>
 
 namespace ft
 {
