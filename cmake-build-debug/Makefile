@@ -144,6 +144,19 @@ catch/fast:
 .PHONY : catch/fast
 
 #=============================================================================
+# Target rules for targets named trees
+
+# Build rule for target.
+trees: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 trees
+.PHONY : trees
+
+# fast build rule for target.
+trees/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trees.dir/build.make CMakeFiles/trees.dir/build
+.PHONY : trees/fast
+
+#=============================================================================
 # Target rules for targets named tests
 
 # Build rule for target.
@@ -372,6 +385,33 @@ srcs/testmain.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/srcs/testmain.cpp.s
 .PHONY : srcs/testmain.cpp.s
 
+srcs/treetest.o: srcs/treetest.cpp.o
+
+.PHONY : srcs/treetest.o
+
+# target to build an object file
+srcs/treetest.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trees.dir/build.make CMakeFiles/trees.dir/srcs/treetest.cpp.o
+.PHONY : srcs/treetest.cpp.o
+
+srcs/treetest.i: srcs/treetest.cpp.i
+
+.PHONY : srcs/treetest.i
+
+# target to preprocess a source file
+srcs/treetest.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trees.dir/build.make CMakeFiles/trees.dir/srcs/treetest.cpp.i
+.PHONY : srcs/treetest.cpp.i
+
+srcs/treetest.s: srcs/treetest.cpp.s
+
+.PHONY : srcs/treetest.s
+
+# target to generate assembly for a file
+srcs/treetest.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trees.dir/build.make CMakeFiles/trees.dir/srcs/treetest.cpp.s
+.PHONY : srcs/treetest.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -382,6 +422,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... catch"
 	@echo "... tests"
+	@echo "... trees"
 	@echo "... catch2tests/catch.o"
 	@echo "... catch2tests/catch.i"
 	@echo "... catch2tests/catch.s"
@@ -406,6 +447,9 @@ help:
 	@echo "... srcs/testmain.o"
 	@echo "... srcs/testmain.i"
 	@echo "... srcs/testmain.s"
+	@echo "... srcs/treetest.o"
+	@echo "... srcs/treetest.i"
+	@echo "... srcs/treetest.s"
 .PHONY : help
 
 

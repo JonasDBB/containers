@@ -2,11 +2,10 @@
 # define MAPNODE_HPP
 # include "ANode.hpp"
 # include "ft_pair.hpp"
+# include "../utils/Utils.hpp"
 
 namespace ft
 {
-	enum color { RED, BLACK };
-
 	template<class Key, class T>
 	class MapNode : public ANode<pair<Key, T> >
 	{
@@ -22,10 +21,10 @@ namespace ft
 		MapNode	*_parent;
 		MapNode	*_left;
 		MapNode	*_right;
-		bool	_clr;
+		int		_height;
 
 		explicit MapNode(const value_type& val) : A_type(val),
-		_parent(NULL), _left(NULL), _right(NULL), _clr(RED)
+		_parent(NULL), _left(NULL), _right(NULL), _height(1)
 		{}
 
 		MapNode(const MapNode& x)
@@ -43,7 +42,7 @@ namespace ft
 			this->_parent = x._parent;
 			this->_left = x._left;
 			this->_right = x._right;
-			this->_clr = x._clr;
+			this->_height = x._height;
 			this->_val = x._val;
 			return (*this);
 		}
@@ -56,6 +55,39 @@ namespace ft
 		MapNode*	next() const
 		{
 
+		}
+
+		const key_type&	key() const
+		{
+			return (this->_val.first);
+		}
+
+		const mapped_type& value() const
+		{
+			return (this->_val.second);
+		}
+
+		int			balance() const
+		{
+			if (!this->_left && !this->_right)
+				return (0);
+			if (!this->_left)
+				return (-1 * this->_right->_height);
+			if (!this->_right)
+				return (this->_left->_height);
+			return (this->_left->_height - this->_right->_height);
+		}
+
+		void	updateHeight()
+		{
+			if (!this->_left && !this->_right)
+				this->_height = 0;
+			else if (!this->_left)
+				this->_height = this->_right->_height + 1;
+			else if (!this->_right)
+				this->_height = this->_left->_height + 1;
+			else
+				this->_height = ft::max(this->_left->_height, this->_right->_height) + 1;
 		}
 
 		operator MapNode<Key, T>() const
@@ -142,6 +174,13 @@ namespace ft
 
 	template <class Key, class T>
 	bool	operator>=(const ft::pair<Key, T> &lhs, const MapNode<Key, T> &rhs)	{ return !(lhs < rhs); }
+
+	template<class Key, class T>
+	std::ostream& operator<<(std::ostream& os, const MapNode<Key, T> &node)
+	{
+		os << node._val;
+		return (os);
+	}
 
 //	template<class Key, class T>
 //	class SentinelMapNode : public MapNode<Key, T>

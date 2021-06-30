@@ -51,7 +51,12 @@ namespace ft
 			return (*this);
 		}
 
-		operator value_type() const
+		operator value_type()
+		{
+			return (this->_val);
+		}
+
+		operator const value_type() const
 		{
 			return (this->_val);
 		}

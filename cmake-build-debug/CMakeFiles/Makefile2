@@ -74,6 +74,7 @@ CMAKE_BINARY_DIR = /Users/jbennink/Documents/Projects/ft_containers/cmake-build-
 
 # The main recursive "all" target.
 all: CMakeFiles/catch.dir/all
+all: CMakeFiles/trees.dir/all
 all: CMakeFiles/tests.dir/all
 
 .PHONY : all
@@ -85,6 +86,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/catch.dir/clean
+clean: CMakeFiles/trees.dir/clean
 clean: CMakeFiles/tests.dir/clean
 
 .PHONY : clean
@@ -115,6 +117,33 @@ catch: CMakeFiles/catch.dir/rule
 CMakeFiles/catch.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/clean
 .PHONY : CMakeFiles/catch.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/trees.dir
+
+# All Build rule for target.
+CMakeFiles/trees.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trees.dir/build.make CMakeFiles/trees.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trees.dir/build.make CMakeFiles/trees.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/CMakeFiles --progress-num=11,12 "Built target trees"
+.PHONY : CMakeFiles/trees.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/trees.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/trees.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/CMakeFiles 0
+.PHONY : CMakeFiles/trees.dir/rule
+
+# Convenience name for target.
+trees: CMakeFiles/trees.dir/rule
+
+.PHONY : trees
+
+# clean rule for target.
+CMakeFiles/trees.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trees.dir/build.make CMakeFiles/trees.dir/clean
+.PHONY : CMakeFiles/trees.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/tests.dir

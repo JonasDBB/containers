@@ -16,11 +16,8 @@ namespace ft
 		{}
 
 		template <class U, class V>
-		pair(const pair<U, V>& pr)
-		{
-			this->first = pr.first;
-			this->second = pr.second;
-		}
+		pair(const pair<U, V>& pr) : first(pr.first), second(pr.second)
+		{}
 
 		pair(const first_type& a, const second_type& b)
 		{
@@ -76,6 +73,13 @@ namespace ft
 	pair<T1, T2>	make_pair(T1 x, T2 y)
 	{
 		return (pair<T1, T2>(x, y));
+	}
+
+	template <class T1, class T2>
+	std::ostream& operator<<(std::ostream& os, const pair<T1, T2>& pr)
+	{
+		os << "key: " << pr.first << "\tval: " << pr.second;
+		return (os);
 	}
 }
 

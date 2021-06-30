@@ -14,8 +14,8 @@ namespace ft
 		typedef Category									iterator_category;
 		typedef T											value_type;
 		typedef ptrdiff_t									difference_type;
-		typedef T*											pointer;
-		typedef T&											reference;
+		typedef Pointer										pointer;
+		typedef Reference									reference;
 
 	protected:
 		pointer _val;

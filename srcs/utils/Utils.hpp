@@ -24,6 +24,12 @@ namespace ft
 		second = tmp;
 	}
 
+	template<class T>
+	T	max(const T& first, const T& second)
+	{
+		return (first > second ? first : second);
+	}
+
 	template<class RandomAccessIterator>
 	typename iterator_traits<RandomAccessIterator>::difference_type
 	distance(RandomAccessIterator first, RandomAccessIterator last, random_access_iterator_tag)
