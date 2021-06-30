@@ -77,6 +77,15 @@ void	print(node *root)
 		layer++;
 	}
 }
+/*   p      p
+ *   |      |
+ *   nd     l
+ *  / \ ->   \
+ * l   r      nd
+ *           /
+ *          r
+ *
+ */
 
 template <class Key, class T>
 node*	rrot(node *nd)
@@ -86,6 +95,9 @@ node*	rrot(node *nd)
 
 	l->_right = nd;
 	nd->_left = r;
+
+	l->_parent = nd->_parent;
+	nd->_parent = l;
 
 	nd->updateHeight();
 	l->updateHeight();
@@ -101,6 +113,9 @@ node*	lrot(node *nd)
 	r->_left = nd;
 	nd->_right = l;
 
+	r->_parent = nd->_parent;
+	nd->_parent = r;
+
 	nd->updateHeight();
 	r->updateHeight();
 	return (r);
@@ -113,9 +128,15 @@ node*	insrt(node *root, ft::pair<Key, T> val)
 		return (new node(val));
 	Key k = val.first;
 	if (k < root->key())
+	{
 		root->_left = insrt(root->_left, val);
+		root->_left->_parent = root;
+	}
 	else if (k > root->key())
+	{
 		root->_right = insrt(root->_right, val);
+		root->_right->_parent = root;
+	}
 	else
 		return (root);
 
@@ -138,22 +159,87 @@ node*	insrt(node *root, ft::pair<Key, T> val)
 	return (root);
 }
 
+template <class Key, class T>
+node*	del(node* root, const Key& k)
+{
+	if (!root)
+		return (root);
+	if (k < root->key())
+		root->_left = del(root->_left, k);
+	else if (k > root->key())
+		root->_right = del(root->_right, k);
+	else
+	{
+		// actually delete node
+		if (!root->_left && !root->_right)
+		{
+			node *tmp = root;
+			root = NULL;
+			delete tmp;
+		}
+		else if (!root->_left || !root->_right)
+		{
+			node *tmp = root->_left ? root->_left : root->_right;
+			*root = *tmp;
+			delete tmp;
+		}
+		else
+		{
+			node *tmp = root->_right;
+			while (tmp->_left)
+				tmp = tmp->_left;
+			root->_val = tmp->_val;
+			root->_right = del(root->_right, tmp->key());
+		}
+	}
+	if (!root)
+		return (root);
+	root->updateHeight();
+
+	if (root->balance() > 1 && root->_left->balance() >= 0)
+		return rrot(root);
+	if (root->balance() < -1 && root->_right->balance() <= 0)
+		return lrot(root);
+	if (root->balance() > 1 && root->_left->balance() < 0)
+	{
+		root->_left = lrot(root->_left);
+		return rrot(root);
+	}
+	if (root->balance() < -1 && root->_right->balance() > 0)
+	{
+		root->_right = rrot(root->_right);
+		return lrot(root);
+	}
+	return (root);
+}
+
 
 void	mappies()
 {
 	ft::MapNode<int, int> *root = NULL;
-//	for (int i = 0; i < 5; ++i)
-//	{
-//		ft::pair<int, int> pr(i, -i);
-//		root = insrt(root, pr);
-//	}
-	root = insrt(root, ft::pair<int, int>(1,-1));
-	root = insrt(root, ft::pair<int, int>(2,-2));
-	root = insrt(root, ft::pair<int, int>(3,-3));
-//	std::cout << *root << std::endl;
-//	std::cout << *root->_right << std::endl;
-//	std::cout << *root->_left << std::endl;
-	print(root);
+	for (int i = 1; i <= 5; ++i)
+	{
+		ft::pair<int, int> pr(i, -i);
+		root = insrt(root, pr);
+	}
+	if (root->_left)
+		std::cout << *root->_left << std::endl;
+	if (root->_left->_left)
+		std::cout << *root->_left->_left << std::endl;
+	if (root->_left->_right)
+		std::cout << *root->_left->_right << std::endl;
+	if (root)
+		std::cout << *root << std::endl;
+//	if (root->_right)
+//		std::cout << *root->_right << std::endl;
+//	if (root->_right->_left)
+//		std::cout << *root->_right->_left << std::endl;
+//	if (root->_right->_right)
+//		std::cout << *root->_right->_right << std::endl;
+//	if (root->_right->_right->_left)
+//		std::cout << *root->_right->_right->_left << std::endl;
+
+	//	print(root);
 }
 
 int		main(int ac, char **av)
