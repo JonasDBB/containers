@@ -4,6 +4,8 @@
 //#include "iterators/BidirectionalIterator.hpp"
 #include "containers/ft_stack.hpp"
 #include "containers/ft_list.hpp"
+#include "containers/ft_map.hpp"
+#include "utils/ft_pair.hpp"
 #include <iostream>
 #include <vector>
 #include <list>
@@ -66,39 +68,44 @@ std::ostream& operator<<(std::ostream& os, const std::pair<T1, T2>& pr)
 	return (os);
 }
 
-//void	mappies()
-//{
-//
-//}
-#include <stack>
+void	mappies()
+{
+	ft::map<char, int> mp;
+//	mp['a'] = 2;
+	mp.insert(ft::make_pair('a', 2));
+	mp.insert(ft::make_pair('b', 3));
+	mp.insert(ft::make_pair('1', 5));
+	std::cout << mp['a'] << std::endl;
+}
+
 int		main(int ac, char **av)
 {
 //	ittests();
-//	mappies();
+	mappies();
 
-	ft::stack<int, ft::vector<int> > stk1;
-	for (int i = 0; i < 5; ++i)
-		stk1.push(i);
-	ft::stack<int, ft::vector<int> > stk2(stk1);
-	ft::stack<int, ft::vector<int> > stk3 = stk2;
-	while (!stk1.empty())
-	{
-		std::cout << stk1.top() << " ";
-		stk1.pop();
-	}
-	std::cout << std::endl;
-	while (!stk2.empty())
-	{
-		std::cout << stk2.top() << " ";
-		stk2.pop();
-	}
-	std::cout << std::endl;
-	while (!stk3.empty())
-	{
-		std::cout << stk3.top() << " ";
-		stk3.pop();
-	}
-	std::cout << std::endl;
+//	ft::stack<int, ft::vector<int> > stk1;
+//	for (int i = 0; i < 5; ++i)
+//		stk1.push(i);
+//	ft::stack<int, ft::vector<int> > stk2(stk1);
+//	ft::stack<int, ft::vector<int> > stk3 = stk2;
+//	while (!stk1.empty())
+//	{
+//		std::cout << stk1.top() << " ";
+//		stk1.pop();
+//	}
+//	std::cout << std::endl;
+//	while (!stk2.empty())
+//	{
+//		std::cout << stk2.top() << " ";
+//		stk2.pop();
+//	}
+//	std::cout << std::endl;
+//	while (!stk3.empty())
+//	{
+//		std::cout << stk3.top() << " ";
+//		stk3.pop();
+//	}
+//	std::cout << std::endl;
 
 
 #ifndef ASAN

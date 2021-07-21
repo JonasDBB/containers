@@ -1,7 +1,7 @@
 #include <iostream>
 #include <map>
 #include "utils/MapNode.hpp"
-
+ft::MapNode<int, int> *g_root = NULL;
 #define node ft::MapNode<Key, T>
 template <class Key, class T>
 void	_printNode(std::string root_path, node *root)
@@ -88,38 +88,108 @@ void	print(node *root)
  */
 
 template <class Key, class T>
-node*	rrot(node *nd)
+void	myprnt(node* root)
 {
-	node *l = nd->_left;
-	node *r = nd->_right;
-
-	l->_right = nd;
-	nd->_left = r;
-
-	l->_parent = nd->_parent;
-	nd->_parent = l;
-
-	nd->updateHeight();
-	l->updateHeight();
-	return (l);
+	std::cout << "\t\t\t  " << *root << std::endl;
+	if (root->_left)
+		std::cout << "\t" << *root->_left << "\t\t||\t";
+	else
+		std::cout << "\t\tLEAF\t||\t";
+	if (root->_right)
+		std::cout << "   " << *root->_right;
+	else
+		std::cout << "\tLEAF";
+	std::cout << std::endl;
+	if (root->_left)
+	{
+		if (root->_left->_left)
+		{
+			std::cout << *root->_left->_left << "||";
+			if (root->_left->_left->_left || root->_left->_left->_right)
+				std::cout << "WADDAFAK" << std::endl;
+		}
+		else
+			std::cout << "LEAF  ||  ";
+		if (root->_left->_right)
+		{
+			std::cout << *root->_left->_right << "  ";
+			if (root->_left->_right->_left || root->_left->_right->_right)
+				std::cout << "WADDAFAK" << std::endl;
+		}
+		else
+			std::cout << "LEAF\t  ";
+	}
+	else
+		std::cout << "\t\t\t\t  ";
+	if (root->_right)
+	{
+		if (root->_right->_left)
+		{
+			std::cout << *root->_right->_left << "||";
+			if (root->_right->_left->_left || root->_right->_left->_right)
+				std::cout << "WADDAFAK" << std::endl;
+		}
+		else
+			std::cout << "  LEAF  ||  ";
+		if (root->_right->_right)
+		{
+			std::cout << *root->_right->_right << "  ";
+			if (root->_right->_right->_left || root->_right->_right->_right)
+				std::cout << "WADDAFAK" << std::endl;
+		}
+		else
+			std::cout << "LEAF";
+	}
+	std::cout << std::endl;
 }
 
-template <class Key, class T>
-node*	lrot(node *nd)
-{
-	node *l = nd->_left;
-	node *r = nd->_right;
+//template <class Key, class T>
+//void	rightRotate(node *nd)
+//{
+//	node *leftChild = nd->_left;
+//	node *leftRightChild = nd->_left->_right;
+//
+//	leftChild->_right = nd;
+//	nd->_left = leftRightChild;
+//	if (leftRightChild)
+//		leftRightChild->_parent = nd;
+//	leftChild->_parent = nd->_parent;
+//	nd->_parent = leftChild;
+//	if (leftChild->_parent)
+//	{
+//		if (nd == leftChild->_parent->_left)
+//			leftChild->_parent->_left = leftChild;
+//		else
+//			leftChild->_parent->_right = leftChild;
+//	}
+//
+//	nd->updateHeight();
+//	leftChild->updateHeight();
+//}
 
-	r->_left = nd;
-	nd->_right = l;
-
-	r->_parent = nd->_parent;
-	nd->_parent = r;
-
-	nd->updateHeight();
-	r->updateHeight();
-	return (r);
-}
+//template <class Key, class T>
+//void	leftRotate(node *nd)
+//{
+//	node *rightChild = nd->_right;
+//	node *rightLeftChild = nd->_right->_left;
+//
+//	rightChild->_left = nd;
+//	nd->_right = rightLeftChild;
+//	if (rightLeftChild)
+//		rightLeftChild->_parent = nd;
+//	rightChild->_parent = nd->_parent;
+//	nd->_parent = rightChild;
+//	if (rightChild->_parent)
+//	{
+//		if (nd == rightChild->_parent->_right)
+//			rightChild->_parent->_right = rightChild;
+//		else
+//			rightChild->_parent->_left = rightChild;
+//	}
+//
+//	nd->updateHeight();
+//	rightChild->updateHeight();
+//}
 
 template <class Key, class T>
 node*	insrt(node *root, ft::pair<Key, T> val)
@@ -130,12 +200,10 @@ node*	insrt(node *root, ft::pair<Key, T> val)
 	if (k < root->key())
 	{
 		root->_left = insrt(root->_left, val);
-		root->_left->_parent = root;
 	}
 	else if (k > root->key())
 	{
 		root->_right = insrt(root->_right, val);
-		root->_right->_parent = root;
 	}
 	else
 		return (root);
@@ -143,18 +211,26 @@ node*	insrt(node *root, ft::pair<Key, T> val)
 	root->updateHeight();
 
 	if (root->balance() > 1 && k < root->_left->key())
-		return (rrot(root));
+	{
+		root->rightRotate();
+		return (root->_parent);
+	}
 	if (root->balance() < -1 && k > root->_right->key())
-		return (lrot(root));
+	{
+		root->leftRotate();
+		return (root->_parent);
+	}
 	if (root->balance() > 1 && k > root->_left->key())
 	{
-		root->_left = lrot(root->_left);
-		return (rrot(root));
+		root->_left->leftRotate();
+		root->rightRotate();
+		return (root->_parent);
 	}
 	if (root->balance() < -1 && k < root->_right->key())
 	{
-		root->_right = rrot(root->_right);
-		return (rrot(root));
+		root->_right->rightRotate();
+		root->leftRotate();
+		return (root->_parent);
 	}
 	return (root);
 }
@@ -185,30 +261,37 @@ node*	del(node* root, const Key& k)
 		}
 		else
 		{
-			node *tmp = root->_right;
-			while (tmp->_left)
-				tmp = tmp->_left;
+			node *tmp = root->_left;
+			while (tmp->_right)
+				tmp = tmp->_right;
 			root->_val = tmp->_val;
-			root->_right = del(root->_right, tmp->key());
+			root->_left = del(root->_left, tmp->key());
 		}
 	}
 	if (!root)
 		return (root);
 	root->updateHeight();
-
 	if (root->balance() > 1 && root->_left->balance() >= 0)
-		return rrot(root);
+	{
+		root->rightRotate();
+		return (root->_parent);
+	}
 	if (root->balance() < -1 && root->_right->balance() <= 0)
-		return lrot(root);
+	{
+		root->leftRotate();
+		return (root->_parent);
+	}
 	if (root->balance() > 1 && root->_left->balance() < 0)
 	{
-		root->_left = lrot(root->_left);
-		return rrot(root);
+		root->_left->leftRotate();
+		root->rightRotate();
+		return (root->_parent);
 	}
 	if (root->balance() < -1 && root->_right->balance() > 0)
 	{
-		root->_right = rrot(root->_right);
-		return lrot(root);
+		root->_right->rightRotate();
+		root->leftRotate();
+		return (root->_parent);
 	}
 	return (root);
 }
@@ -216,30 +299,19 @@ node*	del(node* root, const Key& k)
 
 void	mappies()
 {
-	ft::MapNode<int, int> *root = NULL;
-	for (int i = 1; i <= 5; ++i)
+//	ft::MapNode<int, int> *root = NULL;
+	for (int i = 5; i >= 1; --i)
 	{
 		ft::pair<int, int> pr(i, -i);
-		root = insrt(root, pr);
+		g_root = insrt(g_root, pr);
+//		myprnt(g_root);
+//		std::cout << std::endl;
 	}
-	if (root->_left)
-		std::cout << *root->_left << std::endl;
-	if (root->_left->_left)
-		std::cout << *root->_left->_left << std::endl;
-	if (root->_left->_right)
-		std::cout << *root->_left->_right << std::endl;
-	if (root)
-		std::cout << *root << std::endl;
-//	if (root->_right)
-//		std::cout << *root->_right << std::endl;
-//	if (root->_right->_left)
-//		std::cout << *root->_right->_left << std::endl;
-//	if (root->_right->_right)
-//		std::cout << *root->_right->_right << std::endl;
-//	if (root->_right->_right->_left)
-//		std::cout << *root->_right->_right->_left << std::endl;
-
-	//	print(root);
+	myprnt(g_root);
+	std::cout << std::endl;
+//	deleteNode(g_root, 5);
+	g_root = del(g_root, 5);
+	myprnt(g_root);
 }
 
 int		main(int ac, char **av)

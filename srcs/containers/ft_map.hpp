@@ -48,25 +48,25 @@ namespace ft
 	private:
 		size_type	_size;
 		node		*_root;
-		node		_sentinel;
 		node_alloc	_alloc;
+
 
 	public:
 		// default constructor
 		explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
 				_size(0),
 				_root(NULL),
-				_sentinel(value_type()),
 				_alloc(alloc)
-		{}
+		{
+			(void)comp;
+		}
 
 		// range constructor
-		template <class InputIterator>
+/*		template <class InputIterator>
 		map (InputIterator first, InputIterator last,
 			 const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
 				_size(0),
 				_root(NULL),
-				_sentinel(value_type()),
 				_alloc(alloc)
 		{
 			// insert maybe?
@@ -76,7 +76,6 @@ namespace ft
 		map(const map& x) :
 				_size(0),
 				_root(NULL),
-				_sentinel(value_type()),
 				_alloc(x._alloc)
 		{
 			// prob also insert
@@ -96,9 +95,9 @@ namespace ft
 			// prob another insert
 			return (*this);
 		}
-
+*/
 		/* ==ITERATOR FUNCTIONS== */
-		iterator				begin()
+/*		iterator				begin()
 		{
 			// find lowest val
 		}
@@ -137,7 +136,7 @@ namespace ft
 		{
 
 		}
-
+*/
 		/* ==CAPACITY FUNCTIONS== */
 		bool		empty() const
 		{
@@ -157,16 +156,27 @@ namespace ft
 		/* ==ELEMENT ACCESS FUNCTIONS== */
 		mapped_type&	operator[](const key_type& k)
 		{
-
+			value_type *ins = new value_type(k,mapped_type());
+//			value_type *ins = new ft::pair<key_type,mapped_type>(k, mapped_type());
+//			MapNode<Key, T> *nwnd = new node(ins);
+//			this->_root = insertNode(this->_root, *nwnd);
+//			return(nwnd->_val.second);
+			insert(*ins);
+			return ins->second;
 		}
 
 		/* ==MODIFIER FUNCTIONS== */
-		pair<iterator, bool>	insert(const value_compare& val)
+		ft::pair<iterator, bool>	insert(const value_type& val)
 		{
-
+			size_type oldsize = this->_size;
+			this->_root = insertNode(this->_root, val);
+			myprnt(this->_root);
+			if (this->_size == oldsize)
+				return (false);
+			return (true);
 		}
 
-		iterator	insert(iterator position, const value_type& val)
+/*		iterator	insert(iterator position, const value_type& val)
 		{
 
 		}
@@ -187,8 +197,8 @@ namespace ft
 		{
 
 		}
-
-		void		erase(iterator first, iterator last)
+*/
+/*		void		erase(iterator first, iterator last)
 		{
 			while (first != last)
 				this->erase(first++);
@@ -204,7 +214,7 @@ namespace ft
 		{
 
 		}
-
+*/
 		/* ==OBSERVER FUNCTIONS== */
 		key_compare		key_comp() const
 		{
@@ -222,7 +232,7 @@ namespace ft
 		}
 
 		/* ==OPERATION FUNCTIONS== */
-		iterator		find(const key_type& k)
+/*		iterator		find(const key_type& k)
 		{
 
 		}
@@ -231,7 +241,7 @@ namespace ft
 		{
 
 		}
-
+*/
 		size_type		count(const key_type& k) const
 		{
 			if (this->find(k) == this->end())
@@ -239,7 +249,7 @@ namespace ft
 			return (1);
 		}
 
-		iterator		lower_bound(const key_type& k)
+/*		iterator		lower_bound(const key_type& k)
 		{
 
 		}
@@ -267,6 +277,168 @@ namespace ft
 		pair<iterator, iterator>				equal_range(const key_type& k)
 		{
 
+		}
+*/
+	private:
+		void	myprnt(node* root)
+		{
+			std::cout << "\t\t\t  " << *root << std::endl;
+			if (root->_left)
+				std::cout << "\t" << *root->_left << "\t\t||\t";
+			else
+				std::cout << "\t\tLEAF\t||\t";
+			if (root->_right)
+				std::cout << "   " << *root->_right;
+			else
+				std::cout << "\tLEAF";
+			std::cout << std::endl;
+			if (root->_left)
+			{
+				if (root->_left->_left)
+				{
+					std::cout << *root->_left->_left << "||";
+					if (root->_left->_left->_left || root->_left->_left->_right)
+						std::cout << "WADDAFAK" << std::endl;
+				}
+				else
+					std::cout << "LEAF  ||  ";
+				if (root->_left->_right)
+				{
+					std::cout << *root->_left->_right << "  ";
+					if (root->_left->_right->_left || root->_left->_right->_right)
+						std::cout << "WADDAFAK" << std::endl;
+				}
+				else
+					std::cout << "LEAF\t  ";
+			}
+			else
+				std::cout << "\t\t\t\t  ";
+			if (root->_right)
+			{
+				if (root->_right->_left)
+				{
+					std::cout << *root->_right->_left << "||";
+					if (root->_right->_left->_left || root->_right->_left->_right)
+						std::cout << "WADDAFAK" << std::endl;
+				}
+				else
+					std::cout << "  LEAF  ||  ";
+				if (root->_right->_right)
+				{
+					std::cout << *root->_right->_right << "  ";
+					if (root->_right->_right->_left || root->_right->_right->_right)
+						std::cout << "WADDAFAK" << std::endl;
+				}
+				else
+					std::cout << "LEAF";
+			}
+			std::cout << std::endl;
+		}
+
+
+		node*	insertNode(node *root, ft::pair<Key, T> val)
+		{
+			if (!root)
+			{
+				++this->_size;
+				return (new node(val));
+			}
+			Key k = val.first;
+			if (k < root->key())
+			{
+				root->_left = insertNode(root->_left, val);
+			}
+			else if (k > root->key())
+			{
+				root->_right = insertNode(root->_right, val);
+			}
+			else
+				return (root);
+
+			root->updateHeight();
+
+			if (root->balance() > 1 && k < root->_left->key())
+			{
+				root->rightRotate();
+				return (root->_parent);
+			}
+			if (root->balance() < -1 && k > root->_right->key())
+			{
+				root->leftRotate();
+				return (root->_parent);
+			}
+			if (root->balance() > 1 && k > root->_left->key())
+			{
+				root->_left->leftRotate();
+				root->rightRotate();
+				return (root->_parent);
+			}
+			if (root->balance() < -1 && k < root->_right->key())
+			{
+				root->_right->rightRotate();
+				root->leftRotate();
+				return (root->_parent);
+			}
+			return (root);
+		}
+
+		node*	deleteNode(node* root, const Key& k)
+		{
+			if (!root)
+				return (root);
+			if (k < root->key())
+				root->_left = deleteNode(root->_left, k);
+			else if (k > root->key())
+				root->_right = deleteNode(root->_right, k);
+			else
+			{
+				if (!root->_left && !root->_right)
+				{
+					node *tmp = root;
+					root = NULL;
+					delete tmp;
+				}
+				else if (!root->_left || !root->_right)
+				{
+					node *tmp = root->_left ? root->_left : root->_right;
+					*root = *tmp;
+					delete tmp;
+				}
+				else
+				{
+					node *tmp = root->_left;
+					while (tmp->_right)
+						tmp = tmp->_right;
+					root->_val = tmp->_val;
+					root->_left = deleteNode(root->_left, tmp->key());
+				}
+			}
+			if (!root)
+				return (root);
+			root->updateHeight();
+			if (root->balance() > 1 && root->_left->balance() >= 0)
+			{
+				root->rightRotate();
+				return (root->_parent);
+			}
+			if (root->balance() < -1 && root->_right->balance() <= 0)
+			{
+				root->leftRotate();
+				return (root->_parent);
+			}
+			if (root->balance() > 1 && root->_left->balance() < 0)
+			{
+				root->_left->leftRotate();
+				root->rightRotate();
+				return (root->_parent);
+			}
+			if (root->balance() < -1 && root->_right->balance() > 0)
+			{
+				root->_right->rightRotate();
+				root->leftRotate();
+				return (root->_parent);
+			}
+			return (root);
 		}
 	};
 

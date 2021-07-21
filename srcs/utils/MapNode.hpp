@@ -34,7 +34,7 @@ namespace ft
 
 		~MapNode()
 		{
-			// relink tree
+
 		}
 
 		MapNode&	operator=(const MapNode& x)
@@ -67,7 +67,7 @@ namespace ft
 			return (this->_val.second);
 		}
 
-		int			balance() const
+		int		balance() const
 		{
 			if (!this->_left && !this->_right)
 				return (0);
@@ -81,13 +81,59 @@ namespace ft
 		void	updateHeight()
 		{
 			if (!this->_left && !this->_right)
-				this->_height = 0;
+				this->_height = 1;
 			else if (!this->_left)
 				this->_height = this->_right->_height + 1;
 			else if (!this->_right)
 				this->_height = this->_left->_height + 1;
 			else
 				this->_height = ft::max(this->_left->_height, this->_right->_height) + 1;
+		}
+
+		void	rightRotate()
+		{
+			MapNode<Key, T> *leftChild = this->_left;
+			MapNode<Key, T> *leftRightChild = this->_left->_right;
+
+			leftChild->_right = this;
+			this->_left = leftRightChild;
+			if (leftRightChild)
+				leftRightChild->_parent = this;
+			leftChild->_parent = this->_parent;
+			this->_parent = leftChild;
+			if (leftChild->_parent)
+			{
+				if (this == leftChild->_parent->_left)
+					leftChild->_parent->_left = leftChild;
+				else
+					leftChild->_parent->_right = leftChild;
+			}
+
+			this->updateHeight();
+			leftChild->updateHeight();
+		}
+
+		void	leftRotate()
+		{
+			MapNode<Key, T> *rightChild = this->_right;
+			MapNode<Key, T> *rightLeftChild = this->_right->_left;
+
+			rightChild->_left = this;
+			this->_right = rightLeftChild;
+			if (rightLeftChild)
+				rightLeftChild->_parent = this;
+			rightChild->_parent = this->_parent;
+			this->_parent = rightChild;
+			if (rightChild->_parent)
+			{
+				if (this == rightChild->_parent->_right)
+					rightChild->_parent->_right = rightChild;
+				else
+					rightChild->_parent->_left = rightChild;
+			}
+
+			this->updateHeight();
+			rightChild->updateHeight();
 		}
 
 		operator MapNode<Key, T>() const
@@ -178,7 +224,7 @@ namespace ft
 	template<class Key, class T>
 	std::ostream& operator<<(std::ostream& os, const MapNode<Key, T> &node)
 	{
-		os << node._val;
+		os << node._val << ":" << node._height;
 		return (os);
 	}
 
