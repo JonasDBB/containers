@@ -166,7 +166,7 @@ namespace ft
 		}
 
 		/* ==MODIFIER FUNCTIONS== */
-		ft::pair<iterator, bool>	insert(const value_type& val)
+		bool	insert(const value_type& val)
 		{
 			size_type oldsize = this->_size;
 			this->_root = insertNode(this->_root, val);
@@ -232,11 +232,14 @@ namespace ft
 		}
 
 		/* ==OPERATION FUNCTIONS== */
-/*		iterator		find(const key_type& k)
+		iterator		find(const key_type& k)
 		{
+			node* ret = this->_root;
+			while (ret->key())
 
+			return (ret);
 		}
-
+/*
 		const_iterator	find(const key_type& k) const
 		{
 
@@ -357,23 +360,23 @@ namespace ft
 
 			root->updateHeight();
 
-			if (root->balance() > 1 && k < root->_left->key())
+			if (root->getBalance() > 1 && k < root->_left->key())
 			{
 				root->rightRotate();
 				return (root->_parent);
 			}
-			if (root->balance() < -1 && k > root->_right->key())
+			if (root->getBalance() < -1 && k > root->_right->key())
 			{
 				root->leftRotate();
 				return (root->_parent);
 			}
-			if (root->balance() > 1 && k > root->_left->key())
+			if (root->getBalance() > 1 && k > root->_left->key())
 			{
 				root->_left->leftRotate();
 				root->rightRotate();
 				return (root->_parent);
 			}
-			if (root->balance() < -1 && k < root->_right->key())
+			if (root->getBalance() < -1 && k < root->_right->key())
 			{
 				root->_right->rightRotate();
 				root->leftRotate();
@@ -416,23 +419,23 @@ namespace ft
 			if (!root)
 				return (root);
 			root->updateHeight();
-			if (root->balance() > 1 && root->_left->balance() >= 0)
+			if (root->getBalance() > 1 && root->_left->getBalance() >= 0)
 			{
 				root->rightRotate();
 				return (root->_parent);
 			}
-			if (root->balance() < -1 && root->_right->balance() <= 0)
+			if (root->getBalance() < -1 && root->_right->getBalance() <= 0)
 			{
 				root->leftRotate();
 				return (root->_parent);
 			}
-			if (root->balance() > 1 && root->_left->balance() < 0)
+			if (root->getBalance() > 1 && root->_left->getBalance() < 0)
 			{
 				root->_left->leftRotate();
 				root->rightRotate();
 				return (root->_parent);
 			}
-			if (root->balance() < -1 && root->_right->balance() > 0)
+			if (root->getBalance() < -1 && root->_right->getBalance() > 0)
 			{
 				root->_right->rightRotate();
 				root->leftRotate();

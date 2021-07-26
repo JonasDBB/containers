@@ -250,33 +250,6 @@ catch2tests/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2tests/main.cpp.s
 .PHONY : catch2tests/main.cpp.s
 
-catch2tests/map_tests.o: catch2tests/map_tests.cpp.o
-
-.PHONY : catch2tests/map_tests.o
-
-# target to build an object file
-catch2tests/map_tests.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2tests/map_tests.cpp.o
-.PHONY : catch2tests/map_tests.cpp.o
-
-catch2tests/map_tests.i: catch2tests/map_tests.cpp.i
-
-.PHONY : catch2tests/map_tests.i
-
-# target to preprocess a source file
-catch2tests/map_tests.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2tests/map_tests.cpp.i
-.PHONY : catch2tests/map_tests.cpp.i
-
-catch2tests/map_tests.s: catch2tests/map_tests.cpp.s
-
-.PHONY : catch2tests/map_tests.s
-
-# target to generate assembly for a file
-catch2tests/map_tests.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/catch2tests/map_tests.cpp.s
-.PHONY : catch2tests/map_tests.cpp.s
-
 catch2tests/queue_tests.o: catch2tests/queue_tests.cpp.o
 
 .PHONY : catch2tests/queue_tests.o
@@ -432,9 +405,6 @@ help:
 	@echo "... catch2tests/main.o"
 	@echo "... catch2tests/main.i"
 	@echo "... catch2tests/main.s"
-	@echo "... catch2tests/map_tests.o"
-	@echo "... catch2tests/map_tests.i"
-	@echo "... catch2tests/map_tests.s"
 	@echo "... catch2tests/queue_tests.o"
 	@echo "... catch2tests/queue_tests.i"
 	@echo "... catch2tests/queue_tests.s"

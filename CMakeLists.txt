@@ -37,7 +37,7 @@ add_executable( catch
                 catch2tests/stack_tests.cpp
                 catch2tests/queue_tests.cpp
 				catch2tests/list_tests.cpp
-				catch2tests/map_tests.cpp
+#				catch2tests/map_tests.cpp
 				)
 
 add_executable(	trees

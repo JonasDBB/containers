@@ -49,12 +49,58 @@ namespace ft
 
 		MapNode*	previous() const
 		{
+			MapNode* ret;
 
+			if (this->_left)
+			{
+				ret = this->_left;
+				while (ret->_right)
+					ret = ret->_right;
+				return (ret);
+			}
+			else
+			{
+				ret = this->_parent;
+				if (this == ret->_right)
+					return (ret);
+				else
+				{
+					while (ret == ret->_parent->_left && ret->_parent)
+						ret = ret->_parent;
+					if (!ret->_parent)
+						// lowest node
+					return (ret);
+				}
+				return (ret);
+			}
 		}
 
 		MapNode*	next() const
 		{
+			MapNode* ret;
 
+			if (this->_right)
+			{
+				ret = this->_right;
+				while (ret->_left)
+					ret = ret->_left;
+				return (ret);
+			}
+			else
+			{
+				ret = this->_parent;
+				if (this == ret->_left)
+					return (ret);
+				else
+				{
+					while (ret == ret->_parent->_right && ret->_parent)
+						ret = ret->_parent;
+					if (!ret->_parent)
+						// highest node
+					return (ret);
+				}
+				return (ret);
+			}
 		}
 
 		const key_type&	key() const
@@ -67,7 +113,7 @@ namespace ft
 			return (this->_val.second);
 		}
 
-		int		balance() const
+		int		getBalance() const
 		{
 			if (!this->_left && !this->_right)
 				return (0);
@@ -141,9 +187,14 @@ namespace ft
 			return MapNode<Key, T>(this->_val);
 		}
 
-		operator value_type() const
+//		operator value_type() const
+//		{
+//			return (this->_val);
+//		}
+
+		operator ft::pair<Key, T>() const
 		{
-			return (this->_val);
+			return ft::pair<Key, T>(this->_val.first, this->_val.second);
 		}
 
 		MapNode&	operator=(const value_type& val)

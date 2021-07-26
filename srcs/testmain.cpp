@@ -70,12 +70,16 @@ std::ostream& operator<<(std::ostream& os, const std::pair<T1, T2>& pr)
 
 void	mappies()
 {
-	ft::map<char, int> mp;
+	ft::map<int, int> mp;
 //	mp['a'] = 2;
-	mp.insert(ft::make_pair('a', 2));
-	mp.insert(ft::make_pair('b', 3));
-	mp.insert(ft::make_pair('1', 5));
-	std::cout << mp['a'] << std::endl;
+	mp.insert(ft::make_pair(0, 5));
+	mp.insert(ft::make_pair(1, 2));
+	mp.insert(ft::make_pair(2, 3));
+	mp.insert(ft::make_pair(3, 5));
+	mp.insert(ft::make_pair(4, 5));
+	mp.find(3);// << std::endl;
+
+	std::cout << mp[3] << std::endl;
 }
 
 int		main(int ac, char **av)

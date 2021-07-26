@@ -98,12 +98,12 @@ clean: CMakeFiles/tests.dir/clean
 CMakeFiles/catch.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/catch.dir/build.make CMakeFiles/catch.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target catch"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target catch"
 .PHONY : CMakeFiles/catch.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/catch.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/catch.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/catch.dir/rule
@@ -125,7 +125,7 @@ CMakeFiles/catch.dir/clean:
 CMakeFiles/trees.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/trees.dir/build.make CMakeFiles/trees.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/trees.dir/build.make CMakeFiles/trees.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/CMakeFiles --progress-num=11,12 "Built target trees"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/CMakeFiles --progress-num=10,11 "Built target trees"
 .PHONY : CMakeFiles/trees.dir/all
 
 # Build rule for subdir invocation for target.
@@ -152,7 +152,7 @@ CMakeFiles/trees.dir/clean:
 CMakeFiles/tests.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/CMakeFiles --progress-num=9,10 "Built target tests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/jbennink/Documents/Projects/ft_containers/cmake-build-debug/CMakeFiles --progress-num=8,9 "Built target tests"
 .PHONY : CMakeFiles/tests.dir/all
 
 # Build rule for subdir invocation for target.

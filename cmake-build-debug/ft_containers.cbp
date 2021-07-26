@@ -182,9 +182,6 @@
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/catch2tests/main.cpp">
 			<Option target="catch"/>
 		</Unit>
-		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/catch2tests/map_tests.cpp">
-			<Option target="catch"/>
-		</Unit>
 		<Unit filename="/Users/jbennink/Documents/Projects/ft_containers/catch2tests/queue_tests.cpp">
 			<Option target="catch"/>
 		</Unit>
