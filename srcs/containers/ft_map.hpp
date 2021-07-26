@@ -232,13 +232,13 @@ namespace ft
 		}
 
 		/* ==OPERATION FUNCTIONS== */
-		iterator		find(const key_type& k)
-		{
-			node* ret = this->_root;
-			while (ret->key())
-
-			return (ret);
-		}
+//		iterator		find(const key_type& k)
+//		{
+//			node* ret = this->_root;
+//			while (ret->key())
+//
+//			return (ret);
+//		}
 /*
 		const_iterator	find(const key_type& k) const
 		{

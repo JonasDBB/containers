@@ -2,10 +2,10 @@
 //#include "containers/ft_queue.hpp"
 #include "containers/ft_vector.hpp"
 //#include "iterators/BidirectionalIterator.hpp"
-#include "containers/ft_stack.hpp"
-#include "containers/ft_list.hpp"
-#include "containers/ft_map.hpp"
-#include "utils/ft_pair.hpp"
+//#include "containers/ft_stack.hpp"
+//#include "containers/ft_list.hpp"
+//#include "containers/ft_map.hpp"
+//#include "utils/ft_pair.hpp"
 #include <iostream>
 #include <vector>
 #include <list>
@@ -13,30 +13,30 @@
 
 void	ittests()
 {
-//	ft::vector<int> vec;
-//	for (int i = 1; i <=5; i++)
-//		vec.push_back(i);
-//	ft::vector<int>::iterator it1 = vec.begin();
-//	ft::vector<int>::const_iterator it2 = vec.begin();
-//	for (; it1 != vec.end(); ++it1);
-//	for (; it2 != vec.end(); ++it2);
-//	if (it1 == it2)
-//		;
-//	if (it2 == it1)
-//		;
-//	ft::vector<int>::iterator it3;
-//	it3 = it2;
-//
-//	ft::vector<int>::reverse_iterator rit1 = vec.rbegin();
-//	ft::vector<int>::const_reverse_iterator rit2 = vec.rbegin();
-//	for (; rit1 != vec.rend(); ++rit1);
-//	for (; rit2 != vec.rend(); ++rit2);
-//	if (rit1 == rit2)
-//		;
-//	if (rit2 == rit1)
-//		;
-//	ft::vector<int>::const_reverse_iterator rit3;
-//	rit3 = rit1;
+	ft::vector<int> vec;
+	for (int i = 1; i <=5; i++)
+		vec.push_back(i);
+	ft::vector<int>::iterator it1 = vec.begin();
+	ft::vector<int>::const_iterator it2 = vec.begin();
+	for (; it1 != vec.end(); ++it1);
+	for (; it2 != vec.end(); ++it2);
+	if (it1 == it2)
+		;
+	if (it2 == it1)
+		;
+	ft::vector<int>::iterator it3;
+	it3 = it1;
+
+	ft::vector<int>::reverse_iterator rit1 = vec.rbegin();
+	ft::vector<int>::const_reverse_iterator rit2 = vec.rbegin();
+	for (; rit1 != vec.rend(); ++rit1);
+	for (; rit2 != vec.rend(); ++rit2);
+	if (rit1 == rit2)
+		;
+	if (rit2 == rit1)
+		;
+	ft::vector<int>::reverse_iterator rit3;
+	rit3 = rit1;
 }
 
 class testclass {
@@ -70,22 +70,22 @@ std::ostream& operator<<(std::ostream& os, const std::pair<T1, T2>& pr)
 
 void	mappies()
 {
-	ft::map<int, int> mp;
-//	mp['a'] = 2;
-	mp.insert(ft::make_pair(0, 5));
-	mp.insert(ft::make_pair(1, 2));
-	mp.insert(ft::make_pair(2, 3));
-	mp.insert(ft::make_pair(3, 5));
-	mp.insert(ft::make_pair(4, 5));
-	mp.find(3);// << std::endl;
-
-	std::cout << mp[3] << std::endl;
+//	ft::map<int, int> mp;
+////	mp['a'] = 2;
+//	mp.insert(ft::make_pair(0, 5));
+//	mp.insert(ft::make_pair(1, 2));
+//	mp.insert(ft::make_pair(2, 3));
+//	mp.insert(ft::make_pair(3, 5));
+//	mp.insert(ft::make_pair(4, 5));
+//	mp.find(3);// << std::endl;
+//
+//	std::cout << mp[3] << std::endl;
 }
 
 int		main(int ac, char **av)
 {
-//	ittests();
-	mappies();
+	ittests();
+//	mappies();
 
 //	ft::stack<int, ft::vector<int> > stk1;
 //	for (int i = 0; i < 5; ++i)

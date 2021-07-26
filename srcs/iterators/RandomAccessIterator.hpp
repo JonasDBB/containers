@@ -148,15 +148,19 @@ namespace ft
 			return RandomAccessIterator<T, const T*, const T&>(this->_val);
 		}
 
-		operator RandomAccessIterator<T, T*, T&>() const
-		{
-			return RandomAccessIterator<T, T*, T&>(this->_val);
-		}
+//		operator RandomAccessIterator<T, T*, T&>() const
+//		{
+//			return RandomAccessIterator<T, T*, T&>(this->_val);
+//		}
 
 		template<class T1>
 		friend bool operator==(RandomAccessIterator<T1, T1*, T1&> lhs, RandomAccessIterator<T1, T1*, T1&> rhs);
 		template<class T1>
 		friend bool operator<(RandomAccessIterator<T1, T1*, T1&> lhs, RandomAccessIterator<T1, T1*, T1&> rhs);
+		template<class T1, class T2>
+		friend bool operator==(RandomAccessIterator<T1, T1*, T1&> lhs, RandomAccessIterator<T1, T2*, T2&> rhs);
+		template<class T1, class T2>
+		friend bool operator<(RandomAccessIterator<T1, T1*, T1&> lhs, RandomAccessIterator<T1, T2*, T2&> rhs);
 	};
 
 	template<class T>
@@ -194,6 +198,43 @@ namespace ft
 	{
 		return !(lhs < rhs);
 	}
+
+	template<class T1, class T2>
+	bool operator==(RandomAccessIterator<T1, T1*, T1&> lhs, RandomAccessIterator<T1, T2*, T2&> rhs)
+	{
+		return (lhs._val == rhs._val);
+	}
+
+	template<class T1, class T2>
+	bool operator!=(RandomAccessIterator<T1, T1*, T1&> lhs, RandomAccessIterator<T1, T2*, T2&> rhs)
+	{
+		return !(lhs == rhs);
+	}
+
+	template<class T1, class T2>
+	bool operator<(RandomAccessIterator<T1, T1*, T1&> lhs, RandomAccessIterator<T1, T2*, T2&> rhs)
+	{
+		return ((rhs - lhs) > 0);
+	}
+
+	template<class T1, class T2>
+	bool operator<=(RandomAccessIterator<T1, T1*, T1&> lhs, RandomAccessIterator<T1, T2*, T2&> rhs)
+	{
+		return !(rhs < lhs);
+	}
+
+	template<class T1, class T2>
+	bool operator>(RandomAccessIterator<T1, T1*, T1&> lhs, RandomAccessIterator<T1, T2*, T2&> rhs)
+	{
+		return (rhs < lhs);
+	}
+
+	template<class T1, class T2>
+	bool operator>=(RandomAccessIterator<T1, T1*, T1&> lhs, RandomAccessIterator<T1, T2*, T2&> rhs)
+	{
+		return !(lhs < rhs);
+	}
+
 
 	template<class T>
 	RandomAccessIterator<T, T*, T&>	operator+(typename RandomAccessIterator<T, T*, T&>::difference_type n,

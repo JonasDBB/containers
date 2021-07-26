@@ -10,14 +10,15 @@ namespace ft
 	class NodeIterator : public BidirectionalIterator<Node, Node*, Node&>
 	{
 	public:
-		typedef ListNode<T>												node;
-		typedef NodeIterator<T, node, node*, node&>						this_type;
-		typedef NodeIterator<T, node, const node*, const node&>			const_type;
-		typedef Category												iterator_category;
-		typedef T														value_type;
-		typedef ptrdiff_t												difference_type;
-		typedef Pointer													pointer;
-		typedef Reference												reference;
+		typedef ListNode<T>										node;
+
+		typedef NodeIterator<T, node, node*, node&>				this_type;
+		typedef NodeIterator<T, node, const node*, const node&>	const_type;
+		typedef Category										iterator_category;
+		typedef T												value_type;
+		typedef ptrdiff_t										difference_type;
+		typedef node*											pointer;
+		typedef node&											reference;
 
 	public:
 		NodeIterator() : BidirectionalIterator<Node, Node*, Node&>()
