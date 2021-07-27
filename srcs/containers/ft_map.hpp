@@ -49,6 +49,7 @@ namespace ft
 		size_type	_size;
 		node		*_root;
 		node_alloc	_alloc;
+		sentinelPointer<key_type, mapped_type> sentinel;
 
 
 	public:
@@ -56,7 +57,8 @@ namespace ft
 		explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
 				_size(0),
 				_root(NULL),
-				_alloc(alloc)
+				_alloc(alloc),
+				sentinel()
 		{
 			(void)comp;
 		}
@@ -97,19 +99,28 @@ namespace ft
 		}
 */
 		/* ==ITERATOR FUNCTIONS== */
-/*		iterator				begin()
+		iterator				begin()
 		{
-			// find lowest val
+			node* nd = this->_root;
+			while (nd->_left)
+				nd = nd->_left;
+			return (iterator(nd));
 		}
 
 		const_iterator			begin() const
 		{
-
+			node* nd = this->_root;
+			while (nd->_left)
+				nd = nd->_left;
+			return (iterator(nd));
 		}
 
 		iterator				end()
 		{
-
+			node* nd = this->_root;
+			while (nd->_right)
+				nd = nd->_right;
+			return (++iterator(nd));
 		}
 
 		const_iterator			end() const
@@ -136,7 +147,7 @@ namespace ft
 		{
 
 		}
-*/
+
 		/* ==CAPACITY FUNCTIONS== */
 		bool		empty() const
 		{
@@ -232,13 +243,30 @@ namespace ft
 		}
 
 		/* ==OPERATION FUNCTIONS== */
-//		iterator		find(const key_type& k)
-//		{
-//			node* ret = this->_root;
-//			while (ret->key())
-//
-//			return (ret);
-//		}
+		iterator		find(const key_type& k)
+		{
+			node* nd = this->_root;
+			while (nd->first != k)
+			{
+				if (nd->first > k)
+				{
+					if (nd->_left)
+						nd = nd->_left;
+					else
+						break;
+				}
+				else if (nd->first < k)
+				{
+					if (nd->_right)
+						nd = nd->_right;
+					else
+						break;
+				}
+			}
+			if (nd->first != k)
+				return (this->end());
+			return (iterator(nd));
+		}
 /*
 		const_iterator	find(const key_type& k) const
 		{
@@ -339,59 +367,61 @@ namespace ft
 		}
 
 
-		node*	insertNode(node *root, ft::pair<Key, T> val)
+		node*	insertNode(node *current, ft::pair<Key, T> val)
 		{
-			if (!root)
+			if (!current)
 			{
 				++this->_size;
-				return (new node(val));
+				return (new node(val, &this->sentinel));
 			}
 			Key k = val.first;
-			if (k < root->key())
+			if (k < current->first)
 			{
-				root->_left = insertNode(root->_left, val);
+				current->_left = insertNode(current->_left, val);
+				current->_left->_parent = current;
 			}
-			else if (k > root->key())
+			else if (k > current->first)
 			{
-				root->_right = insertNode(root->_right, val);
+				current->_right = insertNode(current->_right, val);
+				current->_right->_parent = current;
 			}
 			else
-				return (root);
+				return (current);
 
-			root->updateHeight();
+			current->updateHeight();
 
-			if (root->getBalance() > 1 && k < root->_left->key())
+			if (current->getBalance() > 1 && k < current->_left->first)
 			{
-				root->rightRotate();
-				return (root->_parent);
+				current->rightRotate();
+				return (current->_parent);
 			}
-			if (root->getBalance() < -1 && k > root->_right->key())
+			if (current->getBalance() < -1 && k > current->_right->first)
 			{
-				root->leftRotate();
-				return (root->_parent);
+				current->leftRotate();
+				return (current->_parent);
 			}
-			if (root->getBalance() > 1 && k > root->_left->key())
+			if (current->getBalance() > 1 && k > current->_left->first)
 			{
-				root->_left->leftRotate();
-				root->rightRotate();
-				return (root->_parent);
+				current->_left->leftRotate();
+				current->rightRotate();
+				return (current->_parent);
 			}
-			if (root->getBalance() < -1 && k < root->_right->key())
+			if (current->getBalance() < -1 && k < current->_right->first)
 			{
-				root->_right->rightRotate();
-				root->leftRotate();
-				return (root->_parent);
+				current->_right->rightRotate();
+				current->leftRotate();
+				return (current->_parent);
 			}
-			return (root);
+			return (current);
 		}
 
 		node*	deleteNode(node* root, const Key& k)
 		{
 			if (!root)
 				return (root);
-			if (k < root->key())
+			if (k < root->first)
 				root->_left = deleteNode(root->_left, k);
-			else if (k > root->key())
+			else if (k > root->first)
 				root->_right = deleteNode(root->_right, k);
 			else
 			{
@@ -413,7 +443,7 @@ namespace ft
 					while (tmp->_right)
 						tmp = tmp->_right;
 					root->_val = tmp->_val;
-					root->_left = deleteNode(root->_left, tmp->key());
+					root->_left = deleteNode(root->_left, tmp->first);
 				}
 			}
 			if (!root)

@@ -312,10 +312,12 @@ TEST_CASE("vector assign", "[vector]")
 	origivec<int>	real1;
 	origivec<int>	real2;
 	origivec<int>	real3;
+	origivec<std::string> real4;
 
 	jonasvec<int>	mine1;
 	jonasvec<int>	mine2;
 	jonasvec<int>	mine3;
+	jonasvec<std::string> mine4;
 
 	real1.assign(7, 100);
 	mine1.assign(7, 100);
@@ -332,6 +334,10 @@ TEST_CASE("vector assign", "[vector]")
 	real3.assign(intarr, intarr + 3);
 	mine3.assign(intarr, intarr + 3);
 	REQUIRE(mine3 == real3);
+
+	real4.assign(3, "hoi");
+	mine4.assign(3, "hoi");
+	REQUIRE(mine4 == real4);
 }
 
 TEST_CASE("vector pushback", "[vector]")

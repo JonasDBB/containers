@@ -7,6 +7,9 @@
 namespace ft
 {
 	template<class Key, class T>
+	class sentinelPointer;
+
+	template<class Key, class T>
 	class MapNode : public ANode<pair<Key, T> >
 	{
 	public:
@@ -22,10 +25,19 @@ namespace ft
 		MapNode	*_left;
 		MapNode	*_right;
 		int		_height;
+		Key&	first;
+		T&		second;
+		sentinelPointer<Key, T> *_sentinel;
 
-		explicit MapNode(const value_type& val) : A_type(val),
-		_parent(NULL), _left(NULL), _right(NULL), _height(1)
+		MapNode() : A_type(value_type()), _parent(NULL), _left(NULL), _right(NULL), _height(1), first(this->_val.first), second(this->_val.second),
+		_sentinel(NULL)
 		{}
+
+		explicit MapNode(const value_type& val, sentinelPointer<Key, T> *sentinel) : A_type(val),
+		_parent(NULL), _left(NULL), _right(NULL), _height(1), first(this->_val.first), second(this->_val.second),
+		_sentinel(sentinel)
+		{
+		}
 
 		MapNode(const MapNode& x)
 		{
@@ -47,7 +59,7 @@ namespace ft
 			return (*this);
 		}
 
-		MapNode*	previous() const
+		virtual MapNode*	previous() const
 		{
 			MapNode* ret;
 
@@ -68,6 +80,10 @@ namespace ft
 					while (ret == ret->_parent->_left && ret->_parent)
 						ret = ret->_parent;
 					if (!ret->_parent)
+					{
+						this->_sentinel->_begin = this;
+						return (this->_sentinel);
+					}
 						// lowest node
 					return (ret);
 				}
@@ -75,7 +91,7 @@ namespace ft
 			}
 		}
 
-		MapNode*	next() const
+		virtual MapNode*	next() const
 		{
 			MapNode* ret;
 
@@ -93,9 +109,13 @@ namespace ft
 					return (ret);
 				else
 				{
-					while (ret == ret->_parent->_right && ret->_parent)
+					while (ret->_parent && ret == ret->_parent->_right)
 						ret = ret->_parent;
 					if (!ret->_parent)
+					{
+						this->_sentinel->_end = this;
+						return (this->_sentinel);
+					}
 						// highest node
 					return (ret);
 				}
@@ -103,15 +123,15 @@ namespace ft
 			}
 		}
 
-		const key_type&	key() const
-		{
-			return (this->_val.first);
-		}
-
-		const mapped_type& value() const
-		{
-			return (this->_val.second);
-		}
+//		const key_type&	key() const
+//		{
+//			return (this->_val.first);
+//		}
+//
+//		const mapped_type& value() const
+//		{
+//			return (this->_val.second);
+//		}
 
 		int		getBalance() const
 		{
@@ -279,17 +299,39 @@ namespace ft
 		return (os);
 	}
 
-//	template<class Key, class T>
-//	class SentinelMapNode : public MapNode<Key, T>
-//	{
-//	public:
-//		typedef	MapNode<Key, T>		map_node;
-//		typedef pair<const Key, T>	value_type;
-//
-//		map_node	*_first;
-//		map_node	*_last;
-//
-//	};
+	template<class Key, class T>
+	class sentinelPointer : public MapNode<Key, T>
+	{
+	public:
+		typedef	MapNode<Key, T>		map_node;
+		typedef pair<const Key, T>	value_type;
+
+		map_node	*_begin;
+		map_node	*_end;
+
+		explicit sentinelPointer() : MapNode<Key, T>(), _begin(NULL), _end(NULL)
+		{}
+
+		sentinelPointer(const sentinelPointer& x)
+		{
+			*this = x;
+		}
+
+		~sentinelPointer()
+		{}
+
+		sentinelPointer&	operator=(const sentinelPointer& x)
+		{
+			this->_begin = x._begin;
+			this->_end = x._end;
+			return (*this);
+		}
+
+		map_node*	previous() const	{ return this->_end; }
+
+		map_node*	next() const		{ return this->_begin; }
+
+	};
 }
 
 #endif

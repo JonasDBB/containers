@@ -12,7 +12,7 @@ add_executable( tests
                 srcs/containers/ft_vector.hpp
                 srcs/containers/ft_stack.hpp
                 srcs/containers/ft_queue.hpp
-                srcs/containers/ft_list.hpp
+#                srcs/containers/ft_list.hpp
 				srcs/containers/ft_map.hpp
 
                 srcs/iterators/RandomAccessIterator.hpp
@@ -23,7 +23,7 @@ add_executable( tests
                 srcs/utils/type_traits.hpp
                 srcs/utils/Utils.hpp
         		srcs/utils/ANode.hpp
-        		srcs/utils/ListNode.hpp
+#        		srcs/utils/ListNode.hpp
 				srcs/utils/ft_pair.hpp
 				srcs/utils/MapNode.hpp
 				)

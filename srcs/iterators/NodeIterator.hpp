@@ -2,7 +2,7 @@
 # define NODEITERATOR_HPP
 # include "BidirectionalIterator.hpp"
 # include "../utils/type_traits.hpp"
-# include "../utils/ListNode.hpp"
+//# include "../utils/ListNode.hpp"
 
 namespace ft
 {
@@ -10,7 +10,7 @@ namespace ft
 	class NodeIterator : public BidirectionalIterator<Node, Node*, Node&>
 	{
 	public:
-		typedef ListNode<T>										node;
+		typedef Node											node;
 
 		typedef NodeIterator<T, node, node*, node&>				this_type;
 		typedef NodeIterator<T, node, const node*, const node&>	const_type;
@@ -39,6 +39,16 @@ namespace ft
 			BidirectionalIterator<Node,Node*, Node&>::operator=(x);
 			return (*this);
 		}
+
+//		T&	operator*() const
+//		{
+//			return (this->_val->_val);
+//		}
+//
+//		T*	operator->() const
+//		{
+//			return &(this->_val->_val);
+//		}
 
 		NodeIterator operator++(int)
 		{

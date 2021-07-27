@@ -40,12 +40,12 @@ namespace ft
 			return (*this);
 		}
 
-		reference operator*() const
+		virtual reference operator*() const
 		{
 			return (*this->_val);
 		}
 
-		pointer operator->() const
+		virtual pointer operator->() const
 		{
 			return &(*this->_val);
 		}

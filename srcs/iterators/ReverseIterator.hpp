@@ -39,7 +39,7 @@ namespace ft
 		reference operator*() const
 		{
 			Iterator tmp = this->_base;
-			return (*--tmp);
+			return (*(--tmp));
 		}
 
 		pointer operator->() const

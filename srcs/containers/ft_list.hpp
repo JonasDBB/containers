@@ -99,7 +99,7 @@ namespace ft
 		/* ==ITERATOR FUNCTIONS== */
 		iterator				begin()
 		{
-			return(this->_sentinel._next);
+			return(iterator(this->_sentinel._next));
 		}
 
 		const_iterator			begin() const

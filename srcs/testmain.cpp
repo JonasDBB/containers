@@ -1,11 +1,11 @@
 //#include "containers/ft_stack.hpp"
 //#include "containers/ft_queue.hpp"
 #include "containers/ft_vector.hpp"
-//#include "iterators/BidirectionalIterator.hpp"
+#include "iterators/BidirectionalIterator.hpp"
 //#include "containers/ft_stack.hpp"
 //#include "containers/ft_list.hpp"
-//#include "containers/ft_map.hpp"
-//#include "utils/ft_pair.hpp"
+#include "containers/ft_map.hpp"
+#include "utils/ft_pair.hpp"
 #include <iostream>
 #include <vector>
 #include <list>
@@ -70,22 +70,23 @@ std::ostream& operator<<(std::ostream& os, const std::pair<T1, T2>& pr)
 
 void	mappies()
 {
-//	ft::map<int, int> mp;
-////	mp['a'] = 2;
-//	mp.insert(ft::make_pair(0, 5));
-//	mp.insert(ft::make_pair(1, 2));
-//	mp.insert(ft::make_pair(2, 3));
-//	mp.insert(ft::make_pair(3, 5));
-//	mp.insert(ft::make_pair(4, 5));
-//	mp.find(3);// << std::endl;
-//
+	ft::map<int, double> mp;
+//	mp['a'] = 2;
+	mp.insert(ft::make_pair(0, 5));
+	mp.insert(ft::make_pair(1, 2));
+	mp.insert(ft::make_pair(2, 3));
+	mp.insert(ft::make_pair(3, 5));
+	mp.insert(ft::make_pair(4, 5));
+	ft::map<int, double>::iterator it = mp.end();
+//	it = mp.find(6);// << std::endl;
+//	std::cout << "TING\n" << *it << std::endl;
 //	std::cout << mp[3] << std::endl;
 }
 
 int		main(int ac, char **av)
 {
-	ittests();
-//	mappies();
+//	ittests();
+	mappies();
 
 //	ft::stack<int, ft::vector<int> > stk1;
 //	for (int i = 0; i < 5; ++i)
@@ -111,7 +112,6 @@ int		main(int ac, char **av)
 //	}
 //	std::cout << std::endl;
 
-
 #ifndef ASAN
 	std::string line = av[0];
 	line = "leaks " + line.substr(line.rfind('/') + 1, line.back()) +
@@ -121,6 +121,3 @@ int		main(int ac, char **av)
 	(void) ac;
 	(void) av;
 }
-
-
-
