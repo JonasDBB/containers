@@ -10,6 +10,7 @@
 #include <vector>
 #include <list>
 #include <map>
+#include <iterator>
 
 void	ittests()
 {
@@ -72,13 +73,23 @@ void	mappies()
 {
 	ft::map<int, double> mp;
 //	mp['a'] = 2;
-	mp.insert(ft::make_pair(0, 5));
-	mp.insert(ft::make_pair(1, 2));
-	mp.insert(ft::make_pair(2, 3));
-	mp.insert(ft::make_pair(3, 5));
-	mp.insert(ft::make_pair(4, 5));
-	ft::map<int, double>::iterator it = mp.end();
-//	it = mp.find(6);// << std::endl;
+	mp[2] = 4;
+	std::cout << mp[2] << std::endl;
+	mp[2] = 2;
+	std::cout << mp[2] << std::endl;
+
+//	mp.insert(ft::make_pair(0, 5));
+//	mp.insert(ft::make_pair(1, 2));
+//	mp.insert(ft::make_pair(2, 3));
+//	mp.insert(ft::make_pair(3, 5));
+//	mp.insert(ft::make_pair(4, 5));
+//	ft::map<int, double>::iterator it1 = mp.find(2);
+//	ft::map<int, double>::iterator it2 = mp.find(4);
+//	mp.erase(it1, it2);
+//	mp.clear();
+//	for (ft::map<int, double>::iterator it1 = mp.begin(); it1 != mp.end(); ++it)
+//		std::cout << *it << std::endl;
+//	std::cout << std::endl;
 //	std::cout << "TING\n" << *it << std::endl;
 //	std::cout << mp[3] << std::endl;
 }

@@ -46,41 +46,50 @@ namespace ft
 		};
 
 	private:
+		key_compare	_comp;
 		size_type	_size;
 		node		*_root;
 		node_alloc	_alloc;
-		sentinelPointer<key_type, mapped_type> sentinel;
+		node		*_begin;
+		node		*_end;
 
 
 	public:
 		// default constructor
 		explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
+				_comp(comp),
 				_size(0),
 				_root(NULL),
 				_alloc(alloc),
-				sentinel()
-		{
-			(void)comp;
-		}
+				_begin(),
+				_end()
+		{}
 
 		// range constructor
-/*		template <class InputIterator>
+		template <class InputIterator>
 		map (InputIterator first, InputIterator last,
 			 const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
+				_comp(comp),
 				_size(0),
 				_root(NULL),
-				_alloc(alloc)
+				_alloc(alloc),
+				_begin(),
+				_end()
 		{
-			// insert maybe?
+			(void)comp; // ??????????????????????????????????
+			insert(first, last);
 		}
 
 		// copy constructor
 		map(const map& x) :
+				_comp(x._comp),
 				_size(0),
 				_root(NULL),
-				_alloc(x._alloc)
+				_alloc(x._alloc),
+				_begin(),
+				_end()
 		{
-			// prob also insert
+			insert(x.begin(), x.end());
 		}
 
 		// destructor
@@ -94,10 +103,10 @@ namespace ft
 		{
 			this->clear();
 			this->_alloc = x._alloc;
-			// prob another insert
+			this->insert(x.begin(), x.end());
 			return (*this);
 		}
-*/
+
 		/* ==ITERATOR FUNCTIONS== */
 		iterator				begin()
 		{
@@ -112,40 +121,37 @@ namespace ft
 			node* nd = this->_root;
 			while (nd->_left)
 				nd = nd->_left;
-			return (iterator(nd));
+			return (const_iterator(nd));
 		}
 
 		iterator				end()
 		{
-			node* nd = this->_root;
-			while (nd->_right)
-				nd = nd->_right;
-			return (++iterator(nd));
+			return (iterator(this->_end));
 		}
 
 		const_iterator			end() const
 		{
-
+			return (const_iterator(this->_end));
 		}
 
 		reverse_iterator		rbegin()
 		{
-
+			return (reverse_iterator(this->end()));
 		}
 
 		const_reverse_iterator	rbegin() const
 		{
-
+			return (const_reverse_iterator(this->end()));
 		}
 
 		reverse_iterator		rend()
 		{
-
+			return (reverse_iterator(this->begin()));
 		}
 
 		const_reverse_iterator	rend() const
 		{
-
+			return (const_reverse_iterator(this->begin()));
 		}
 
 		/* ==CAPACITY FUNCTIONS== */
@@ -167,74 +173,82 @@ namespace ft
 		/* ==ELEMENT ACCESS FUNCTIONS== */
 		mapped_type&	operator[](const key_type& k)
 		{
-			value_type *ins = new value_type(k,mapped_type());
-//			value_type *ins = new ft::pair<key_type,mapped_type>(k, mapped_type());
-//			MapNode<Key, T> *nwnd = new node(ins);
-//			this->_root = insertNode(this->_root, *nwnd);
-//			return(nwnd->_val.second);
-			insert(*ins);
-			return ins->second;
+			iterator it = find(k);
+			if (it != this->end())
+				return (it->second);
+			return (insert(make_pair(k, mapped_type())).first->second);
 		}
 
 		/* ==MODIFIER FUNCTIONS== */
-		bool	insert(const value_type& val)
+		pair<iterator, bool>	insert(const value_type& val)
 		{
 			size_type oldsize = this->_size;
 			this->_root = insertNode(this->_root, val);
-			myprnt(this->_root);
+//			myprnt(this->_root);
 			if (this->_size == oldsize)
-				return (false);
-			return (true);
+				return (make_pair(find(val.first), false));
+			return (make_pair(find(val.first), true));
 		}
 
-/*		iterator	insert(iterator position, const value_type& val)
+		iterator	insert(iterator position, const value_type& val)
 		{
-
+			(void)position;
+			return (insert(val).first);
 		}
 
 		template <class InputIterator>
 		void		insert(InputIterator first, InputIterator last,
 							typename iterator_traits<InputIterator>::type* = NULL)
 		{
-
+			while (first != last)
+				insert(first++);
 		}
 
 		void		erase(iterator position)
 		{
-
+			this->_root = deleteNode(this->_root, position->first);
+//			myprnt(this->_root);
 		}
 
 		size_type	erase(const key_type& k)
 		{
-
+			size_type oldsize = this->_size;
+			this->_root = deleteNode(this->_root, k);
+//			myprnt(this->_root);
+			return (oldsize - this->_size);
 		}
-*/
-/*		void		erase(iterator first, iterator last)
+
+		void		erase(iterator first, iterator last)
 		{
 			while (first != last)
 				this->erase(first++);
-			return (last);
 		}
 
 		void		swap(map& x)
 		{
-
+			ft::swap(this->_size, x._size);
+			ft::swap(this->_root, x._root);
+			ft::swap(this->_alloc, x._alloc);
+			ft::swap(this->_begin, x._begin);
+			ft::swap(this->_end, x._end);
 		}
 
 		void		clear()
 		{
-
+			while (!this->empty())
+				erase(this->_root->first);
+			myprnt(this->_root);
 		}
-*/
+
 		/* ==OBSERVER FUNCTIONS== */
 		key_compare		key_comp() const
 		{
-
+			return (this->_comp);
 		}
 
 		value_compare	value_comp() const
 		{
-
+			return value_compare(this->_comp);
 		}
 
 		allocator_type	get_allocator() const
@@ -245,6 +259,8 @@ namespace ft
 		/* ==OPERATION FUNCTIONS== */
 		iterator		find(const key_type& k)
 		{
+			if (!this->_root)
+				return (this->end());
 			node* nd = this->_root;
 			while (nd->first != k)
 			{
@@ -267,12 +283,34 @@ namespace ft
 				return (this->end());
 			return (iterator(nd));
 		}
-/*
+
 		const_iterator	find(const key_type& k) const
 		{
-
+//			if (!this->_root)
+//				return (this->end());
+//			node* nd = this->_root;
+//			while (nd->first != k)
+//			{
+//				if (nd->first > k)
+//				{
+//					if (nd->_left)
+//						nd = nd->_left;
+//					else
+//						break;
+//				}
+//				else if (nd->first < k)
+//				{
+//					if (nd->_right)
+//						nd = nd->_right;
+//					else
+//						break;
+//				}
+//			}
+//			if (nd->first != k)
+//				return (this->end());
+			return (const_iterator(*(find(k))));
 		}
-*/
+
 		size_type		count(const key_type& k) const
 		{
 			if (this->find(k) == this->end())
@@ -280,40 +318,70 @@ namespace ft
 			return (1);
 		}
 
-/*		iterator		lower_bound(const key_type& k)
+		iterator		lower_bound(const key_type& k)
 		{
-
+			iterator it = this->begin();
+			for (; it != this->end(); ++it)
+			{
+				if (!it->first < k)
+					break;
+			}
+			return (it);
 		}
 
 		const_iterator	lower_bound(const key_type& k) const
 		{
-
+			const_iterator it = this->begin();
+			for (; it != this->end(); ++it)
+			{
+				if (!it->first < k)
+					break;
+			}
+			return (it);
 		}
 
 		iterator		upper_bound(const key_type& k)
 		{
-
+			iterator it = this->begin();
+			for (; it != this->end(); ++it)
+			{
+				if (it->first > k)
+					break;
+			}
+			return (it);
 		}
 
 		const_iterator	upper_bound(const key_type& k) const
 		{
-
+			const_iterator it = this->begin();
+			for (; it != this->end(); ++it)
+			{
+				if (it->first > k)
+					break;
+			}
+			return (it);
 		}
 
 		pair<const_iterator, const_iterator>	equal_range(const key_type& k) const
 		{
-
+			return (make_pair(lower_bound(k), upper_bound(k)));
 		}
 
 		pair<iterator, iterator>				equal_range(const key_type& k)
 		{
-
+			return (make_pair(lower_bound(k), upper_bound(k)));
 		}
-*/
+
 	private:
 		void	myprnt(node* root)
 		{
-			std::cout << "\t\t\t  " << *root << std::endl;
+			if (this->_root)
+				std::cout << "\t\t\t  " << *root << std::endl;
+			else
+			{
+				std::cout << "\t\t\t  " << "EMPTY" << std::endl;
+				return;
+			}
 			if (root->_left)
 				std::cout << "\t" << *root->_left << "\t\t||\t";
 			else
@@ -372,7 +440,7 @@ namespace ft
 			if (!current)
 			{
 				++this->_size;
-				return (new node(val, &this->sentinel));
+				return (new node(val, this->_begin, this->_end));
 			}
 			Key k = val.first;
 			if (k < current->first)
@@ -429,12 +497,14 @@ namespace ft
 				{
 					node *tmp = root;
 					root = NULL;
+					--this->_size;
 					delete tmp;
 				}
 				else if (!root->_left || !root->_right)
 				{
 					node *tmp = root->_left ? root->_left : root->_right;
 					*root = *tmp;
+					--this->_size;
 					delete tmp;
 				}
 				else
