@@ -39,15 +39,21 @@ namespace ft
 		static const bool result = (sizeof(true_type) == sizeof(test<T>(0)));
 	};
 
-	template <typename T>
-	struct iterator_traits : public enable_if<is_iterator<T>::result, T>
+	template <class Iterator, bool>
+	struct _iterator_traits {};
+
+	template <class Iterator>
+	struct _iterator_traits<Iterator, true>
 	{
-		typedef ptrdiff_t					difference_type;
-		typedef T							value_type;
-		typedef T*							pointer;
-		typedef T&							reference;
-		typedef bidirectional_iterator_tag	iterator_category;
+		typedef typename Iterator::difference_type		difference_type;
+		typedef typename Iterator::value_type			value_type;
+		typedef typename Iterator::pointer				pointer;
+		typedef typename Iterator::reference			reference;
+		typedef typename Iterator::iterator_category	iterator_category;
 	};
+
+	template <class Iterator>
+struct iterator_traits : public _iterator_traits<Iterator, is_iterator<Iterator>::result> {};
 
 	template <typename T>
 	struct iterator_traits<T*>
@@ -56,9 +62,7 @@ namespace ft
 		typedef T							value_type;
 		typedef T*							pointer;
 		typedef T&							reference;
-		typedef bidirectional_iterator_tag	iterator_category;
-
-		typedef bidirectional_iterator_tag	type;
+		typedef random_access_iterator_tag	iterator_category;
 	};
 
 	template <typename T>
@@ -66,14 +70,10 @@ namespace ft
 	{
 		typedef ptrdiff_t					difference_type;
 		typedef T							value_type;
-		typedef T*							pointer;
-		typedef T&							reference;
-		typedef bidirectional_iterator_tag	iterator_category;
-
-		typedef random_access_iterator_tag	type;
+		typedef const T*					pointer;
+		typedef const T&					reference;
+		typedef random_access_iterator_tag	iterator_category;
 	};
-
-
 
 }
 #endif

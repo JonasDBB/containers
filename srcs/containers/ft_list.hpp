@@ -60,7 +60,7 @@ namespace ft
 		template <class InputIterator>
 		list(InputIterator first, InputIterator last,
 			 const allocator_type& alloc = allocator_type(),
-			 typename iterator_traits<InputIterator>::type* = NULL) :
+			 typename iterator_traits<InputIterator>::iterator_category* = NULL) :
 			 _size(0),
 			 _sentinel(T()),
 			 _alloc(alloc)
@@ -177,7 +177,7 @@ namespace ft
 		/* ==MODIFIER FUNCTIONS== */
 		template <class InputIterator>
 		void	assign(InputIterator first, InputIterator last,
-						typename iterator_traits<InputIterator>::type* = NULL)
+						typename iterator_traits<InputIterator>::iterator_category* = NULL)
 		{
 			this->clear();
 			while (first != last)
@@ -253,7 +253,7 @@ namespace ft
 
 		template <class InputIterator>
 		void		insert(iterator position, InputIterator first, InputIterator last,
-						   typename iterator_traits<InputIterator>::type* = NULL)
+						   typename iterator_traits<InputIterator>::iterator_category* = NULL)
 		{
 			for (; first != last; ++first)
 				insert(position, *first);

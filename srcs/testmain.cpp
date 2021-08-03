@@ -3,7 +3,7 @@
 #include "containers/ft_vector.hpp"
 #include "iterators/BidirectionalIterator.hpp"
 //#include "containers/ft_stack.hpp"
-//#include "containers/ft_list.hpp"
+#include "containers/ft_list.hpp"
 #include "containers/ft_map.hpp"
 #include "utils/ft_pair.hpp"
 #include <iostream>
@@ -97,8 +97,17 @@ void	mappies()
 int		main(int ac, char **av)
 {
 //	ittests();
-	mappies();
-
+//	mappies();
+//	ft::vector<int> vc(4,5);
+//	ft::vector<int>::iterator it1, it2;
+//	it1 = vc.begin();
+//	it2 = vc.end();
+//	ft::distance(it1, it2);
+//	ft::list<int> ls(4, 5);
+//	ft::list<int>::iterator i1, i2;
+//	i1 = ls.begin();
+//	i2 = ls.end();
+//	ft::distance(i1, i2);
 //	ft::stack<int, ft::vector<int> > stk1;
 //	for (int i = 0; i < 5; ++i)
 //		stk1.push(i);

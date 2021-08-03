@@ -56,7 +56,7 @@ namespace ft
 		template <class InputIterator>
 		vector(InputIterator first, InputIterator last,
 			   const allocator_type& alloc = allocator_type(),
-			   typename iterator_traits<InputIterator>::type* = NULL) :
+			   typename iterator_traits<InputIterator>::iterator_category* = NULL) :
 				_capacity(0),
 				_size(0),
 				_array(NULL),
@@ -242,7 +242,7 @@ namespace ft
 		/* ==MODIFIER FUNCTIONS== */
 		template <class InputIterator>
 		void			assign(InputIterator first, InputIterator last,
-							   typename iterator_traits<InputIterator>::type* = NULL)
+							   typename iterator_traits<InputIterator>::iterator_category* = NULL)
 		{
 			clear();
 			reserve(ft::distance(first, last));
@@ -312,7 +312,7 @@ namespace ft
 
 		template <class InputIterator>
 		void			insert(iterator position, InputIterator first, InputIterator last,
-							   typename iterator_traits<InputIterator>::type* = NULL)
+							   typename iterator_traits<InputIterator>::iterator_category* = NULL)
 		{
 			difference_type	len = ft::distance(first, last);
 			difference_type pos = ft::distance(this->begin(), position);
