@@ -50,8 +50,8 @@ namespace ft
 		size_type	_size;
 		node		*_root;
 		node_alloc	_alloc;
-		node		*_begin;
-		node		*_end;
+		node		_begin;
+		node		_end;
 
 
 	public:
@@ -63,7 +63,12 @@ namespace ft
 				_alloc(alloc),
 				_begin(),
 				_end()
-		{}
+		{
+			this->_begin._begin = &this->_begin;
+			this->_end._begin = &this->_begin;
+			this->_begin._end = &this->_end;
+			this->_end._end = &this->_end;
+		}
 
 		// range constructor
 		template <class InputIterator>
@@ -76,7 +81,10 @@ namespace ft
 				_begin(),
 				_end()
 		{
-			(void)comp; // ??????????????????????????????????
+			this->_begin._begin = &this->_begin;
+			this->_end._begin = &this->_begin;
+			this->_begin._end = &this->_end;
+			this->_end._end = &this->_end;
 			insert(first, last);
 		}
 
@@ -89,6 +97,10 @@ namespace ft
 				_begin(),
 				_end()
 		{
+			this->_begin._begin = &this->_begin;
+			this->_end._begin = &this->_begin;
+			this->_begin._end = &this->_end;
+			this->_end._end = &this->_end;
 			insert(x.begin(), x.end());
 		}
 
@@ -110,6 +122,8 @@ namespace ft
 		/* ==ITERATOR FUNCTIONS== */
 		iterator				begin()
 		{
+			if (!this->_root)
+				return (this->end());
 			node* nd = this->_root;
 			while (nd->_left)
 				nd = nd->_left;
@@ -126,12 +140,12 @@ namespace ft
 
 		iterator				end()
 		{
-			return (iterator(this->_end));
+			return (iterator(&this->_end));
 		}
 
 		const_iterator			end() const
 		{
-			return (const_iterator(this->_end));
+			return (const_iterator(&this->_end));
 		}
 
 		reverse_iterator		rbegin()
@@ -183,8 +197,9 @@ namespace ft
 		pair<iterator, bool>	insert(const value_type& val)
 		{
 			size_type oldsize = this->_size;
-			this->_root = insertNode(this->_root, val);
-//			myprnt(this->_root);
+			this->_root = insertNode(this->_root, val, NULL);
+			this->updateEnds();
+			myprnt(this->_root);
 			if (this->_size == oldsize)
 				return (make_pair(find(val.first), false));
 			return (make_pair(find(val.first), true));
@@ -207,14 +222,16 @@ namespace ft
 		void		erase(iterator position)
 		{
 			this->_root = deleteNode(this->_root, position->first);
-//			myprnt(this->_root);
+			this->updateEnds();
+			myprnt(this->_root);
 		}
 
 		size_type	erase(const key_type& k)
 		{
 			size_type oldsize = this->_size;
 			this->_root = deleteNode(this->_root, k);
-//			myprnt(this->_root);
+			this->updateEnds();
+			myprnt(this->_root);
 			return (oldsize - this->_size);
 		}
 
@@ -237,7 +254,7 @@ namespace ft
 		{
 			while (!this->empty())
 				erase(this->_root->first);
-			myprnt(this->_root);
+//			myprnt(this->_root);
 		}
 
 		/* ==OBSERVER FUNCTIONS== */
@@ -375,6 +392,8 @@ namespace ft
 	private:
 		void	myprnt(node* root)
 		{
+			if (this->_root && this->_root->_parent)
+				std::cout << "WADAFAK" << std::endl;
 			if (this->_root)
 				std::cout << "\t\t\t  " << *root << std::endl;
 			else
@@ -432,26 +451,29 @@ namespace ft
 					std::cout << "LEAF";
 			}
 			std::cout << std::endl;
+			std::cout << std::endl;
 		}
 
 
-		node*	insertNode(node *current, ft::pair<Key, T> val)
+		node*	insertNode(node *current, ft::pair<Key, T> val, node* parent)
 		{
 			if (!current)
 			{
 				++this->_size;
-				return (new node(val, this->_begin, this->_end));
+				node* nd = new node(val, &this->_begin, &this->_end);
+				nd->_parent = parent;
+				return (nd);
 			}
 			Key k = val.first;
 			if (k < current->first)
 			{
-				current->_left = insertNode(current->_left, val);
-				current->_left->_parent = current;
+				current->_left = insertNode(current->_left, val, current);
+//				current->_left->_parent = current;
 			}
 			else if (k > current->first)
 			{
-				current->_right = insertNode(current->_right, val);
-				current->_right->_parent = current;
+				current->_right = insertNode(current->_right, val, current);
+//				current->_right->_parent = current;
 			}
 			else
 				return (current);
@@ -503,9 +525,12 @@ namespace ft
 				else if (!root->_left || !root->_right)
 				{
 					node *tmp = root->_left ? root->_left : root->_right;
-					*root = *tmp;
+					if (!root->_parent)
+						tmp->_parent = NULL;
+					node *tmp2 = root;
+					root = tmp;
 					--this->_size;
-					delete tmp;
+					delete tmp2;
 				}
 				else
 				{
@@ -542,6 +567,12 @@ namespace ft
 				return (root->_parent);
 			}
 			return (root);
+		}
+
+		void	updateEnds()
+		{
+			this->_begin._parent = this->_root;
+			this->_end._parent = this->_root;
 		}
 	};
 

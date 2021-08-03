@@ -61,10 +61,14 @@ namespace ft
 		{
 			MapNode* ret;
 
-//			if (this == this->_end)
-//			{
-//				ret =
-//			}
+			if (this == this->_end)
+			{
+				ret = this->_parent;
+				while (ret->_right)
+					ret = ret->_right;
+				return (ret);
+			}
+
 			if (this->_left)
 			{
 				ret = this->_left;
@@ -83,11 +87,10 @@ namespace ft
 						ret = ret->_parent;
 					if (!ret->_parent)
 					{
-//						this->_sentinel->_begin = this;
 						return (this->_begin);
 					}
 						// lowest node
-					return (ret);
+					return (ret->_parent);
 				}
 				return (ret);
 			}
@@ -97,6 +100,13 @@ namespace ft
 		{
 			MapNode* ret;
 
+			if (this == this->_begin)
+			{
+				ret = this->_parent;
+				while (ret->_left)
+					ret = ret->_left;
+				return (ret);
+			}
 			if (this->_right)
 			{
 				ret = this->_right;
@@ -111,29 +121,21 @@ namespace ft
 					return (ret);
 				else
 				{
+
+//					std::cout << "node is " << *ret << std::endl;
 					while (ret->_parent && ret == ret->_parent->_right)
 						ret = ret->_parent;
+
 					if (!ret->_parent)
 					{
-//						this->_sentinel->_end = this;
 						return (this->_end);
 					}
 						// highest node
-					return (ret);
+					return (ret->_parent);
 				}
 				return (ret);
 			}
 		}
-
-//		const key_type&	key() const
-//		{
-//			return (this->_val.first);
-//		}
-//
-//		const mapped_type& value() const
-//		{
-//			return (this->_val.second);
-//		}
 
 		int		getBalance() const
 		{

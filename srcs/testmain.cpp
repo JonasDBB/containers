@@ -73,31 +73,36 @@ void	mappies()
 {
 	ft::map<int, double> mp;
 //	mp['a'] = 2;
-	mp[2] = 4;
-	std::cout << mp[2] << std::endl;
-	mp[2] = 2;
-	std::cout << mp[2] << std::endl;
 
+
+	for (int i = 0; i < 5; ++i)
+	{
+		mp[i] = i;
+	}
 //	mp.insert(ft::make_pair(0, 5));
 //	mp.insert(ft::make_pair(1, 2));
 //	mp.insert(ft::make_pair(2, 3));
 //	mp.insert(ft::make_pair(3, 5));
 //	mp.insert(ft::make_pair(4, 5));
+//	ft::map<int, double>::iterator it1, it2;
+//	it1 = mp.end();
+//	--it1;
+//	std::cout << *it1 << std::endl;
+//	it2 = mp.end();
 //	ft::map<int, double>::iterator it1 = mp.find(2);
 //	ft::map<int, double>::iterator it2 = mp.find(4);
 //	mp.erase(it1, it2);
 //	mp.clear();
-//	for (ft::map<int, double>::iterator it1 = mp.begin(); it1 != mp.end(); ++it)
-//		std::cout << *it << std::endl;
-//	std::cout << std::endl;
-//	std::cout << "TING\n" << *it << std::endl;
-//	std::cout << mp[3] << std::endl;
+	for (ft::map<int, double>::iterator it = mp.begin(); it != mp.end(); ++it)
+		std::cout << it->first << ", " << it->second << std::endl;
+	std::cout << std::endl;
+
 }
 
 int		main(int ac, char **av)
 {
 //	ittests();
-//	mappies();
+	mappies();
 //	ft::vector<int> vc(4,5);
 //	ft::vector<int>::iterator it1, it2;
 //	it1 = vc.begin();
