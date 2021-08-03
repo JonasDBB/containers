@@ -80,8 +80,8 @@ void	mappies()
 	{
 		mp1[i] = i;
 	}
-	mp2.insert(mp1.begin(), mp1.end());
-	ft::map<int, double> mp3(mp1);
+//	mp2.insert(mp1.begin(), mp1.end());
+//	ft::map<int, double> mp3(mp1);
 //	ft::map<int, double>::iterator it1, it2;
 //	it1 = mp.end();
 //	--it1;
@@ -90,7 +90,7 @@ void	mappies()
 	ft::map<int, double>::iterator it1 = mp1.find(2);
 	ft::map<int, double>::iterator it2 = mp1.find(4);
 	mp1.erase(it1, it2);
-	mp1.clear();
+//	mp1.clear();
 	for (ft::map<int, double>::iterator it = mp1.begin(); it != mp1.end(); ++it)
 		std::cout << it->first << ", " << it->second << std::endl;
 	std::cout << std::endl;

@@ -461,7 +461,11 @@ namespace ft
 			if (!current)
 			{
 				++this->_size;
-				node* nd = new node(val, &this->_begin, &this->_end);
+				node *nd = this->_alloc.allocate(1);
+				this->_alloc.construct(nd, val);
+				nd->_begin = &this->_begin;
+				nd->_end = &this->_end;
+//				node* nd = new node(val, &this->_begin, &this->_end);
 				nd->_parent = parent;
 				return (nd);
 			}
@@ -521,17 +525,20 @@ namespace ft
 					node *tmp = root;
 					root = NULL;
 					--this->_size;
-					delete tmp;
+					this->_alloc.destroy(tmp);
+					this->_alloc.deallocate(tmp, 1);
+//					delete tmp;
 				}
 				else if (!root->_left || !root->_right)
 				{
 					node *tmp = root->_left ? root->_left : root->_right;
-					if (!root->_parent)
-						tmp->_parent = NULL;
+					tmp->_parent = root->_parent;
 					node *tmp2 = root;
 					root = tmp;
 					--this->_size;
-					delete tmp2;
+					this->_alloc.destroy(tmp2);
+					this->_alloc.deallocate(tmp2, 1);
+//					delete tmp2;
 				}
 				else
 				{
