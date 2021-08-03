@@ -221,6 +221,11 @@ namespace ft
 			return ft::pair<Key, T>(this->_val.first, this->_val.second);
 		}
 
+		operator const ft::pair<const Key, T>() const
+		{
+			return ft::pair<Key, T>(this->_val.first, this->_val.second);
+		}
+
 		MapNode&	operator=(const value_type& val)
 		{
 			this->_val = val;

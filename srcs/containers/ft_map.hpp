@@ -73,7 +73,8 @@ namespace ft
 		// range constructor
 		template <class InputIterator>
 		map (InputIterator first, InputIterator last,
-			 const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
+			 const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type(),
+			 typename iterator_traits<InputIterator>::iterator_category* = NULL) :
 				_comp(comp),
 				_size(0),
 				_root(NULL),
@@ -199,7 +200,7 @@ namespace ft
 			size_type oldsize = this->_size;
 			this->_root = insertNode(this->_root, val, NULL);
 			this->updateEnds();
-			myprnt(this->_root);
+//			myprnt(this->_root);
 			if (this->_size == oldsize)
 				return (make_pair(find(val.first), false));
 			return (make_pair(find(val.first), true));
@@ -213,17 +214,17 @@ namespace ft
 
 		template <class InputIterator>
 		void		insert(InputIterator first, InputIterator last,
-							typename iterator_traits<InputIterator>::type* = NULL)
+						   typename iterator_traits<InputIterator>::iterator_category* = NULL)
 		{
 			while (first != last)
-				insert(first++);
+				insert(*(first++));
 		}
 
 		void		erase(iterator position)
 		{
 			this->_root = deleteNode(this->_root, position->first);
 			this->updateEnds();
-			myprnt(this->_root);
+//			myprnt(this->_root);
 		}
 
 		size_type	erase(const key_type& k)
@@ -231,7 +232,7 @@ namespace ft
 			size_type oldsize = this->_size;
 			this->_root = deleteNode(this->_root, k);
 			this->updateEnds();
-			myprnt(this->_root);
+//			myprnt(this->_root);
 			return (oldsize - this->_size);
 		}
 

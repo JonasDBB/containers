@@ -71,29 +71,27 @@ std::ostream& operator<<(std::ostream& os, const std::pair<T1, T2>& pr)
 
 void	mappies()
 {
-	ft::map<int, double> mp;
+	ft::map<int, double> mp1;
+	ft::map<int, double> mp2;
 //	mp['a'] = 2;
 
 
 	for (int i = 0; i < 5; ++i)
 	{
-		mp[i] = i;
+		mp1[i] = i;
 	}
-//	mp.insert(ft::make_pair(0, 5));
-//	mp.insert(ft::make_pair(1, 2));
-//	mp.insert(ft::make_pair(2, 3));
-//	mp.insert(ft::make_pair(3, 5));
-//	mp.insert(ft::make_pair(4, 5));
+	mp2.insert(mp1.begin(), mp1.end());
+	ft::map<int, double> mp3(mp1);
 //	ft::map<int, double>::iterator it1, it2;
 //	it1 = mp.end();
 //	--it1;
 //	std::cout << *it1 << std::endl;
 //	it2 = mp.end();
-//	ft::map<int, double>::iterator it1 = mp.find(2);
-//	ft::map<int, double>::iterator it2 = mp.find(4);
-//	mp.erase(it1, it2);
-//	mp.clear();
-	for (ft::map<int, double>::iterator it = mp.begin(); it != mp.end(); ++it)
+	ft::map<int, double>::iterator it1 = mp1.find(2);
+	ft::map<int, double>::iterator it2 = mp1.find(4);
+	mp1.erase(it1, it2);
+	mp1.clear();
+	for (ft::map<int, double>::iterator it = mp1.begin(); it != mp1.end(); ++it)
 		std::cout << it->first << ", " << it->second << std::endl;
 	std::cout << std::endl;
 
