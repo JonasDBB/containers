@@ -2,7 +2,6 @@
 # define NODEITERATOR_HPP
 # include "BidirectionalIterator.hpp"
 # include "../utils/type_traits.hpp"
-//# include "../utils/ListNode.hpp"
 
 namespace ft
 {

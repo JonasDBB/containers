@@ -31,13 +31,13 @@ namespace ft
 		_begin(NULL), _end(NULL)
 		{}
 
-		explicit MapNode(const value_type& val, MapNode *begin, MapNode *end) : A_type(val),
+		explicit MapNode(const value_type& val) : A_type(val),
 		_parent(NULL), _left(NULL), _right(NULL), _height(1), first(this->_val.first), second(this->_val.second),
-		_begin(begin), _end(end)
+		_begin(NULL), _end(NULL)
 		{
 		}
 
-		MapNode(const MapNode& x)
+		MapNode(const MapNode& x) : first(x.first), second(x.second)
 		{
 			*this = x;
 		}
@@ -206,25 +206,20 @@ namespace ft
 			rightChild->updateHeight();
 		}
 
-		operator MapNode<Key, T>() const
-		{
-			return MapNode<Key, T>(this->_val);
-		}
-
-//		operator value_type() const
+//		operator MapNode<Key, T>() const
 //		{
-//			return (this->_val);
+//			return MapNode<Key, T>(this->_val);
 //		}
 
-		operator ft::pair<Key, T>() const
-		{
-			return ft::pair<Key, T>(this->_val.first, this->_val.second);
-		}
+//		operator ft::pair<Key, T>() const
+//		{
+//			return ft::pair<Key, T>(this->_val.first, this->_val.second);
+//		}
 
-		operator const ft::pair<const Key, T>() const
-		{
-			return ft::pair<Key, T>(this->_val.first, this->_val.second);
-		}
+//		operator const ft::pair<const Key, T>() const
+//		{
+//			return ft::pair<Key, T>(this->_val.first, this->_val.second);
+//		}
 
 		MapNode&	operator=(const value_type& val)
 		{
@@ -307,41 +302,6 @@ namespace ft
 		os << node._val << ":" << node._height;
 		return (os);
 	}
-
-//	template<class Key, class T>
-//	class sentinelPointer : public MapNode<Key, T>
-//	{
-//	public:
-//		typedef	MapNode<Key, T>		map_node;
-//		typedef pair<const Key, T>	value_type;
-//
-//		map_node	*_begin;
-//		map_node	*_end;
-//
-//		explicit sentinelPointer() : MapNode<Key, T>(), _begin(NULL), _end(NULL)
-//		{}
-//
-//		sentinelPointer(const sentinelPointer& x)
-//		{
-//			*this = x;
-//		}
-//
-//		~sentinelPointer()
-//		{}
-//
-//		sentinelPointer&	operator=(const sentinelPointer& x)
-//		{
-//			this->_begin = x._begin;
-//			this->_end = x._end;
-//			return (*this);
-//		}
-//		void setbegin(const map_node* nd) {this->_begin = nd;}
-//		void setend(const map_node* nd) {this->_end = nd;}
-//		map_node*	previous() const	{ return this->_end; }
-//
-//		map_node*	next() const		{ return this->_begin; }
-//
-//	};
 }
 
 #endif

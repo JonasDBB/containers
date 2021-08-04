@@ -69,32 +69,22 @@ std::ostream& operator<<(std::ostream& os, const std::pair<T1, T2>& pr)
 	return (os);
 }
 
+bool fncomp (char lhs, char rhs) {return lhs<rhs;}
+
+struct classcomp {
+	bool operator() (const char& lhs, const char& rhs) const
+	{return lhs<rhs;}
+};
+#include "utils/MapNode.hpp"
 void	mappies()
 {
-	ft::map<int, double> mp1;
-	ft::map<int, double> mp2;
-//	mp['a'] = 2;
+	ft::map<int,int> mp0;
 
+	for (int i = 1; i < 100; ++i)
+		mp0[rand() %1000] = i;
 
-	for (int i = 0; i < 5; ++i)
-	{
-		mp1[i] = i;
-	}
-//	mp2.insert(mp1.begin(), mp1.end());
-//	ft::map<int, double> mp3(mp1);
-//	ft::map<int, double>::iterator it1, it2;
-//	it1 = mp.end();
-//	--it1;
-//	std::cout << *it1 << std::endl;
-//	it2 = mp.end();
-	ft::map<int, double>::iterator it1 = mp1.find(2);
-	ft::map<int, double>::iterator it2 = mp1.find(4);
-	mp1.erase(it1, it2);
-//	mp1.clear();
-	for (ft::map<int, double>::iterator it = mp1.begin(); it != mp1.end(); ++it)
-		std::cout << it->first << ", " << it->second << std::endl;
-	std::cout << std::endl;
-
+	const ft::map<int,int> mp1(mp0.begin(), mp0.end());
+	ft::map<int,int>::const_iterator it = mp1.begin();
 }
 
 int		main(int ac, char **av)

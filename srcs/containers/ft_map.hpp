@@ -23,7 +23,7 @@ namespace ft
 		typedef	const value_type&											const_reference;
 		typedef	value_type*													pointer;
 		typedef	const value_type*											const_pointer;
-		typedef MapNode<key_type, mapped_type>								node;
+		typedef MapNode<const key_type, mapped_type>						node;
 		typedef NodeIterator<value_type, node, node*, node&>				iterator;
 		typedef NodeIterator<value_type, node, const node*, const node&>	const_iterator;
 		typedef ReverseIterator<iterator>									reverse_iterator;
@@ -102,7 +102,7 @@ namespace ft
 			this->_end._begin = &this->_begin;
 			this->_begin._end = &this->_end;
 			this->_end._end = &this->_end;
-			insert(x.begin(), x.end());
+			*this = x;
 		}
 
 		// destructor
@@ -116,7 +116,15 @@ namespace ft
 		{
 			this->clear();
 			this->_alloc = x._alloc;
-			this->insert(x.begin(), x.end());
+			node *nd = x._root;
+			while (nd && nd->_left)
+				nd = nd->_left;
+			while (this->_size != x._size)
+			{
+				this->_root = insertNode(this->_root, *nd, NULL);
+//				myprnt(this->_root);
+				nd = nd->next();
+			}
 			return (*this);
 		}
 
@@ -133,6 +141,8 @@ namespace ft
 
 		const_iterator			begin() const
 		{
+			if (!this->_root)
+				return (this->end());
 			node* nd = this->_root;
 			while (nd->_left)
 				nd = nd->_left;
@@ -146,7 +156,7 @@ namespace ft
 
 		const_iterator			end() const
 		{
-			return (const_iterator(&this->_end));
+			return (const_iterator(&const_cast<node *>(this->_end)));
 		}
 
 		reverse_iterator		rbegin()
@@ -191,7 +201,7 @@ namespace ft
 			iterator it = find(k);
 			if (it != this->end())
 				return (it->second);
-			return (insert(make_pair(k, mapped_type())).first->second);
+			return (insert(ft::make_pair(k, mapped_type())).first->second);
 		}
 
 		/* ==MODIFIER FUNCTIONS== */
@@ -202,8 +212,8 @@ namespace ft
 			this->updateEnds();
 //			myprnt(this->_root);
 			if (this->_size == oldsize)
-				return (make_pair(find(val.first), false));
-			return (make_pair(find(val.first), true));
+				return (ft::make_pair(find(val.first), false));
+			return (ft::make_pair(find(val.first), true));
 		}
 
 		iterator	insert(iterator position, const value_type& val)
@@ -282,20 +292,22 @@ namespace ft
 			node* nd = this->_root;
 			while (nd->first != k)
 			{
-				if (nd->first > k)
+				if (this->_comp(k, nd->first))
 				{
 					if (nd->_left)
 						nd = nd->_left;
 					else
 						break;
 				}
-				else if (nd->first < k)
+				else if (this->_comp(nd->first, k))
 				{
 					if (nd->_right)
 						nd = nd->_right;
 					else
 						break;
 				}
+				else
+					break;
 			}
 			if (nd->first != k)
 				return (this->end());
@@ -304,29 +316,31 @@ namespace ft
 
 		const_iterator	find(const key_type& k) const
 		{
-//			if (!this->_root)
-//				return (this->end());
-//			node* nd = this->_root;
-//			while (nd->first != k)
-//			{
-//				if (nd->first > k)
-//				{
-//					if (nd->_left)
-//						nd = nd->_left;
-//					else
-//						break;
-//				}
-//				else if (nd->first < k)
-//				{
-//					if (nd->_right)
-//						nd = nd->_right;
-//					else
-//						break;
-//				}
-//			}
-//			if (nd->first != k)
-//				return (this->end());
-			return (const_iterator(*(find(k))));
+			if (!this->_root)
+				return (this->end());
+			node* nd = this->_root;
+			while (nd->first != k)
+			{
+				if (this->_comp(k, nd->first))
+				{
+					if (nd->_left)
+						nd = nd->_left;
+					else
+						break;
+				}
+				else if (this->_comp(nd->first, k))
+				{
+					if (nd->_right)
+						nd = nd->_right;
+					else
+						break;
+				}
+				else
+					break;
+			}
+			if (nd->first != k)
+				return (this->end());
+			return (const_iterator(nd));
 		}
 
 		size_type		count(const key_type& k) const
@@ -341,7 +355,7 @@ namespace ft
 			iterator it = this->begin();
 			for (; it != this->end(); ++it)
 			{
-				if (!it->first < k)
+				if (!(this->_comp(it->first, k)))
 					break;
 			}
 			return (it);
@@ -352,7 +366,7 @@ namespace ft
 			const_iterator it = this->begin();
 			for (; it != this->end(); ++it)
 			{
-				if (!it->first < k)
+				if (!(this->_comp(it->first, k)))
 					break;
 			}
 			return (it);
@@ -363,7 +377,7 @@ namespace ft
 			iterator it = this->begin();
 			for (; it != this->end(); ++it)
 			{
-				if (it->first > k)
+				if (this->_comp(k, it->first))
 					break;
 			}
 			return (it);
@@ -374,7 +388,7 @@ namespace ft
 			const_iterator it = this->begin();
 			for (; it != this->end(); ++it)
 			{
-				if (it->first > k)
+				if (this->_comp(k, it->first))
 					break;
 			}
 			return (it);
@@ -391,8 +405,13 @@ namespace ft
 		}
 
 	private:
-		void	myprnt(node* root)
+		void	myprnt(node* nd)
 		{
+			node* root;
+			if (!nd)
+				root = this->_root;
+			else
+				root = nd;
 			if (this->_root && this->_root->_parent)
 				std::cout << "WADAFAK" << std::endl;
 			if (this->_root)
@@ -451,10 +470,8 @@ namespace ft
 				else
 					std::cout << "LEAF";
 			}
-			std::cout << std::endl;
-			std::cout << std::endl;
+			std::cout << std::endl << std::endl;
 		}
-
 
 		node*	insertNode(node *current, ft::pair<Key, T> val, node* parent)
 		{
@@ -470,38 +487,38 @@ namespace ft
 				return (nd);
 			}
 			Key k = val.first;
-			if (k < current->first)
-			{
+//			if (k < current->first)
+			if (this->_comp(k, current->first))
 				current->_left = insertNode(current->_left, val, current);
-//				current->_left->_parent = current;
-			}
-			else if (k > current->first)
-			{
+//			else if (k > current->first)
+			else if (this->_comp(current->first, k))
 				current->_right = insertNode(current->_right, val, current);
-//				current->_right->_parent = current;
-			}
 			else
 				return (current);
 
 			current->updateHeight();
 
-			if (current->getBalance() > 1 && k < current->_left->first)
+//			if (current->getBalance() > 1 && k < current->_left->first)
+			if (current->getBalance() > 1 && this->_comp(k, current->_left->first))
 			{
 				current->rightRotate();
 				return (current->_parent);
 			}
-			if (current->getBalance() < -1 && k > current->_right->first)
+//			if (current->getBalance() < -1 && k > current->_right->first)
+			if (current->getBalance() < -1 && this->_comp(current->_right->first, k))
 			{
 				current->leftRotate();
 				return (current->_parent);
 			}
-			if (current->getBalance() > 1 && k > current->_left->first)
+//			if (current->getBalance() > 1 && k > current->_left->first)
+			if (current->getBalance() > 1 && k > this->_comp(current->_left->first, k))
 			{
 				current->_left->leftRotate();
 				current->rightRotate();
 				return (current->_parent);
 			}
-			if (current->getBalance() < -1 && k < current->_right->first)
+//			if (current->getBalance() < -1 && k < current->_right->first)
+			if (current->getBalance() < -1 && this->_comp(k, current->_right->first))
 			{
 				current->_right->rightRotate();
 				current->leftRotate();
@@ -510,31 +527,69 @@ namespace ft
 			return (current);
 		}
 
-		node*	deleteNode(node* root, const Key& k)
+		void	swapnodes(node* first, node* second)
 		{
-			if (!root)
-				return (root);
-			if (k < root->first)
-				root->_left = deleteNode(root->_left, k);
-			else if (k > root->first)
-				root->_right = deleteNode(root->_right, k);
+			if (first == second)
+				return;
+			if (first->_parent)
+			{
+				if (first == first->_parent->_right)
+					first->_parent->_right = second;
+				else
+					first->_parent->_left = second;
+			}
+
+			if (second->_parent)
+			{
+				if (second == second->_parent->_right)
+					second->_parent->_right = first;
+				else
+					second->_parent->_left = first;
+			}
+
+			ft::swap(first->_parent, second->_parent);
+
+			if (first->_left)
+				first->_left->_parent = second;
+			if (first->_right)
+				first->_right->_parent = second;
+			if (second->_left)
+				second->_left->_parent = first;
+			if (second->_right)
+				second->_right->_parent = first;
+
+			ft::swap(first->_left, second->_left);
+			ft::swap(first->_right, second->_right);
+			ft::swap(first->_height, second->_height);
+		}
+
+		node*	deleteNode(node* current, const Key& k)
+		{
+			if (!current)
+				return (current);
+//			if (k < current->first)
+			if (this->_comp(k, current->first))
+				current->_left = deleteNode(current->_left, k);
+//			else if (k > current->first)
+			else if (this->_comp(current->first, k))
+				current->_right = deleteNode(current->_right, k);
 			else
 			{
-				if (!root->_left && !root->_right)
+				if (!current->_left && !current->_right)
 				{
-					node *tmp = root;
-					root = NULL;
+					node *tmp = current;
+					current = NULL;
 					--this->_size;
 					this->_alloc.destroy(tmp);
 					this->_alloc.deallocate(tmp, 1);
 //					delete tmp;
 				}
-				else if (!root->_left || !root->_right)
+				else if (!current->_left || !current->_right)
 				{
-					node *tmp = root->_left ? root->_left : root->_right;
-					tmp->_parent = root->_parent;
-					node *tmp2 = root;
-					root = tmp;
+					node *tmp = current->_left ? current->_left : current->_right;
+					tmp->_parent = current->_parent;
+					node *tmp2 = current;
+					current = tmp;
 					--this->_size;
 					this->_alloc.destroy(tmp2);
 					this->_alloc.deallocate(tmp2, 1);
@@ -542,39 +597,42 @@ namespace ft
 				}
 				else
 				{
-					node *tmp = root->_left;
+					node *tmp = current->_left;
 					while (tmp->_right)
 						tmp = tmp->_right;
-					root->_val = tmp->_val;
-					root->_left = deleteNode(root->_left, tmp->first);
+//					current->_val = tmp->_val;
+					swapnodes(current, tmp);
+//					current = tmp;
+					ft::swap(current, tmp);
+					current->_left = deleteNode(current->_left, tmp->first);
 				}
 			}
-			if (!root)
-				return (root);
-			root->updateHeight();
-			if (root->getBalance() > 1 && root->_left->getBalance() >= 0)
+			if (!current)
+				return (current);
+			current->updateHeight();
+			if (current->getBalance() > 1 && current->_left->getBalance() >= 0)
 			{
-				root->rightRotate();
-				return (root->_parent);
+				current->rightRotate();
+				return (current->_parent);
 			}
-			if (root->getBalance() < -1 && root->_right->getBalance() <= 0)
+			if (current->getBalance() < -1 && current->_right->getBalance() <= 0)
 			{
-				root->leftRotate();
-				return (root->_parent);
+				current->leftRotate();
+				return (current->_parent);
 			}
-			if (root->getBalance() > 1 && root->_left->getBalance() < 0)
+			if (current->getBalance() > 1 && current->_left->getBalance() < 0)
 			{
-				root->_left->leftRotate();
-				root->rightRotate();
-				return (root->_parent);
+				current->_left->leftRotate();
+				current->rightRotate();
+				return (current->_parent);
 			}
-			if (root->getBalance() < -1 && root->_right->getBalance() > 0)
+			if (current->getBalance() < -1 && current->_right->getBalance() > 0)
 			{
-				root->_right->rightRotate();
-				root->leftRotate();
-				return (root->_parent);
+				current->_right->rightRotate();
+				current->leftRotate();
+				return (current->_parent);
 			}
-			return (root);
+			return (current);
 		}
 
 		void	updateEnds()
