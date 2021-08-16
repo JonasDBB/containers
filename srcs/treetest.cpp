@@ -66,11 +66,11 @@ node*	insrt(node *root, ft::pair<Key, T> val)
 	if (!root)
 		return (new node(val));
 	Key k = val.first;
-	if (k < root->key())
+	if (k < root->first)
 	{
 		root->_left = insrt(root->_left, val);
 	}
-	else if (k > root->key())
+	else if (k > root->first)
 	{
 		root->_right = insrt(root->_right, val);
 	}
@@ -79,23 +79,23 @@ node*	insrt(node *root, ft::pair<Key, T> val)
 
 	root->updateHeight();
 
-	if (root->getBalance() > 1 && k < root->_left->key())
+	if (root->getBalance() > 1 && k < root->_left->first)
 	{
 		root->rightRotate();
 		return (root->_parent);
 	}
-	if (root->getBalance() < -1 && k > root->_right->key())
+	if (root->getBalance() < -1 && k > root->_right->first)
 	{
 		root->leftRotate();
 		return (root->_parent);
 	}
-	if (root->getBalance() > 1 && k > root->_left->key())
+	if (root->getBalance() > 1 && k > root->_left->first)
 	{
 		root->_left->leftRotate();
 		root->rightRotate();
 		return (root->_parent);
 	}
-	if (root->getBalance() < -1 && k < root->_right->key())
+	if (root->getBalance() < -1 && k < root->_right->first)
 	{
 		root->_right->rightRotate();
 		root->leftRotate();
@@ -109,9 +109,9 @@ node*	del(node* root, const Key& k)
 {
 	if (!root)
 		return (root);
-	if (k < root->key())
+	if (k < root->first)
 		root->_left = del(root->_left, k);
-	else if (k > root->key())
+	else if (k > root->first)
 		root->_right = del(root->_right, k);
 	else
 	{
@@ -134,7 +134,7 @@ node*	del(node* root, const Key& k)
 			while (tmp->_right)
 				tmp = tmp->_right;
 			root->_val = tmp->_val;
-			root->_left = del(root->_left, tmp->key());
+			root->_left = del(root->_left, tmp->first);
 		}
 	}
 	if (!root)
@@ -196,7 +196,7 @@ void	mappies()
 //	std::pair<const int, int> &ref(*it);
 //	deleteNode(g_root, 5);
 	g_root = del(g_root, 5);
-//	myprnt(g_root);
+	myprnt(g_root);
 }
 
 int		main(int ac, char **av)

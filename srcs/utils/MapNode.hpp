@@ -68,7 +68,6 @@ namespace ft
 					ret = ret->_right;
 				return (ret);
 			}
-
 			if (this->_left)
 			{
 				ret = this->_left;
@@ -86,13 +85,9 @@ namespace ft
 					while (ret == ret->_parent->_left && ret->_parent)
 						ret = ret->_parent;
 					if (!ret->_parent)
-					{
 						return (this->_begin);
-					}
-						// lowest node
 					return (ret->_parent);
 				}
-				return (ret);
 			}
 		}
 
@@ -121,19 +116,12 @@ namespace ft
 					return (ret);
 				else
 				{
-
-//					std::cout << "node is " << *ret << std::endl;
 					while (ret->_parent && ret == ret->_parent->_right)
 						ret = ret->_parent;
-
 					if (!ret->_parent)
-					{
 						return (this->_end);
-					}
-						// highest node
 					return (ret->_parent);
 				}
-				return (ret);
 			}
 		}
 
@@ -204,6 +192,11 @@ namespace ft
 
 			this->updateHeight();
 			rightChild->updateHeight();
+		}
+
+		operator ft::pair<key_type, mapped_type>() const
+		{
+			return (ft::make_pair(this->first, this->second));
 		}
 
 //		operator MapNode<Key, T>() const

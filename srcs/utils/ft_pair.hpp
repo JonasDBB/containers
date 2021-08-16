@@ -1,9 +1,13 @@
 #ifndef FT_PAIR_HPP
 # define FT_PAIR_HPP
 #include <iostream>
+#include "ANode.hpp"
 
 namespace ft
 {
+	template<class Key, class T>
+	class MapNode;
+
 	template <class T1, class T2>
 	struct pair
 	{
@@ -21,6 +25,9 @@ namespace ft
 		{}
 
 		pair(const first_type& a, const second_type& b) : first(a), second(b)
+		{}
+
+		explicit pair(const MapNode<const T1, T2>& nd) : first(nd.first), second(nd.second)
 		{}
 
 		pair&	operator=(const pair& pr)

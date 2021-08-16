@@ -262,39 +262,38 @@ TEST_CASE("map bracket operator", "[map]")
 	REQUIRE(mine1 == real1);
 }
 
-//TEST_CASE("map insert", "[map]")
-//{
-//	origimap<char, int>	real1;
-//	jonasmap<char, int>	mine1;
-//	real1.insert(std::pair<char, int>('a', 100));
-//	mine1.insert(ft::pair<char, int>('a', 100));
-//	real1.insert(std::pair<char, int>('z', 200));
-//	mine1.insert(ft::pair<char, int>('z', 200));
-//	REQUIRE(mine1 == real1);
-//
-//	std::pair<origimap<char, int>::iterator, bool> realRet;
-//	std::pair<jonasmap<char, int>::iterator, bool> myRet;
-//	realRet = real1.insert(std::pair<char, int>('z', 500));
-//	myRet = mine1.insert(ft::pair<char, int>('z', 500));
-//	REQUIRE(mine1 == real1);
-////	REQUIRE(realRet.first == myRet.first);
-//	REQUIRE(realRet.second == myRet.second);
-//
-//	auto realIt = real1.begin();
-//	auto myIt = mine1.begin();
-//	real1.insert(realIt, std::pair<char, int>('b', 300));
-//	mine1.insert(myIt, ft::pair<char, int>('b', 300));
-//	REQUIRE(mine1 == real1);
-//	real1.insert(realIt, std::pair<char, int>('c', 400));
-//	mine1.insert(myIt, ft::pair<char, int>('c', 400));
-//	REQUIRE(mine1 == real1);
-//
-//	origimap<char, int>	real2;
-//	jonasmap<char, int>	mine2;
-//	real2.insert(real1.begin(), real1.find('c'));
-//	mine2.insert(mine1.begin(), mine1.find('c'));
-//	REQUIRE(mine2 == real2);
-//}
+TEST_CASE("map insert", "[map]")
+{
+	origimap<char, int>	real1;
+	jonasmap<char, int>	mine1;
+	real1.insert(std::pair<char, int>('a', 100));
+	mine1.insert(ft::pair<char, int>('a', 100));
+	real1.insert(std::pair<char, int>('z', 200));
+	mine1.insert(ft::pair<char, int>('z', 200));
+	REQUIRE(mine1 == real1);
+
+	std::pair<origimap<char, int>::iterator, bool> realRet;
+	ft::pair<jonasmap<char, int>::iterator, bool> myRet;
+	realRet = real1.insert(std::pair<char, int>('z', 500));
+	myRet = mine1.insert(ft::pair<char, int>('z', 500));
+	REQUIRE(mine1 == real1);
+	REQUIRE(realRet.second == myRet.second);
+
+	auto realIt = real1.begin();
+	auto myIt = mine1.begin();
+	real1.insert(realIt, std::pair<char, int>('b', 300));
+	mine1.insert(myIt, ft::pair<char, int>('b', 300));
+	REQUIRE(mine1 == real1);
+	real1.insert(realIt, std::pair<char, int>('c', 400));
+	mine1.insert(myIt, ft::pair<char, int>('c', 400));
+	REQUIRE(mine1 == real1);
+
+	origimap<char, int>	real2;
+	jonasmap<char, int>	mine2;
+	real2.insert(real1.begin(), real1.find('c'));
+	mine2.insert(mine1.begin(), mine1.find('c'));
+	REQUIRE(mine2 == real2);
+}
 
 TEST_CASE("map erase", "[map]")
 {
@@ -402,31 +401,31 @@ TEST_CASE("map key comp", "[map]")
 	}
 }
 
-//TEST_CASE("map value comp", "[map]")
-//{
-//	origimap<char, int>	real1;
-//	jonasmap<char, int>	mine1;
-//
-//	int n = 1001;
-//	char c = 'x';
-//	for (int i = 0; i < 3; ++i, ++c, n += 1001)
-//	{
-//		real1[c] = n;
-//		mine1[c] = n;
-//	}
-//	REQUIRE(mine1 == real1);
-//
-//	std::pair<char, int> realHigh = *real1.rbegin();
-//	ft::pair<char, int> myHigh = *mine1.rbegin();
-//
-//	auto realIt = real1.begin();
-//	auto myIt = mine1.begin();
-//	while (real1.value_comp()(*realIt++, realHigh) && mine1.value_comp()(*myIt++, myHigh))
-//	{
-//		REQUIRE(realIt->first == myIt->first);
-//		REQUIRE(realIt->second == myIt->second);
-//	}
-//}
+TEST_CASE("map value comp", "[map]")
+{
+	origimap<char, int>	real1;
+	jonasmap<char, int>	mine1;
+
+	int n = 1001;
+	char c = 'x';
+	for (int i = 0; i < 3; ++i, ++c, n += 1001)
+	{
+		real1[c] = n;
+		mine1[c] = n;
+	}
+	REQUIRE(mine1 == real1);
+
+	std::pair<char, int> realHigh(*real1.rbegin());
+	ft::pair<char, int> myHigh(*mine1.rbegin());
+
+	auto realIt = real1.begin();
+	auto myIt = mine1.begin();
+	while (real1.value_comp()(*realIt++, realHigh) && mine1.value_comp()(*myIt++, myHigh))
+	{
+		REQUIRE(realIt->first == myIt->first);
+		REQUIRE(realIt->second == myIt->second);
+	}
+}
 
 TEST_CASE("map find", "[map]")
 {

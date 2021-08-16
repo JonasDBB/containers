@@ -122,7 +122,6 @@ namespace ft
 			while (this->_size != x._size)
 			{
 				this->_root = insertNode(this->_root, ft::make_pair(nd->first, nd->second), NULL);
-//				myprnt(this->_root);
 				nd = nd->next();
 			}
 			return (*this);
@@ -210,7 +209,6 @@ namespace ft
 			size_type oldsize = this->_size;
 			this->_root = insertNode(this->_root, val, NULL);
 			this->updateEnds();
-//			myprnt(this->_root);
 			if (this->_size == oldsize)
 				return (ft::make_pair(find(val.first), false));
 			return (ft::make_pair(find(val.first), true));
@@ -234,7 +232,6 @@ namespace ft
 		{
 			this->_root = deleteNode(this->_root, position->first);
 			this->updateEnds();
-//			myprnt(this->_root);
 		}
 
 		size_type	erase(const key_type& k)
@@ -242,7 +239,6 @@ namespace ft
 			size_type oldsize = this->_size;
 			this->_root = deleteNode(this->_root, k);
 			this->updateEnds();
-//			myprnt(this->_root);
 			return (oldsize - this->_size);
 		}
 
@@ -265,7 +261,6 @@ namespace ft
 		{
 			while (!this->empty())
 				erase(this->_root->first);
-//			myprnt(this->_root);
 		}
 
 		/* ==OBSERVER FUNCTIONS== */
@@ -482,15 +477,12 @@ namespace ft
 				this->_alloc.construct(nd, val);
 				nd->_begin = &this->_begin;
 				nd->_end = &this->_end;
-//				node* nd = new node(val, &this->_begin, &this->_end);
 				nd->_parent = parent;
 				return (nd);
 			}
 			Key k = val.first;
-//			if (k < current->first)
 			if (this->_comp(k, current->first))
 				current->_left = insertNode(current->_left, val, current);
-//			else if (k > current->first)
 			else if (this->_comp(current->first, k))
 				current->_right = insertNode(current->_right, val, current);
 			else
@@ -498,26 +490,22 @@ namespace ft
 
 			current->updateHeight();
 
-//			if (current->getBalance() > 1 && k < current->_left->first)
 			if (current->getBalance() > 1 && this->_comp(k, current->_left->first))
 			{
 				current->rightRotate();
 				return (current->_parent);
 			}
-//			if (current->getBalance() < -1 && k > current->_right->first)
 			if (current->getBalance() < -1 && this->_comp(current->_right->first, k))
 			{
 				current->leftRotate();
 				return (current->_parent);
 			}
-//			if (current->getBalance() > 1 && k > current->_left->first)
 			if (current->getBalance() > 1 && k > this->_comp(current->_left->first, k))
 			{
 				current->_left->leftRotate();
 				current->rightRotate();
 				return (current->_parent);
 			}
-//			if (current->getBalance() < -1 && k < current->_right->first)
 			if (current->getBalance() < -1 && this->_comp(k, current->_right->first))
 			{
 				current->_right->rightRotate();
@@ -567,10 +555,8 @@ namespace ft
 		{
 			if (!current)
 				return (current);
-//			if (k < current->first)
 			if (this->_comp(k, current->first))
 				current->_left = deleteNode(current->_left, k);
-//			else if (k > current->first)
 			else if (this->_comp(current->first, k))
 				current->_right = deleteNode(current->_right, k);
 			else
@@ -582,7 +568,6 @@ namespace ft
 					--this->_size;
 					this->_alloc.destroy(tmp);
 					this->_alloc.deallocate(tmp, 1);
-//					delete tmp;
 				}
 				else if (!current->_left || !current->_right)
 				{
@@ -593,16 +578,13 @@ namespace ft
 					--this->_size;
 					this->_alloc.destroy(tmp2);
 					this->_alloc.deallocate(tmp2, 1);
-//					delete tmp2;
 				}
 				else
 				{
 					node *tmp = current->_left;
 					while (tmp->_right)
 						tmp = tmp->_right;
-//					current->_val = tmp->_val;
 					swapnodes(current, tmp);
-//					current = tmp;
 					ft::swap(current, tmp);
 					current->_left = deleteNode(current->_left, tmp->first);
 				}
