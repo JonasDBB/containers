@@ -527,3 +527,53 @@ TEST_CASE("map equal range", "[map]")
 	REQUIRE(realRet.second->first == myRet.second->first);
 	REQUIRE(realRet.second->second == myRet.second->second);
 }
+
+TEST_CASE("map relational operators", "[map]")
+{
+	origimap<char, int> real1;
+	origimap<char, int> real2;
+	jonasmap<char, int>	mine1;
+	jonasmap<char, int>	mine2;
+
+	real1['a'] = 100;
+	mine1['a'] = 100;
+	real1['b'] = 200;
+	mine1['b'] = 200;
+
+	real2['a'] = 10;
+	mine2['a'] = 10;
+	real2['z'] = 1000;
+	mine2['z'] = 1000;
+
+	REQUIRE((mine1 == mine2) == (real1 == real2));
+	REQUIRE((mine1 != mine2) == (real1 != real2));
+	REQUIRE((mine1 > mine2) == (real1 > real2));
+	REQUIRE((mine1 < mine2) == (real1 < real2));
+	REQUIRE((mine1 <= mine2) == (real1 <= real2));
+	REQUIRE((mine1 >= mine2) == (real1 >= real2));
+}
+
+TEST_CASE("map swap overload", "[map]")
+{
+	origimap<char, int>	real1, real2;
+	jonasmap<char, int>	mine1, mine2;
+	real1['x'] = 100;
+
+	mine1['x'] = 100;
+	real1['y'] = 200;
+	mine1['y'] = 200;
+	real2['a'] = 11;
+
+	mine2['a'] = 11;
+	real2['b'] = 22;
+	mine2['b'] = 22;
+	real2['c'] = 33;
+	mine2['c'] = 33;
+	swap(real1, real2);
+
+	swap(mine1, mine2);
+	REQUIRE(mine1 == real1);
+	REQUIRE(mine2 == real2);
+}
+
+
