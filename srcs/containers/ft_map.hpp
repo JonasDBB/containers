@@ -253,8 +253,8 @@ namespace ft
 			ft::swap(this->_size, x._size);
 			ft::swap(this->_root, x._root);
 			ft::swap(this->_alloc, x._alloc);
-			ft::swap(this->_begin, x._begin);
-			ft::swap(this->_end, x._end);
+			this->updateEnds();
+			x.updateEnds();
 		}
 
 		void		clear()

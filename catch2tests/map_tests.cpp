@@ -325,28 +325,28 @@ TEST_CASE("map erase", "[map]")
 	REQUIRE(mine1 == real1);
 }
 
-//TEST_CASE("map swap", "[map]")
-//{
-//	origimap<char, int>	real1, real2;
-//	jonasmap<char, int>	mine1, mine2;
-//	real1['x'] = 100;
-//
-//	mine1['x'] = 100;
-//	real1['y'] = 200;
-//	mine1['y'] = 200;
-//	real2['a'] = 11;
-//
-//	mine2['a'] = 11;
-//	real2['b'] = 22;
-//	mine2['b'] = 22;
-//	real2['c'] = 33;
-//	mine2['c'] = 33;
-//	real1.swap(real2);
-//
-//	mine1.swap(mine2);
-//	REQUIRE(mine1 == real1);
-//	REQUIRE(mine2 == real2);
-//}
+TEST_CASE("map swap", "[map]")
+{
+	origimap<char, int>	real1, real2;
+	jonasmap<char, int>	mine1, mine2;
+	real1['x'] = 100;
+
+	mine1['x'] = 100;
+	real1['y'] = 200;
+	mine1['y'] = 200;
+	real2['a'] = 11;
+
+	mine2['a'] = 11;
+	real2['b'] = 22;
+	mine2['b'] = 22;
+	real2['c'] = 33;
+	mine2['c'] = 33;
+	real1.swap(real2);
+
+	mine1.swap(mine2);
+	REQUIRE(mine1 == real1);
+	REQUIRE(mine2 == real2);
+}
 
 TEST_CASE("map clear", "[map]")
 {
