@@ -78,13 +78,22 @@ struct classcomp {
 #include "utils/MapNode.hpp"
 void	mappies()
 {
-	ft::map<int,int> mp0;
+	ft::map<char, int>	mine1;
 
-	for (int i = 1; i < 100; ++i)
-		mp0[rand() %1000] = i;
+	mine1['a'] = 10;
+	mine1['b'] = 30;
+	mine1['c'] = 50;
+	mine1['d'] = 70;
 
-	const ft::map<int,int> mp1(mp0.begin(), mp0.end());
-	ft::map<int,int>::const_iterator it = mp1.begin();
+	ft::map<char, int>	mine2(mine1.begin(), mine1.end());
+
+	ft::map<char, int>	mine3(mine2);
+
+	ft::map<char, int, classcomp>	mine4;
+
+	bool(*f)(char, char) = fncomp;
+
+	ft::map<char, int, bool(*)(char, char)>		mine5(f);
 }
 
 int		main(int ac, char **av)

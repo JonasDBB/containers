@@ -121,7 +121,7 @@ namespace ft
 				nd = nd->_left;
 			while (this->_size != x._size)
 			{
-				this->_root = insertNode(this->_root, *nd, NULL);
+				this->_root = insertNode(this->_root, ft::make_pair(nd->first, nd->second), NULL);
 //				myprnt(this->_root);
 				nd = nd->next();
 			}
@@ -156,7 +156,7 @@ namespace ft
 
 		const_iterator			end() const
 		{
-			return (const_iterator(&const_cast<node *>(this->_end)));
+			return (const_iterator(const_cast<node*>(&this->_end)));
 		}
 
 		reverse_iterator		rbegin()
